@@ -26,6 +26,17 @@ namespace GardenBoxer.Services
     {
       return _repo.GetById(Id, UserId);
     }
+
+    public Garden Edit(Garden newdGarden, string userId)
+    {
+      Garden original = GetById(newdGarden.Id);
+      original.UserId = userId;
+      original.Name = editedGarden.Name != null ? newGarden.Name : original.Name;
+      original.Description = newdGarden.Description != null ? newdGarden.Description : original.Description;
+      original.Width = newdGarden.Width != null ? newdGarden.Width : original.Width;
+      original.Height = newdGarden.Height != null ? newdGarden.Height : original.Height;
+      return _repo.Edit(original);
+    }
     public Garden Delete(int id, string userId)
     {
       return _repo.Delete(id, userId);
