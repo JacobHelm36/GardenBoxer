@@ -21,9 +21,46 @@ namespace GardenBoxer.Repositories
     //   return _db.Query<Garden>(sql);
     // }
 
-    internal Keep Create(Garden GardenData)
+    internal Garden Create(Garden GardenData)
     {
-      throw new NotImplementedException();
+      string sql = @"
+            INSERT INTO gardens
+            (name, userId, width, height, description)
+            VALUES
+            (@Name, @UserId, @Width, @Height, @Description);
+            SELECT LAST_INSERT_ID();
+            ";
+      VaultData.Id = _db.ExecuteScalar<int>(sql, BedData);
+      return VaultData;
+    }
+    internal void Edit(Garden EditedGarden)
+    {
+      string sql = @"
+        UPDATE gardens
+        SET
+            name = @Name,
+            description = @Description,
+            width = @Width,
+            height = @Height
+        WHERE (id = @Id AND userId = @UserId);
+        ";
+      _db.Execute(sql, EditedGarden);
+    }
+    internal Garden GetById(int Id, string UserId)
+    {
+      string sql = "SELECT * FROM gardens WHERE (id = @Id AND userId = @UserId)";
+      return _db.QueryFirstOrDefault<Garden>(sql, new { Id, UserId });
+    }
+    internal IEnumerable<Garden> GetGardens(string UserId)
+    {
+      string sql = "SELECT * FROM gardens WHERE userId = @UserId";
+      return _db.Query<IEnumerable<Garden>>(sql, new { UserId });
+    }
+    internal bool Delete(int Id, string UserId)
+    {
+      string sql = "DELETE FROM gardens WHERE (id = @Id AND userId = @UserId) LIMIT 1";
+      int deleted = _db.Execute(sql, new { Id, UserId });
+      return deleted == 1;
     }
   }
 }

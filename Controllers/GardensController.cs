@@ -11,43 +11,92 @@ using Microsoft.Extensions.Logging;
 
 namespace GardenBoxer.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class GardensController : ControllerBase
+  [ApiController]
+  [Route("api/[controller]")]
+  public class GardensController : ControllerBase
+  {
+    private readonly GardensService _gs;
+    private readonly BedsService _bs;
+    public GardensController(GardensService gs, BedsService bs)
     {
-        private readonly GardensService _ks;
-        public GardensController(GardensService ks)
-        {
-            _ks = ks;
-        }
-        [HttpGet]
-        public ActionResult<IEnumerable<Garden>> Get()
-        {
-            try
-            {
-                return Ok(_ks.Get());
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            };
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult<Garden> Post([FromBody] Garden newGarden)
-        {
-            try
-            {
-                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                newGarden.UserId = userId;
-                return Ok(_ks.Create(newGarden));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
+      _gs = gs;
+      _bs = bs;
     }
+    [HttpGet]
+    [Authorize]
+    public ActionResult<IEnumerable<Garden>> Get()
+    {
+      try
+      {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_gs.Get(userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{Id}")]
+    [Authorize]
+    public ActionResult<Garden> GetById(int Id)
+    {
+      try
+      {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_gs.GetById(Id, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      };
+    }
+
+    [HttpGet("{GardenId}/beds")]
+    [Authorize]
+    public ActionResult<IEnumerable<Bed>> GetBedsByGardenId(int GardenId)
+    {
+      try
+      {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_bs.GetBedsByGardenId(GardenId, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpPost]
+    [Authorize]
+    public ActionResult<Bed> Post([FromBody] Bed newBed)
+    {
+      try
+      {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        newBed.UserId = userId;
+        return Ok(_bs.Create(newBed));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult<Bed> Delete(int id)
+    {
+      try
+      {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_bs.Delete(id, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+  }
+}
+
 }
