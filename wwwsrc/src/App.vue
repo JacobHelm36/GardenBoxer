@@ -18,7 +18,7 @@ export default {
     Navbar
   }
 };
-</script>
+</script> 
 
 <style lang="scss">
 @import "./assets/_variables.scss";
