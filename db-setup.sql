@@ -58,3 +58,24 @@
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS users;
+
+-- CREATE TABLE beds (
+--     id int NOT NULL AUTO_INCREMENT,
+--     name VARCHAR(255) NOT NULL,
+--     userId VARCHAR(255) NOT NULL,
+--     img VARCHAR(255),
+--     datePlanted DATE,
+--     dateFertilized DATE,
+--     width INT,
+--     height INT,
+--     INDEX userId (userId),
+--     PRIMARY KEY (id),
+--     bedX INT NOT NULL,
+--     bedY INT NOT NULL,
+--     gardenId INT NOT NULL,
+--     UNIQUE(bedX, bedY, gardenId),
+
+--     FOREIGN KEY (gardenId)
+--     REFERENCES garden(id)
+--     ON DELETE CASCADE
+-- );
