@@ -6,18 +6,18 @@ using Dapper;
 
 namespace GardenBoxer.Repositories
 {
-  public class GardensRepository
+  public class BedsRepository
   {
     private readonly IDbConnection _db;
 
-    public GardensRepository(IDbConnection db)
+    public BedsRepository(IDbConnection db)
     {
       _db = db;
     }
 
     // internal IEnumerable<Garden> Get()
     // {
-    //   string sql = "SELECT * FROM Gardens WHERE isPrivate = 0;";
+    //   string sql = "SELECT * FROM Beds WHERE isPrivate = 0;";
     //   return _db.Query<Garden>(sql);
     // }
 

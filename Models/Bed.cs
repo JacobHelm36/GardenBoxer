@@ -1,4 +1,4 @@
-namespace Keepr.Models
+namespace GardenBoxer.Models
 {
   public class Garden
   {
