@@ -7,7 +7,9 @@
           v-bind:style="{ 'min-height': plotHeight + '%', 'min-width': plotWidth + '%'}"
           :key="grid"
           class="grid"
-        ></div>
+        >
+          <p>hi</p>
+        </div>
       </div>
     </div>
     <h1>Your Gardens</h1>
@@ -38,7 +40,6 @@ export default {
     }
   },
   components: {
-    Garden
   },
   data() {
     return {
