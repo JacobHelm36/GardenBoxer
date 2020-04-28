@@ -39,7 +39,7 @@ namespace GardenBoxer.Repositories
       return _db.Query<IEnumerable<Bed>>(sql);
     }
 
-    internal Keep GetById(int id)
+    internal Bed GetById(int id)
     {
       string sql = "SELECT * FROM beds WHERE id = @Id";
       return _db.QueryFirstOrDefault<Bed>(sql, new { Id = id });

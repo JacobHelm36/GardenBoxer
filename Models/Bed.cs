@@ -1,6 +1,6 @@
 namespace GardenBoxer.Models
 {
-  public class Garden
+  public class Bed
   {
     public int Id { get; set; }
     public string UserId { get; set; }

@@ -1,14 +1,26 @@
 <template>
-  <div class="dashboard">
-    <h1>WELCOME TO THE DASHBOARD</h1>
-    public {{ publicKeeps }} user {{ userKeeps }}
+  <div class="dashboard container">
+    <div class="row">
+      <garden v-for="garden in gardens" :key="garden.id" :gardenData="garden" />
+    </div>
+    <h1>Your Gardens</h1>
   </div>
 </template>
 
 <script>
+import Garden from "../components/garden.vue";
 export default {
-  mounted() {},
-  computed: {}
+  mounted() {
+    this.$store.dispatch("getGardens");
+  },
+  computed: {
+    gardens() {
+      return this.$store.state.gardens;
+    }
+  },
+  components: {
+    Garden
+  }
 };
 </script>
 

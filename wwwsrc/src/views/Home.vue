@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>Welcome Home</h1>
+    <h1>Garden Boxer</h1>
+    <h3>About:</h3>
   </div>
 </template>
 
