@@ -39,7 +39,6 @@ export default {
     }
   },
   components: {
-    Garden
   },
   data() {
     return {
