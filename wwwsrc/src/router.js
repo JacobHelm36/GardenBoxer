@@ -6,6 +6,8 @@ import Home from "./views/Home.vue";
 import Dashboard from "./views/Dashboard.vue";
 // @ts-ignore
 import Garden from "./views/Garden.vue";
+// @ts-ignore
+import CreateGarden from "./views/CreateGarden.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -27,6 +29,12 @@ export default new Router({
       path: "/garden/:id",
       name: "garden",
       component: Garden,
+      beforeEnter: authGuard
+    },
+    {
+      path: "/create-garden",
+      name: "create",
+      component: CreateGarden,
       beforeEnter: authGuard
     }
   ]

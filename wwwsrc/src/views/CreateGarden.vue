@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name:"create",
   mounted() {
     this.$store.dispatch("setActiveGarden", this.$route.params.id);
     this.$store.dispatch("getBedsByGardenId", this.$route.params.id);
