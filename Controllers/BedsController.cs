@@ -20,22 +20,10 @@ namespace GardenBoxer.Controllers
     {
       _bs = bs;
     }
-    [HttpGet]
-    public ActionResult<IEnumerable<Bed>> Get()
-    {
-      try
-      {
-        return Ok(_bs.Get());
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      };
-    }
 
     [HttpPut("{id}")]
     [Authorize]
-    public ActionResult<Keep> Edit(int id, [FromBody] Bed editedBed)
+    public ActionResult<Bed> Edit(int id, [FromBody] Bed editedBed)
     {
       try
       {

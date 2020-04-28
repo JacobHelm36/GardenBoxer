@@ -27,9 +27,9 @@
         <li
           class="nav-item"
           v-if="$auth.isAuthenticated"
-          :class="{ active: $route.name == 'name' }"
+          :class="{ active: $route.name == 'create' }"
         >
-          <router-link class="nav-link" :to="{ name: 'name' }">Create Garden</router-link>
+          <router-link class="nav-link" :to="{ name: 'create' }">Create Garden</router-link>
         </li>
       </ul>
       <span class="navbar-text">

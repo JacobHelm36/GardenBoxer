@@ -30,21 +30,21 @@ namespace GardenBoxer.Repositories
             (@Name, @UserId, @BedX, @BedY, @Width, @Height, @DatePlanted, @DateFertilized);
             SELECT LAST_INSERT_ID();
             ";
-      VaultData.Id = _db.ExecuteScalar<int>(sql, BedData);
-      return VaultData;
+      BedData.Id = _db.ExecuteScalar<int>(sql, BedData);
+      return BedData;
     }
-    internal GetBedsByGardenId(int GardenId, string UserId)
+    internal IEnumerable<Bed> GetBedsByGardenId(int GardenId, string UserId)
     {
       string sql = "SELECT * FROM beds WHERE (userId = @UserId AND gardenId = @GardenId)";
-      return _db.Query<IEnumerable<Bed>>(sql);
+      return _db.Query<Bed>(sql, new {UserId});
     }
 
-    internal Bed GetById(int id)
+    internal Bed GetById(int Id, string UserId)
     {
-      string sql = "SELECT * FROM beds WHERE id = @Id";
-      return _db.QueryFirstOrDefault<Bed>(sql, new { Id = id });
+      string sql = "SELECT * FROM beds WHERE (id = @Id AND userId = @UserId)";
+      return _db.QueryFirstOrDefault<Bed>(sql, new { Id, UserId });
     }
-    internal Edit(Bed EditedBed)
+    internal Bed Edit(Bed EditedBed)
     {
       string sql = @"
         UPDATE beds
@@ -59,10 +59,11 @@ namespace GardenBoxer.Repositories
         WHERE (id = @Id AND userId = @UserId);
         ";
       _db.Execute(sql, EditedBed);
+      return EditedBed;
     }
-    internal bool Delete(int id)
+    internal bool Delete(int Id, string UserId)
     {
-      string sql = "DELETE FROM beds WHERE id = @id LIMIT 1";
+      string sql = "DELETE FROM beds WHERE (id = @Id AND userId = @UserId) LIMIT 1";
       int removed = _db.Execute(sql, new { Id });
       return removed == 1;
     }

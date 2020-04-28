@@ -12,7 +12,6 @@
         </div>
       </div>
     </div>
-    <h1>Your Gardens</h1>
   </div>
 </template>
 
@@ -20,13 +19,11 @@
 export default {
   name:"create",
   mounted() {
-    this.$store.dispatch("setActiveGarden", this.$route.params.id);
-    this.$store.dispatch("getBedsByGardenId", this.$route.params.id);
   },
   computed: {
     grids() {
-      arr = [];
-      num = this.width * this.height;
+      let arr = [];
+      let num = this.width * this.height;
       for (let i = 0; i++; i < num) {
         arr.push(i);
       }

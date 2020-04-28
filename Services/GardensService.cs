@@ -15,31 +15,35 @@ namespace GardenBoxer.Services
     }
     public IEnumerable<Garden> Get(string userId)
     {
-      return _repo.Get(userId);
+      return _repo.GetGardens(userId);
     }
 
     public Garden Create(Garden newGarden)
     {
       return _repo.Create(newGarden);
     }
-    public Garden GetById(int Id, string UserId)
+    internal Garden GetById(int Id, string UserId)
     {
       return _repo.GetById(Id, UserId);
     }
 
-    public Garden Edit(Garden newdGarden, string userId)
+    internal Garden Edit(Garden newGarden)
     {
-      Garden original = GetById(newdGarden.Id);
-      original.UserId = userId;
-      original.Name = editedGarden.Name != null ? newGarden.Name : original.Name;
-      original.Description = newdGarden.Description != null ? newdGarden.Description : original.Description;
-      original.Width = newdGarden.Width != null ? newdGarden.Width : original.Width;
-      original.Height = newdGarden.Height != null ? newdGarden.Height : original.Height;
+      Garden original = GetById(newGarden.Id, newGarden.UserId);
+      original.UserId = newGarden.UserId != null ? newGarden.UserId : original.UserId;
+      original.Name = newGarden.Name != null ? newGarden.Name : original.Name;
+      original.Description = newGarden.Description != null ? newGarden.Description : original.Description;
+      original.Width = newGarden.Width != 0 ? newGarden.Width : original.Width;
+      original.Height = newGarden.Height != 0 ? newGarden.Height : original.Height;
       return _repo.Edit(original);
     }
-    public Garden Delete(int id, string userId)
+    public string Delete(int id, string userId)
     {
-      return _repo.Delete(id, userId);
+      if(_repo.Delete(id, userId))
+      {
+      return "Deleted";
+      }
+        throw new Exception("That Garden doesn't exist");
     }
   }
 }

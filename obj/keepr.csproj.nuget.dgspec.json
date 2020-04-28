@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "c:\\source\\codeworks\\codeworks-templates\\keepr\\keepr.csproj": {}
+    "/Users/jacobhelm/source/personal/gardenboxer/keepr.csproj": {}
   },
   "projects": {
-    "c:\\source\\codeworks\\codeworks-templates\\keepr\\keepr.csproj": {
+    "/Users/jacobhelm/source/personal/gardenboxer/keepr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\source\\codeworks\\codeworks-templates\\keepr\\keepr.csproj",
+        "projectUniqueName": "/Users/jacobhelm/source/personal/gardenboxer/keepr.csproj",
         "projectName": "keepr",
-        "projectPath": "c:\\source\\codeworks\\codeworks-templates\\keepr\\keepr.csproj",
-        "packagesPath": "C:\\Users\\MarkO\\.nuget\\packages\\",
-        "outputPath": "c:\\source\\codeworks\\codeworks-templates\\keepr\\obj\\",
+        "projectPath": "/Users/jacobhelm/source/personal/gardenboxer/keepr.csproj",
+        "packagesPath": "/Users/jacobhelm/.nuget/packages/",
+        "outputPath": "/Users/jacobhelm/source/personal/gardenboxer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MarkO\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/jacobhelm/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -67,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.200/RuntimeIdentifierGraph.json"
         }
       }
     }

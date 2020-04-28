@@ -30,10 +30,10 @@ namespace GardenBoxer.Repositories
             (@Name, @UserId, @Width, @Height, @Description);
             SELECT LAST_INSERT_ID();
             ";
-      VaultData.Id = _db.ExecuteScalar<int>(sql, BedData);
-      return VaultData;
+      GardenData.Id = _db.ExecuteScalar<int>(sql, GardenData);
+      return GardenData;
     }
-    internal void Edit(Garden EditedGarden)
+    internal Garden Edit(Garden EditedGarden)
     {
       string sql = @"
         UPDATE gardens
@@ -45,6 +45,7 @@ namespace GardenBoxer.Repositories
         WHERE (id = @Id AND userId = @UserId);
         ";
       _db.Execute(sql, EditedGarden);
+      return EditedGarden;
     }
     internal Garden GetById(int Id, string UserId)
     {
@@ -54,7 +55,7 @@ namespace GardenBoxer.Repositories
     internal IEnumerable<Garden> GetGardens(string UserId)
     {
       string sql = "SELECT * FROM gardens WHERE userId = @UserId";
-      return _db.Query<IEnumerable<Garden>>(sql, new { UserId });
+      return _db.Query<Garden>(sql, new { UserId });
     }
     internal bool Delete(int Id, string UserId)
     {

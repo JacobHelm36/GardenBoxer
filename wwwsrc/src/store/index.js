@@ -22,21 +22,32 @@ export default new Vuex.Store({
     activeGarden: {},
   },
   mutations: {
+    // Gardens
     setGardens(state, gardens) {
       state.gardens = gardens;
-    },
-    setNewGardens(state, newGarden) {
-      state.gardens.push(newGarden)
     },
     setActiveGarden(state, garden) {
       state.activeGarden = garden;
     },
+    setNewGardens(state, newGarden) {
+      state.gardens.push(newGarden)
+    },
+    removeGarden(state, gardenId) {
+      state.gardens = state.gardens.filter(g => g.id != gardenId)
+    },
+    // Beds
     setBeds(state, beds) {
       state.beds = beds;
+    },
+    addBed(state, newBed) {
+      state.beds.push(newBed)
     },
     setEditBed(state, editedBed) {
       let index = state.beds.indexOf({ id: editedBed.id });
       Vue.set(state.beds, index, editedBed);
+    },
+    removeBed(state, bedId) {
+      state.beds = state.beds.filter(b => b.id != bedId)
     }
   },
   actions: {
@@ -70,9 +81,17 @@ export default new Vuex.Store({
       let res = await api.get(`gardens/${gardenId}/beds`);
       commit("setBeds", res.data);
     },
+    async createBed({ commit }, newBed) {
+      let res = await api.post("beds", newBed)
+      commit("addBed", res.data)
+    },
     async editBeds({ commit }, editedBed) {
-      let res = await api.put(`gardens/${editedBed.Id}`, editedBed);
+      let res = await api.put(`beds/${editedBed.Id}`, editedBed);
       commit("setEditBed", res.data)
+    },
+    async deleteBed({ commit }, bedData) {
+      let res = await api.delete(`beds/${bedData.id}`)
+      commit("removeBed", bedData.id)
     }
   }
 });

@@ -66,6 +66,22 @@ namespace GardenBoxer.Controllers
         return BadRequest(e.Message);
       }
     }
+
+    [HttpPut("{id}")]
+    [Authorize]
+    public ActionResult<Garden> Edit(int id, [FromBody] Garden editedGarden)
+      {
+        try
+          {
+          string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+          editedGarden.UserId = userId;
+          return Ok(_gs.Edit(editedGarden));
+          }
+          catch (Exception e)
+          {
+              return BadRequest(e.Message);
+          }
+      }
     [HttpPost]
     [Authorize]
     public ActionResult<Bed> Post([FromBody] Bed newBed)
@@ -88,7 +104,7 @@ namespace GardenBoxer.Controllers
       try
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_bs.Delete(id, userId));
+        return Ok(_gs.Delete(id, userId));
       }
       catch (Exception e)
       {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Keepr.Repositories;
-using Keepr.Services;
+using GardenBoxer.Repositories;
+using GardenBoxer.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -63,6 +63,8 @@ namespace Keepr
       //NOTE REGISTER SERVICES AND REPOSITORIES
       services.AddTransient<GardensService>();
       services.AddTransient<GardensRepository>();
+      services.AddTransient<BedsService>();
+      services.AddTransient<BedsRepository>();
     }
 
     private IDbConnection CreateDbConnection()

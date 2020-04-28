@@ -13,10 +13,6 @@ namespace GardenBoxer.Services
     {
       _repo = repo;
     }
-    public IEnumerable<Bed> Get()
-    {
-      return _repo.Get();
-    }
 
     public Bed Create(Bed newBed)
     {
@@ -27,24 +23,32 @@ namespace GardenBoxer.Services
     {
       return _repo.GetBedsByGardenId(GardenId, userId);
     }
+    public Bed GetById(int BedId, string UserId)
+    {
+      return _repo.GetById(BedId, UserId);
+    }
 
     public Bed Edit(Bed newdBed, string userId)
     {
-      Bed original = GetById(newdBed.Id);
+      Bed original = GetById(newdBed.Id, userId);
       original.UserId = userId;
-      original.Name = editedBed.Name != null ? newBed.Name : original.Name;
+      original.Name = newdBed.Name != null ? newdBed.Name : original.Name;
       original.DateFertilized = newdBed.DateFertilized != null ? newdBed.DateFertilized : original.DateFertilized;
-      original.Width = newdBed.Width != null ? newdBed.Width : original.Width;
-      original.Height = newdBed.BedX != null ? newdBed.BedX : original.BedX;
-      original.BedX = newdBed.Height != null ? newdBed.Height : original.Height;
-      original.BedY = newdBed.BedY != null ? newdBed.BedY : original.BedY;
+      original.Width = newdBed.Width != 0 ? newdBed.Width : original.Width;
+      original.Height = newdBed.BedX != 0 ? newdBed.BedX : original.BedX;
+      original.BedX = newdBed.Height != 0 ? newdBed.Height : original.Height;
+      original.BedY = newdBed.BedY != 0 ? newdBed.BedY : original.BedY;
       original.DatePlanted = newdBed.DatePlanted != null ? newdBed.DatePlanted : original.DatePlanted;
       return _repo.Edit(original);
     }
 
-    public BedsRepository Delete(int id, string userId)
+    public string Delete(int id, string userId)
     {
-      return _repo.Delete(id, userId);
+      if(_repo.Delete(id, userId))
+      {
+        return "Deleted";
+      }
+        throw new Exception("That Bed doesn't exist");
     }
   }
 }
