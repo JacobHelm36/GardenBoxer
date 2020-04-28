@@ -2,6 +2,7 @@
   <div class="dashboard container">
     <div class="row">
       <div class="col-12">
+        <h1>HI</h1>
         <div
           v-for="grid in grids"
           v-bind:style="{ 'min-height': plotHeight + '%', 'min-width': plotWidth + '%'}"

@@ -67,13 +67,17 @@ export default new Vuex.Store({
       let res = await api.get(`gardens/${gardenId}`);
       commit("setActiveGarden", res.data);
     },
+    async editGarden({ commit }, editedGarden) {
+      let res = await api.put("gardens", editedGarden)
+      commit("setActiveGarden", res.data);
+    },
     async createGarden({ commit }, newGarden) {
       let res = await api.post("gardens", newGarden)
-      commit("setNewGardens", res.data)
+      commit("setNewGardens", res.data);
     },
     async deleteGarden({ commit }, gardenData) {
       await api.delete(`gardens/${gardenData.id}`)
-      commit("removeGarden", gardenData.id)
+      commit("removeGarden", gardenData.id);
     },
 
     // Beds
