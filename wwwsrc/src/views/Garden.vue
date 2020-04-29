@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Bed from "../components/bed"
+import Bed from "../components/addBed"
 import Garden from "../components/garden"
 export default {
   mounted() {
