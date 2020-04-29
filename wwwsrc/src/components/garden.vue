@@ -1,8 +1,9 @@
 <template>
-    <div class="row d-flex justify-content-center">
-      <div @click.prevent="click($event)" class="col-12 box p-0 mt-5 mb-5" v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight}" >
-      </div>
-    </div>
+  <div
+    class="box cont d-flex justify-content-center"
+    v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight}"
+    @click.prevent="click($event)"
+  ></div>
 </template>
 
 <script>
@@ -24,14 +25,15 @@ export default {
       let ratio = this.gardenData.height / this.gardenData.width;
       if(ratio > 1.2){
         return {
-          plotWidth: ((this.gardenData.width / this.gardenData.height) * 80) + "%",
-          plotHeight: "80%"
-        }
+          plotWidth:
+            (this.gardenData.width / this.gardenData.height) * 95 + "%",
+          plotHeight: "95%"
+        };
       }
       return {
-        plotHeight: (ratio * 80) + "%",
-        plotWidth: "80%"
-      }
+        plotHeight: ratio * 95 + "%",
+        plotWidth: "95%"
+      };
     }
   },
   components: {
@@ -50,5 +52,8 @@ export default {
   background-color: rgb(42, 165, 73);
   border: 1px solid black;
 }
-
+.cont {
+  width: 95%;
+  padding-bottom: 95%;
+}
 </style>
