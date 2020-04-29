@@ -13,6 +13,7 @@
       </div>
       <div @click.prevent="click($event)" class="col-12 box p-0 mt-5 mb-5" v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight}" >
       </div>
+      <button @click="asdf()">asdf</button>
     </div>
   </div>
 </template>
@@ -29,12 +30,13 @@ export default {
       console.log(e.offsetX);
       return e.offsetX;
     },
+    asdf(){
+      console.log(this.$router);
+    },
     async createGarden(){
-      debugger;
       this.newGarden.width = Number(this.newGarden.width);
       this.newGarden.height = Number(this.newGarden.height);
       await this.$store.dispatch("createGarden", this.newGarden);
-      this.$route.name = "dashboard";
     }
   },
   computed: {
