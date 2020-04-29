@@ -11,7 +11,7 @@ namespace GardenBoxer.Models
     public int BedY { get; set; }
     public string DatePlanted { get; set; }
     public string DateFertilized { get; set; }
-
+    public string Img { get; set; }
 
 
   }

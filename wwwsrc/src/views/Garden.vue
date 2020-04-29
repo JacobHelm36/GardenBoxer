@@ -1,17 +1,22 @@
 <template>
   <div class="dashboard container">
-    <garden :gardenData="garden" />
-    <h2>{{garden.name}}</h2>
-    <h2>{{garden.description}}</h2>
-    <h1>Your Gardens</h1>
-    <bed v-for="bedObj in beds" :key="bedObj.id" />
-    <p>{{bedObj.name}}</p>
+    <div class="row">
+      <div class="col-12">
+        <h1>HI</h1>
+      </div>
+      <div class="col-12">
+        <garden :clickable="true" :gardenData="gardenInfo" />
+        <h2>{{gardenInfo.name}}</h2>
+        <h2>{{gardenInfo.description}}</h2>
+        <add-bed v-for="bedObj in beds" :key="bedObj.id" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Bed from "../components/addBed"
-import Garden from "../components/garden"
+import AddBed from "../components/addBed";
+import Garden from "../components/garden";
 export default {
   mounted() {
     this.$store.dispatch("setActiveGarden", this.$route.params.id);
@@ -21,14 +26,15 @@ export default {
     beds() {
       return this.$store.state.beds;
     },
-    garden() {
+    gardenInfo() {
       return this.$store.state.activeGarden;
     }
   },
   components: {
-    Bed
+    AddBed,
+    Garden
   },
-  props:[]
+  props: []
 };
 </script>
 

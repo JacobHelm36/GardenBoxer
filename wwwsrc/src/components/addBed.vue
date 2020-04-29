@@ -6,14 +6,19 @@
     <input type='number' class="form-control-sm" v-model="newBed.height" placeholder="Enter a height"></input>
     <input type='text' class="form-control-sm" v-model="newBed.datePlanted" placeholder="Enter the date planted"></input>
     <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
-    <button class="btn btn-primary" @click="createBed()">Submit</button>
+    <p>{{coords.bedX}}</p>
+    <p>{{coords.bedY}}</p>
+    <text v-model="newBed.bedX"></text>
+    <text v-model="newBed.bedY"></text>
+      <button class="btn btn-primary" @click="createBed()">Submit</button>
+      <button class="btn btn-danger" @click="window.close()">Cancel</button>
   </div>
 </template>
 
 
 <script>
 export default {
-  props:[],
+  props:["coords"],
   name: 'beds',
   methods: {
     createBed(){
@@ -28,11 +33,14 @@ export default {
         width: null,
         height: null,
         datePlanted: null,
-        dateFertilized: null
+        dateFertilized: null,
+        bedX: null,
+        bedY: null
       }
     }
   },
   computed:{
+    
     }
 }
 </script>
