@@ -4,11 +4,12 @@
       <garden v-for="garden in gardens" :key="garden.id" :gardenData="garden" />
     </div>
     <h1>Your Gardens</h1>
+    {{gardens}} gardens
   </div>
 </template>
 
 <script>
-import Garden from "../components/garden.vue";
+import Garden from "../components/gardenCard.vue";
 export default {
   mounted() {
     this.$store.dispatch("getGardens");
