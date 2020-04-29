@@ -70,27 +70,27 @@ namespace GardenBoxer.Controllers
     [HttpPut("{id}")]
     [Authorize]
     public ActionResult<Garden> Edit(int id, [FromBody] Garden editedGarden)
-    {
-      try
       {
-        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        editedGarden.UserId = userId;
-        return Ok(_gs.Edit(editedGarden));
+        try
+          {
+          string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+          editedGarden.UserId = userId;
+          return Ok(_gs.Edit(editedGarden));
+          }
+          catch (Exception e)
+          {
+              return BadRequest(e.Message);
+          }
       }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
     [HttpPost]
     [Authorize]
-    public ActionResult<Garden> Post([FromBody] Garden newGarden)
+    public ActionResult<Bed> Post([FromBody] Bed newBed)
     {
       try
       {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        newGarden.UserId = userId;
-        return Ok(_gs.Create(newGarden));
+        newBed.UserId = userId;
+        return Ok(_bs.Create(newBed));
       }
       catch (Exception e)
       {
@@ -99,7 +99,7 @@ namespace GardenBoxer.Controllers
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<Garden> Delete(int id)
+    public ActionResult<Bed> Delete(int id)
     {
       try
       {

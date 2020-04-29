@@ -59,7 +59,6 @@
 -- DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS users;
 
-
 -- CREATE TABLE beds (
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255) NOT NULL,

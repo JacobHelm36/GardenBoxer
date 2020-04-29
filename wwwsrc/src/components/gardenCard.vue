@@ -11,19 +11,15 @@
 </template>
 
 <script>
-import Garden from "../components/garden";
+import Garden from "../components/garden"
 export default {
   props: ["gardenData"],
   mounted() {},
   computed: {},
-  components: {
+  components:{
     Garden
   }
 };
 </script>
 
-<style>
-.card-back {
-  border: 1px solid black;
-}
-</style>
+<style></style>

@@ -1,3 +1,4 @@
 node_modules 
 .env
 .vscode
+obj/Debug/netcoreapp3.1/keepr.csprojAssemblyReference.cache
