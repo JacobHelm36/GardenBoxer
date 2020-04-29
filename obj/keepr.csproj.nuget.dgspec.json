@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\source\\codeworks\\GardenBoxer\\keepr.csproj": {}
+    "c:\\source\\codeworks\\GardenBoxer\\keepr.csproj": {}
   },
   "projects": {
-    "C:\\source\\codeworks\\GardenBoxer\\keepr.csproj": {
+    "c:\\source\\codeworks\\GardenBoxer\\keepr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\source\\codeworks\\GardenBoxer\\keepr.csproj",
+        "projectUniqueName": "c:\\source\\codeworks\\GardenBoxer\\keepr.csproj",
         "projectName": "keepr",
-        "projectPath": "C:\\source\\codeworks\\GardenBoxer\\keepr.csproj",
+        "projectPath": "c:\\source\\codeworks\\GardenBoxer\\keepr.csproj",
         "packagesPath": "C:\\Users\\calvi\\.nuget\\packages\\",
-        "outputPath": "C:\\source\\codeworks\\GardenBoxer\\obj\\",
+        "outputPath": "c:\\source\\codeworks\\GardenBoxer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
