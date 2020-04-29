@@ -8,11 +8,12 @@
 
 <script>
 export default {
-  name: "create",
-  props: ["gardenData"],
-  mounted() {},
-  methods: {
-    click(e) {
+  name:"create",
+  props:["gardenData"],
+  mounted() {
+  },
+  methods:{
+    click(e){
       console.log(e);
       console.log(e.offsetY);
       console.log(e.offsetX);
@@ -20,9 +21,9 @@ export default {
     }
   },
   computed: {
-    plotDimensions() {
+    plotDimensions(){
       let ratio = this.gardenData.height / this.gardenData.width;
-      if (ratio > 1.2) {
+      if(ratio > 1.2){
         return {
           plotWidth:
             (this.gardenData.width / this.gardenData.height) * 95 + "%",
@@ -35,15 +36,19 @@ export default {
       };
     }
   },
-  components: {},
+  components: {
+  },
   data() {
-    return {};
+    return {
+    };
   }
 };
 </script>
 
-<style scoped>
-.box {
+<style>
+.box{
+  min-width:80%;
+  max-width:80%;
   background-color: rgb(42, 165, 73);
   border: 1px solid black;
 }

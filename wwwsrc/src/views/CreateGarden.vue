@@ -4,9 +4,9 @@
     <div class="row d-flex justify-content-center">
       <div class="form-input col-12">
         <label>Height:</label>
-        <input type="number" class="form-control-sm" v-model="newGarden.height" placeholder="Enter a height"></input>
+        <input type="number" class="form-control-sm" max="100" v-model="newGarden.height" placeholder="Enter a height"></input>
         <label>Width:</label>
-        <input type="number" class="form-control-sm" v-model="newGarden.width" placeholder="Enter a width"></input>
+        <input type="number" class="form-control-sm" max="100" v-model="newGarden.width" placeholder="Enter a width"></input>
         <input type="text" class="form-control-sm" max="100" v-model="newGarden.name" placeholder="Name"></input>
         <input type="text" class="form-control-sm" max="100" v-model="newGarden.description" placeholder="Description"></input>
         <button @click="createGarden()" class="btn btn-primary">Submit</button>
@@ -65,8 +65,8 @@ export default {
   data() {
     return {
       newGarden:{
-        width: 0,
-        height: 0,
+        width: null,
+        height: null,
         name: null,
         description:null
       }
