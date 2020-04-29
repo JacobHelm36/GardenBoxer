@@ -15,11 +15,11 @@ namespace GardenBoxer.Repositories
       _db = db;
     }
 
-    // internal IEnumerable<Garden> Get()
-    // {
-    //   string sql = "SELECT * FROM Gardens WHERE isPrivate = 0;";
-    //   return _db.Query<Garden>(sql);
-    // }
+    internal IEnumerable<Garden> Get(string UserId)
+    {
+      string sql = "SELECT * FROM gardens WHERE userId = @UserId;";
+      return _db.Query<Garden>(sql, new { UserId });
+    }
 
     internal Garden Create(Garden GardenData)
     {
