@@ -1,10 +1,11 @@
 <template>
   <div class="dashboard container">
     <div class="row">
+      <div class="col-12 text-center">
+        <h1>Your Gardens</h1>
+      </div>
       <garden v-for="garden in gardens" :key="garden.id" :gardenData="garden" />
     </div>
-    <h1>Your Gardens</h1>
-    {{gardens}} gardens
   </div>
 </template>
 

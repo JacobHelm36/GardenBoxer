@@ -1,8 +1,12 @@
 <template>
-  <div class="col-6 col-md-3 card-back rounded bg-light">
-    <garden :gardenData="gardenData" />
-    <h4>{{gardenData.name}}</h4>
-    <h4>{{gardenData.description}}</h4>
+  <div class="col-6 col-md-3">
+    <div
+      class="card-back rounded bg-primary d-flex justify-content-center flex-column align-items-center"
+    >
+      <garden class="mt-1" :gardenData="gardenData" />
+      <h4>{{gardenData.name}}</h4>
+      <h4>{{gardenData.description}}</h4>
+    </div>
   </div>
 </template>
 
