@@ -4,6 +4,7 @@
       class="card-back rounded bg-primary d-flex justify-content-center flex-column align-items-center"
     >
       <garden class="mt-1" :gardenData="gardenData" />
+      <router-link :to="'/garden/' + gardenData.id">link</router-link>
       <h4>{{gardenData.name}}</h4>
       <h4>{{gardenData.description}}</h4>
     </div>
@@ -11,12 +12,12 @@
 </template>
 
 <script>
-import Garden from "../components/garden"
+import Garden from "../components/garden";
 export default {
   props: ["gardenData"],
   mounted() {},
   computed: {},
-  components:{
+  components: {
     Garden
   }
 };

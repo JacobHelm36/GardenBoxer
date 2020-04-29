@@ -36,7 +36,7 @@ namespace GardenBoxer.Repositories
     internal IEnumerable<Bed> GetBedsByGardenId(int GardenId, string UserId)
     {
       string sql = "SELECT * FROM beds WHERE (userId = @UserId AND gardenId = @GardenId)";
-      return _db.Query<Bed>(sql, new {UserId});
+      return _db.Query<Bed>(sql, new { UserId, GardenId });
     }
 
     internal Bed GetById(int Id, string UserId)

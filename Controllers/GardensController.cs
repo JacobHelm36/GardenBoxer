@@ -52,14 +52,14 @@ namespace GardenBoxer.Controllers
       };
     }
 
-    [HttpGet("{GardenId}/beds")]
+    [HttpGet("{gardenId}/beds")]
     [Authorize]
-    public ActionResult<IEnumerable<Bed>> GetBedsByGardenId(int GardenId)
+    public ActionResult<IEnumerable<Bed>> GetBedsByGardenId(int gardenId)
     {
       try
       {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_bs.GetBedsByGardenId(GardenId, userId));
+        return Ok(_bs.GetBedsByGardenId(gardenId, userId));
       }
       catch (Exception e)
       {
