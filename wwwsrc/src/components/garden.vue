@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .box {
   background-color: rgb(42, 165, 73);
   border: 1px solid black;
