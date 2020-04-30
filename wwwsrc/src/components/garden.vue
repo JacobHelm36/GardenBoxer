@@ -9,9 +9,9 @@
       class="add-bed"
       id="bed-form"
       v-bind:style="{'top':formCoords.top + 'px', 'left': formCoords.left + 'px'}"
-      v-if="form"
       v-show="clickable"
       :coords="bedCoords"
+      :formActive="formActive"
     />
     <button v-if="cancellation" class="btn btn-danger" @click="click()">Cancel</button>
   </div>
@@ -33,7 +33,6 @@ export default {
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = true;
-        this.cancellation = true;
       }
       debugger;
       let garden = document.getElementById("garden");
@@ -53,12 +52,6 @@ export default {
         this.formCoords.left = e.offsetX;
         this.form = true;
         // this.cancellation = true;
-      }
-    },
-    cancel() {
-      if (this.form) {
-        this.form = false;
-        this.cancellation = false;
       }
     }
   },
@@ -84,6 +77,9 @@ export default {
       let bottom = document.getElementById("bed-form").offsetHeight;
       let right = document.getElementById("bed-form").offsetWidth;
       return [this.formCoords.top, this.formCoords.left, bottom, right];
+    },
+    formActive() {
+      return this.form;
     }
   },
   components: {
@@ -92,7 +88,6 @@ export default {
   data() {
     return {
       form: false,
-      cancellation: false,
       formCoords: {
         left: 0,
         top: 0
