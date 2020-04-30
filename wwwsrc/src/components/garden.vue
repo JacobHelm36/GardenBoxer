@@ -1,8 +1,8 @@
 <template>
   <div
-    class="box cont d-flex justify-content-center"
+    class="box cont"
     id="garden"
-    v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight, 'padding-bottom':plotDimensions.plotHeight}"
+    v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth,'padding-bottom':plotDimensions.plotHeight}"
     @click.prevent="click($event)"
   >
     <add-bed
@@ -62,12 +62,13 @@ export default {
     bedCoordinates() {
       return this.bedCoords;
     },
-    gridCoords(){
+    gridCoords() {
       let x = this.bedCoords.bedX * this.WInterval;
       let y = this.bedCoords.bedY * this.HInterval;
       return {
-        x,y
-      }
+        x,
+        y
+      };
     },
     formBox() {
       let bottom = document.getElementById("bed-form").offsetHeight;
@@ -95,8 +96,8 @@ export default {
         bedX: 0,
         bedY: 0
       },
-      HInterval:0,
-      WInterval:0
+      HInterval: 0,
+      WInterval: 0
     };
   }
 };
@@ -115,7 +116,7 @@ export default {
   position: absolute;
 }
 .outline {
-  position:absolute;
-  border:1px solid black;
+  position: absolute;
+  border: 1px solid black;
 }
 </style>
