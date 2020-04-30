@@ -1,6 +1,6 @@
 <template>
-  <div class="beds row">
-    <div class="col-12">
+  <div class="beds">
+    <div class="">
       <img class="img-fluid" :src="bedData.img" alt />
     </div>
     <div v-show="info" class="popup">
@@ -8,7 +8,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 export default {

@@ -1,10 +1,7 @@
 <template>
   <div class="dashboard container">
     <div class="row">
-      <div class="col-12">
-        <h1>HI</h1>
-      </div>
-      <div class="col-12">
+      <div class="col-12 d-flex justify-content-center align-items-center">
         <garden :clickable="true" :gardenData="gardenInfo" />
         <h2>{{gardenInfo.name}}</h2>
         <h2>{{gardenInfo.description}}</h2>

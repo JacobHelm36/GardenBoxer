@@ -15,6 +15,13 @@
     />
     <div v-bind:style="{'top':gridCoords.y + 'px', 'left':gridCoords.x + 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}" v-if="formActive" class="outline"></div>
     
+    <bed 
+    v-for="bed in beds"
+    :key="bed.id"
+    class="beds"
+    v-bind:style="{'top':(bed.bedY * HInterval) + 'px', 'left':(bed.bedX * WInterval)+ 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}"
+    :bedData="bed"
+    />
   </div>
 </template>
 
@@ -43,13 +50,13 @@ export default {
       if (ratio > 1.2) {
         return {
           plotWidth:
-            (this.gardenData.width / this.gardenData.height) * 95 + "%",
-          plotHeight: "95%"
+            (this.gardenData.width / this.gardenData.height) * 100 + "%",
+          plotHeight: "100%"
         };
       }
       return {
-        plotHeight: ratio * 95 + "%",
-        plotWidth: "95%"
+        plotHeight: ratio * 100 + "%",
+        plotWidth: "100%"
       };
     },
     bedCoordinates() {
@@ -69,6 +76,9 @@ export default {
     },
     formActive() {
       return this.form;
+    },
+    beds() {
+      return this.$store.state.beds;
     }
   },
   components: {
@@ -98,8 +108,8 @@ export default {
   border: 1px solid black;
 }
 .cont {
-  width: 95%;
-  padding-bottom: 95%;
+  width: 100%;
+  padding-bottom: 100%;
 }
 .add-bed {
   position: absolute;
