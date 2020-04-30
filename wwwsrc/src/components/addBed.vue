@@ -1,5 +1,5 @@
 <template>
-  <div class="beds bed-form">
+  <div class="beds bed-form" v-if="formActive">
     <div class="form">
       <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant"></input>
       <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
@@ -9,14 +9,14 @@
       <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
     </div>
       <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
-      <button type="button" class="btn btn-primary" @click="this.formActive = false">Submit</button>
+      <button type="button" class="btn btn-primary" @click="formActive = false">Cancel</button>
   </div>
 </template>
 
 
 <script>
 export default {
-  props:["coords"],
+  props:["coords", "formActive"],
   methods: {
     createBed(){
       this.$store.dispatch("createBed", this.newBed)

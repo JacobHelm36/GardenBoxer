@@ -13,7 +13,8 @@
       :coords="bedCoordinates"
       :formActive="formActive"
     />
-    <button v-if="cancellation" class="btn btn-danger" @click="click()">Cancel</button>
+    <div v-bind:style="{'top':gridCoords.y + 'px', 'left':gridCoords.x + 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}" v-if="formActive" class="outline"></div>
+    
   </div>
 </template>
 
@@ -25,33 +26,14 @@ export default {
   mounted() {},
   methods: {
     click(e) {
-      if (e.toElement.id == "garden") {
-        let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
-        let Winterval = e.toElement.offsetWidth / this.gardenData.width;
-        this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
-        this.bedCoords.bedX = Math.round(e.offsetX / Winterval);
+      if (e.toElement.id == "garden" && this.clickable) {
+        this.HInterval = e.toElement.offsetHeight / this.gardenData.height;
+        this.WInterval = e.toElement.offsetWidth / this.gardenData.width;
+        this.bedCoords.bedY = Math.floor(e.offsetY / this.HInterval);
+        this.bedCoords.bedX = Math.floor(e.offsetX / this.WInterval);
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = true;
-      }
-      debugger;
-      let garden = document.getElementById("garden");
-      let X = e.pageX - garden.documentElement.scrollLeft;
-      let Y = e.pageY - garden.documentElement.scrollTop;
-      if (
-        Y < this.formBox[1] ||
-        Y > this.formBox[3] ||
-        X < this.formBox[0] ||
-        X > this.formBox[2]
-      ) {
-        let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
-        let Winterval = e.toElement.offsetWidth / this.gardenData.width;
-        this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
-        this.bedCoords.bedX = Math.round(e.offsetX / Winterval);
-        this.formCoords.top = e.offsetY;
-        this.formCoords.left = e.offsetX;
-        this.form = true;
-        // this.cancellation = true;
       }
     }
   },
@@ -72,6 +54,13 @@ export default {
     },
     bedCoordinates() {
       return this.bedCoords;
+    },
+    gridCoords(){
+      let x = this.bedCoords.bedX * this.WInterval;
+      let y = this.bedCoords.bedY * this.HInterval;
+      return {
+        x,y
+      }
     },
     formBox() {
       let bottom = document.getElementById("bed-form").offsetHeight;
@@ -95,7 +84,9 @@ export default {
       bedCoords: {
         bedX: 0,
         bedY: 0
-      }
+      },
+      HInterval:0,
+      WInterval:0
     };
   }
 };
@@ -112,5 +103,9 @@ export default {
 }
 .add-bed {
   position: absolute;
+}
+.outline {
+  position:absolute;
+  border:1px solid black;
 }
 </style>
