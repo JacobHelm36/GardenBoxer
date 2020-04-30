@@ -6,7 +6,8 @@
   >
     <add-bed
       class="add-bed"
-      v-bind:style="{'top':formCoords.top, 'left': formCoords.left}"
+      id="bed-form"
+      v-bind:style="{'top':formCoords.top + 'px', 'left': formCoords.left + 'px'}"
       v-if="form"
       v-show="clickable"
       :coords="bedCoords"
@@ -22,13 +23,30 @@ export default {
   mounted() {},
   methods: {
     click(e) {
+      debugger;
       if (!this.form) {
         let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
         let Winterval = e.toElement.offsetWidth / this.gardenData.width;
         this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
         this.bedCoords.bedX = Math.round(e.offsetX / Winterval);
-        this.formCoords.top = e.offsetY + "px";
-        this.formCoords.left = e.offsetX + "px";
+        this.formCoords.top = e.offsetY;
+        this.formCoords.left = e.offsetX;
+        this.form = true;
+      }
+      let X = e.pageX - document.body.scrollLeft;
+      let Y = e.pageY - document.body.scrollTop;
+      if (
+        e.layerY < this.formBox[1] ||
+        e.layerY > this.formBox[3] ||
+        e.layerX < this.formBox[0] ||
+        e.layerX > this.formBox[2]
+      ) {
+        let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
+        let Winterval = e.toElement.offsetWidth / this.gardenData.width;
+        this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
+        this.bedCoords.bedX = Math.round(e.offsetX / Winterval);
+        this.formCoords.top = e.offsetY;
+        this.formCoords.left = e.offsetX;
         this.form = true;
       }
     }
@@ -50,6 +68,11 @@ export default {
     },
     bedCoordinates() {
       return this.bedCoords;
+    },
+    formBox() {
+      let bottom = document.getElementById("bed-form").offsetHeight;
+      let right = document.getElementById("bed-form").offsetWidth;
+      return [this.formCoords.top, this.formCoords.left, bottom, right];
     }
   },
   components: {

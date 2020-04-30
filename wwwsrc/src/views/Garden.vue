@@ -8,7 +8,6 @@
         <garden :clickable="true" :gardenData="gardenInfo" />
         <h2>{{gardenInfo.name}}</h2>
         <h2>{{gardenInfo.description}}</h2>
-        <add-bed v-for="bedObj in beds" :key="bedObj.id" />
       </div>
     </div>
   </div>

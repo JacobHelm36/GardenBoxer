@@ -1,5 +1,5 @@
 <template>
-  <div class="beds">
+  <div id="bed-form" class="beds">
     <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant"></input>
     <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
     <input type='number' class="form-control-sm" v-model="newBed.width" placeholder="Enter a width"></input>
