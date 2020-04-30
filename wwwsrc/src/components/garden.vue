@@ -25,11 +25,7 @@ export default {
   mounted() {},
   methods: {
     click(e) {
-<<<<<<< HEAD
       if (e.toElement.id == "garden") {
-=======
-      if (!this.form) {
->>>>>>> 66292a0341e0e907d146a5c35d81a65a47b12902
         let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
         let Winterval = e.toElement.offsetWidth / this.gardenData.width;
         this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
@@ -39,28 +35,6 @@ export default {
         this.form = true;
         this.cancellation = true;
       }
-<<<<<<< HEAD
-=======
-      debugger;
-      let garden = document.getElementById("garden");
-      let X = e.pageX - garden.documentElement.scrollLeft;
-      let Y = e.pageY - garden.documentElement.scrollTop;
-      if (
-        Y < this.formBox[1] ||
-        Y > this.formBox[3] ||
-        X < this.formBox[0] ||
-        X > this.formBox[2]
-      ) {
-        let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
-        let Winterval = e.toElement.offsetWidth / this.gardenData.width;
-        this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
-        this.bedCoords.bedX = Math.round(e.offsetX / Winterval);
-        this.formCoords.top = e.offsetY;
-        this.formCoords.left = e.offsetX;
-        this.form = true;
-        // this.cancellation = true;
-      }
->>>>>>> 66292a0341e0e907d146a5c35d81a65a47b12902
     },
     cancel() {
       if (this.form) {
