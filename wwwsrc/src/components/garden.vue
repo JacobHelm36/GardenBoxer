@@ -1,6 +1,7 @@
 <template>
   <div
     class="box cont d-flex justify-content-center"
+    id="garden"
     v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight, 'padding-bottom':plotDimensions.plotHeight}"
     @click.prevent="click($event)"
   >
@@ -10,7 +11,7 @@
       v-bind:style="{'top':formCoords.top + 'px', 'left': formCoords.left + 'px'}"
       v-if="form"
       v-show="clickable"
-      :coords="bedCoords"
+      :coords="bedCoordinates"
     />
     <!-- <button v-if="cancellation">Cancel</button> -->
   </div>
@@ -24,8 +25,7 @@ export default {
   mounted() {},
   methods: {
     click(e) {
-      debugger;
-      if (!this.form) {
+      if (e.toElement.id == "garden") {
         let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
         let Winterval = e.toElement.offsetWidth / this.gardenData.width;
         this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
@@ -33,23 +33,6 @@ export default {
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = true;
-      }
-      let X = e.pageX - document.body.scrollLeft;
-      let Y = e.pageY - document.body.scrollTop;
-      if (
-        e.layerY < this.formBox[1] ||
-        e.layerY > this.formBox[3] ||
-        e.layerX < this.formBox[0] ||
-        e.layerX > this.formBox[2]
-      ) {
-        let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
-        let Winterval = e.toElement.offsetWidth / this.gardenData.width;
-        this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
-        this.bedCoords.bedX = Math.round(e.offsetX / Winterval);
-        this.formCoords.top = e.offsetY;
-        this.formCoords.left = e.offsetX;
-        this.form = true;
-        // this.cancellation = true;
       }
     },
     cancel() {
@@ -76,11 +59,6 @@ export default {
     },
     bedCoordinates() {
       return this.bedCoords;
-    },
-    formBox() {
-      let bottom = document.getElementById("bed-form").offsetHeight;
-      let right = document.getElementById("bed-form").offsetWidth;
-      return [this.formCoords.top, this.formCoords.left, bottom, right];
     }
   },
   components: {

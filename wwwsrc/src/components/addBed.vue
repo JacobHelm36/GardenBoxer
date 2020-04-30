@@ -1,5 +1,5 @@
 <template>
-  <div class="beds">
+  <div class="beds bed-form">
     <div class="form">
       <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant"></input>
       <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
@@ -16,7 +16,6 @@
 <script>
 export default {
   props:["coords"],
-  name: 'beds',
   methods: {
     createBed(){
       this.$store.dispatch("createBed", this.newBed)
@@ -25,14 +24,14 @@ export default {
   data(){
     return {
       newBed: {
-        name: null,
-        description: null,
-        width: null,
-        height: null,
-        datePlanted: null,
-        dateFertilized: null,
-        bedX: coord.bedX,
-        bedY: coords.bedY
+        name: "",
+        description: "",
+        width: 1,
+        height: 1,
+        datePlanted: "",
+        dateFertilized: "",
+        bedX: this.coords.bedX,
+        bedY: this.coords.bedY
       }
     }
   },
