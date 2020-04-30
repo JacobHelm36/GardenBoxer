@@ -10,7 +10,7 @@
       id="bed-form"
       v-bind:style="{'top':formCoords.top + 'px', 'left': formCoords.left + 'px'}"
       v-show="clickable"
-      :coords="bedCoords"
+      :coords="bedCoordinates"
       :formActive="formActive"
     />
     <button v-if="cancellation" class="btn btn-danger" @click="click()">Cancel</button>
@@ -25,7 +25,7 @@ export default {
   mounted() {},
   methods: {
     click(e) {
-      if (!this.form) {
+      if (e.toElement.id == "garden") {
         let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
         let Winterval = e.toElement.offsetWidth / this.gardenData.width;
         this.bedCoords.bedY = Math.round(e.offsetY / Hinterval);
