@@ -11,6 +11,7 @@
       v-show="clickable"
       :coords="bedCoords"
     />
+    <!-- <button v-if="cancellation">Cancel</button> -->
   </div>
 </template>
 
@@ -30,6 +31,13 @@ export default {
         this.formCoords.top = e.offsetY + "px";
         this.formCoords.left = e.offsetX + "px";
         this.form = true;
+        // this.cancellation = true;
+      }
+    },
+    cancel() {
+      if (this.form) {
+        this.form = false;
+        this.cancellation = false;
       }
     }
   },
@@ -58,6 +66,7 @@ export default {
   data() {
     return {
       form: false,
+      cancellation: false,
       formCoords: {
         left: 0,
         top: 0

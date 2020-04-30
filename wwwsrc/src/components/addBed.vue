@@ -1,17 +1,14 @@
 <template>
   <div class="beds">
-    <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant"></input>
-    <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
-    <input type='number' class="form-control-sm" v-model="newBed.width" placeholder="Enter a width"></input>
-    <input type='number' class="form-control-sm" v-model="newBed.height" placeholder="Enter a height"></input>
-    <input type='text' class="form-control-sm" v-model="newBed.datePlanted" placeholder="Enter the date planted"></input>
-    <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
-    <p>{{coords.bedX}}</p>
-    <p>{{coords.bedY}}</p>
-    <text v-model="newBed.bedX"></text>
-    <text v-model="newBed.bedY"></text>
-      <button class="btn btn-primary" @click="createBed()">Submit</button>
-      <button class="btn btn-danger" @click="window.close()">Cancel</button>
+    <div class="form">
+      <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant"></input>
+      <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
+      <input type='number' class="form-control-sm" v-model="newBed.width" placeholder="Enter a width"></input>
+      <input type='number' class="form-control-sm" v-model="newBed.height" placeholder="Enter a height"></input>
+      <input type='text' class="form-control-sm" v-model="newBed.datePlanted" placeholder="Enter the date planted"></input>
+      <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
+    </div>
+      <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
   </div>
 </template>
 
@@ -34,8 +31,8 @@ export default {
         height: null,
         datePlanted: null,
         dateFertilized: null,
-        bedX: null,
-        bedY: null
+        bedX: coord.bedX,
+        bedY: coords.bedY
       }
     }
   },
