@@ -31,8 +31,8 @@ export default {
         height: null,
         datePlanted: null,
         dateFertilized: null,
-        bedX: coord.bedX,
-        bedY: coords.bedY
+        bedX: this.coord.bedX,
+        bedY: this.coords.bedY
       }
     }
   },

@@ -1,6 +1,7 @@
 <template>
   <div
     class="box cont d-flex justify-content-center"
+    id="garden"
     v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight, 'padding-bottom':plotDimensions.plotHeight}"
     @click.prevent="click($event)"
   >
@@ -12,7 +13,7 @@
       v-show="clickable"
       :coords="bedCoords"
     />
-    <!-- <button v-if="cancellation">Cancel</button> -->
+    <button v-if="cancellation" class="btn btn-danger" @click="click()">Cancel</button>
   </div>
 </template>
 
@@ -24,7 +25,6 @@ export default {
   mounted() {},
   methods: {
     click(e) {
-      debugger;
       if (!this.form) {
         let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
         let Winterval = e.toElement.offsetWidth / this.gardenData.width;
@@ -33,14 +33,17 @@ export default {
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = true;
+        this.cancellation = true;
       }
-      let X = e.pageX - document.body.scrollLeft;
-      let Y = e.pageY - document.body.scrollTop;
+      debugger;
+      let garden = document.getElementById("garden");
+      let X = e.pageX - garden.documentElement.scrollLeft;
+      let Y = e.pageY - garden.documentElement.scrollTop;
       if (
-        e.layerY < this.formBox[1] ||
-        e.layerY > this.formBox[3] ||
-        e.layerX < this.formBox[0] ||
-        e.layerX > this.formBox[2]
+        Y < this.formBox[1] ||
+        Y > this.formBox[3] ||
+        X < this.formBox[0] ||
+        X > this.formBox[2]
       ) {
         let Hinterval = e.toElement.offsetHeight / this.gardenData.height;
         let Winterval = e.toElement.offsetWidth / this.gardenData.width;
