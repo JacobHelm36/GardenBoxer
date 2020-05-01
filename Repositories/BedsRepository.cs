@@ -25,9 +25,9 @@ namespace GardenBoxer.Repositories
     {
       string sql = @"
             INSERT INTO beds
-            (name, userId, bedX, bedY, width, height, datePlanted, dateFertilized)
+            (name, userId, bedX, bedY, width, height, datePlanted, dateFertilized, gardenId, img)
             VALUES
-            (@Name, @UserId, @BedX, @BedY, @Width, @Height, @DatePlanted, @DateFertilized);
+            (@Name, @UserId, @BedX, @BedY, @Width, @Height, @DatePlanted, @DateFertilized, @GardenId, @Img);
             SELECT LAST_INSERT_ID();
             ";
       BedData.Id = _db.ExecuteScalar<int>(sql, BedData);
