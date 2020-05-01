@@ -89,7 +89,7 @@ export default new Vuex.Store({
       let res = await api.post("beds", newBed)
       commit("addBed", res.data)
     },
-    async editBeds({ commit }, editedBed) {
+    async editBed({ commit }, editedBed) {
       let res = await api.put(`beds/${editedBed.Id}`, editedBed);
       commit("setEditBed", res.data)
     },
