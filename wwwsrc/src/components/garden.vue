@@ -117,4 +117,7 @@ export default {
   position: absolute;
   border: 1px solid black;
 }
+.beds {
+  position: absolute;
+}
 </style>

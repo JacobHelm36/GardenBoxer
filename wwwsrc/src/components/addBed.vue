@@ -5,7 +5,7 @@
       <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
       <input type='number' class="form-control-sm" v-model="newBed.width" placeholder="Enter a width"></input>
       <input type='number' class="form-control-sm" v-model="newBed.height" placeholder="Enter a height"></input>
-      <input type='text' class="form-control-sm" v-model="newBed.image" placeholder="Enter an image"></input>
+      <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image"></input>
       <input type='text' class="form-control-sm" v-model="newBed.datePlanted" placeholder="Enter the date planted"></input>
       <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
     </div>
