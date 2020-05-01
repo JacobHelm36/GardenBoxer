@@ -3,7 +3,7 @@
     <div
       class="card-back rounded bg-primary d-flex justify-content-center flex-column align-items-center"
     >
-      <garden class="mt-1" :gardenData="gardenData" />
+      <garden class="mt-1" :percent="95" :gardenData="gardenData" />
       <router-link :to="'/garden/' + gardenData.id">link</router-link>
       <h4>{{gardenData.name}}</h4>
       <h4>{{gardenData.description}}</h4>

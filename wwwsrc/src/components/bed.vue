@@ -1,6 +1,6 @@
 <template>
   <div class="beds">
-    <div class="">
+    <div class>
       <img class="img-fluid" :src="bedData.img" alt />
     </div>
     <div v-show="info" class="popup">
