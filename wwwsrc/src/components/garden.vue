@@ -10,17 +10,21 @@
       id="bed-form"
       v-bind:style="{'top':formCoords.top + 'px', 'left': formCoords.left + 'px'}"
       v-show="clickable"
+      v-if="form"
       :coords="bedCoordinates"
-      :formActive="formActive"
     />
-    <div v-bind:style="{'top':gridCoords.y + 'px', 'left':gridCoords.x + 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}" v-if="formActive" class="outline"></div>
-    
-    <bed 
-    v-for="bed in beds"
-    :key="bed.id"
-    class="beds"
-    v-bind:style="{'top':(bed.bedY * HInterval) + 'px', 'left':(bed.bedX * WInterval)+ 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}"
-    :bedData="bed"
+    <div
+      v-bind:style="{'top':gridCoords.y + 'px', 'left':gridCoords.x + 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}"
+      v-if="form"
+      class="outline"
+    ></div>
+
+    <bed
+      v-for="bed in beds"
+      :key="bed.id"
+      class="beds"
+      v-bind:style="{'top':(bed.bedY * HInterval) + 'px', 'left':(bed.bedX * WInterval)+ 'px', 'min-width': WInterval + 'px', 'min-height': HInterval + 'px'}"
+      :bedData="bed"
     />
   </div>
 </template>
@@ -29,7 +33,7 @@
 import AddBed from "../components/addBed";
 export default {
   name: "create",
-  props: ["gardenData", "clickable"],
+  props: ["gardenData", "clickable", "percent"],
   mounted() {},
   methods: {
     click(e) {
@@ -40,7 +44,7 @@ export default {
         this.bedCoords.bedX = Math.floor(e.offsetX / this.WInterval);
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
-        this.form = true;
+        this.form = !this.form;
       }
     }
   },
@@ -50,13 +54,14 @@ export default {
       if (ratio > 1.2) {
         return {
           plotWidth:
-            (this.gardenData.width / this.gardenData.height) * 100 + "%",
-          plotHeight: "100%"
+            (this.gardenData.width / this.gardenData.height) * this.percent +
+            "%",
+          plotHeight: this.percent + "%"
         };
       }
       return {
-        plotHeight: ratio * 100 + "%",
-        plotWidth: "100%"
+        plotHeight: ratio * this.percent + "%",
+        plotWidth: this.percent + "%"
       };
     },
     bedCoordinates() {
@@ -74,9 +79,6 @@ export default {
       let bottom = document.getElementById("bed-form").offsetHeight;
       let right = document.getElementById("bed-form").offsetWidth;
       return [this.formCoords.top, this.formCoords.left, bottom, right];
-    },
-    formActive() {
-      return this.form;
     },
     beds() {
       return this.$store.state.beds;
@@ -107,10 +109,6 @@ export default {
 .box {
   background-color: rgb(42, 165, 73);
   border: 1px solid black;
-}
-.cont {
-  width: 100%;
-  padding-bottom: 100%;
 }
 .add-bed {
   position: absolute;

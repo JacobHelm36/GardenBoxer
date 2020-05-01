@@ -2,7 +2,7 @@
   <div class="dashboard container">
     <div class="row">
       <div class="col-12 p-0">
-        <garden :clickable="true" :gardenData="gardenInfo" />
+        <garden :percent="100" :clickable="true" :gardenData="gardenInfo" />
         <h2>{{gardenInfo.name}}</h2>
         <h2>{{gardenInfo.description}}</h2>
       </div>
