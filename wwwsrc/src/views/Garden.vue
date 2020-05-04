@@ -1,10 +1,13 @@
 <template>
-  <div class="dashboard container">
-    <div class="row">
-      <div class="col-12 p-0">
-        <garden :percent="100" :clickable="true" :gardenData="gardenInfo" />
-        <h2>{{gardenInfo.name}}</h2>
-        <h2>{{gardenInfo.description}}</h2>
+  <div class="dashboard">
+    <side-bar />
+    <div class="container">
+      <div class="row">
+        <div class="col-12 p-0">
+          <garden :showBeds="true" :percent="100" :clickable="true" :gardenData="gardenInfo" />
+          <h2>{{gardenInfo.name}}</h2>
+          <h2>{{gardenInfo.description}}</h2>
+        </div>
       </div>
     </div>
   </div>
@@ -13,6 +16,7 @@
 <script>
 import AddBed from "../components/addBed";
 import Garden from "../components/garden";
+import SideBar from "../components/sideBar";
 export default {
   mounted() {
     this.$store.dispatch("setActiveGarden", this.$route.params.id);
@@ -28,7 +32,8 @@ export default {
   },
   components: {
     AddBed,
-    Garden
+    Garden,
+    SideBar
   },
   props: []
 };
