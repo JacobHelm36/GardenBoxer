@@ -12,8 +12,10 @@
 <script>
 import Garden from "../components/gardenCard.vue";
 export default {
-  mounted() {
-    this.$store.dispatch("getGardens");
+  async mounted() {
+    if (await this.$auth.isAuthenticated) {
+      this.$store.dispatch("getGardens");
+    }
   },
   computed: {
     gardens() {
