@@ -52,14 +52,14 @@ export default {
       }
     },
     pollDim() {
-      if(this.$route.params.id != this.gardenData.id){
-        clearInterval(this.interval)
+      if (this.$route.params.id != this.gardenData.id) {
+        clearInterval(this.interval);
       }
       this.HInterval =
         document.getElementById("garden").offsetHeight / this.gardenData.height;
       this.WInterval =
         document.getElementById("garden").offsetWidth / this.gardenData.width;
-      console.log(this.$route.params.id +"vs"+ this.gardenData.id);
+      console.log(this.$route.params.id + "vs" + this.gardenData.id);
     }
   },
   computed: {
@@ -139,6 +139,6 @@ export default {
 .beds {
   position: absolute;
   border: 1px black;
-  background-color: rgb(131, 82, 53)
+  background-color: rgb(131, 82, 53);
 }
 </style>
