@@ -15,8 +15,11 @@
         <input type='text' class="form-control-sm" v-model="editedBed.img" placeholder="Enter an image"></input>
         <input type='text' class="form-control-sm" :placeholder="bedData.datePlanted"></input>
         <input type='text' class="form-control-sm" v-model="editedBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
+        <div class="">
+          <button type="button" class="btn btn-primary" @click="updateBed()">Save Changes</button>
+          <button type="button" class="btn btn-danger" @click="cancelEditBed()">Cancel</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" @click="updateBed()">Save Changes</button>
     </div>
   </div>
 </template>
@@ -26,8 +29,7 @@ export default {
   props: ["bedData", "clicker"],
   methods: {
     bedForm(e){
-      debugger;
-      if (e.toElement.id == "") {
+      if (e.toElement.id == "beds") {
       this.bedEditForm = !this.bedEditForm;
       }
     },
