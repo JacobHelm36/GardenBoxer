@@ -78,9 +78,6 @@ export default {
         plotWidth: this.percent + "%"
       };
     },
-    bedCoordinates() {
-      return this.bedCoords;
-    },
     gridCoords() {
       let x = this.bedCoords.bedX * this.Interval.WInterval;
       let y = this.bedCoords.bedY * this.Interval.HInterval;
@@ -93,6 +90,9 @@ export default {
       let bottom = document.getElementById("bed-form").offsetHeight;
       let right = document.getElementById("bed-form").offsetWidth;
       return [this.formCoords.top, this.formCoords.left, bottom, right];
+    },
+    bedCoordinates() {
+      return this.bedCoords;
     },
     beds() {
       return this.$store.state.beds;
