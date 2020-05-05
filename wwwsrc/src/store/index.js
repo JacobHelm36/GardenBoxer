@@ -30,7 +30,8 @@ export default new Vuex.Store({
       state.activeGarden = garden;
     },
     setNewGardens(state, newGarden) {
-      state.gardens.push(newGarden)
+      state.gardens.push(newGarden);
+      state.activeGarden = newGarden;
     },
     removeGarden(state, gardenId) {
       state.gardens = state.gardens.filter(g => g.id != gardenId)

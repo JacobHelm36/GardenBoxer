@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="dashboard" id="garden-view">
     <side-bar />
     <div class="container">
       <div class="row">

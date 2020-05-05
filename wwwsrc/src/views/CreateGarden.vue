@@ -38,6 +38,7 @@ export default {
       this.newGarden.width = Number(this.newGarden.width);
       this.newGarden.height = Number(this.newGarden.height);
       await this.$store.dispatch("createGarden", this.newGarden);
+      this.$router.push(`garden/${this.$store.state.activeGarden.id}`);
     }
   },
   computed: {
