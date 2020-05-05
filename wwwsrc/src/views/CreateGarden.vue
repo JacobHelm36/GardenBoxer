@@ -32,6 +32,7 @@ export default {
     },
     asdf(){
       console.log(this.$router);
+      this.$router.push(`dashboard`)
     },
     async createGarden(){
       this.newGarden.width = Number(this.newGarden.width);
