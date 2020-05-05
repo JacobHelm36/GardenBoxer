@@ -15,7 +15,7 @@
         <input type='text' class="form-control-sm" v-model="editedBed.img" placeholder="Enter an image"></input>
         <input type='text' class="form-control-sm" :placeholder="bedData.datePlanted"></input>
         <input type='text' class="form-control-sm" v-model="editedBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
-        <div class="">
+        <div class="flex">
           <button type="button" class="btn btn-primary" @click="updateBed()">Save Changes</button>
           <button type="button" class="btn btn-danger" @click="cancelEditBed()">Cancel</button>
         </div>
@@ -34,7 +34,10 @@ export default {
       }
     },
     updateBed() {
-      this.$store.dispatch("editBed", this.editedBed)
+      this.$store.dispatch("editBed", this.editedBed);
+    },
+    cancelEditBed() {
+      this.bedEditForm = false;
     }
   },
   data() {
@@ -71,5 +74,7 @@ export default {
 
 
 <style scoped>
-
+.flex {
+  display: flex;
+}
 </style>

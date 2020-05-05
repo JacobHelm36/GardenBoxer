@@ -8,7 +8,7 @@ namespace GardenBoxer.Models
     public string Description { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
-
+    public string backGround { get; set; }
 
   }
 }
