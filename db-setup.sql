@@ -76,6 +76,17 @@
 --     UNIQUE(bedX, bedY, gardenId),
 
 --     FOREIGN KEY (gardenId)
---     REFERENCES garden(id)
+--     REFERENCES gardens(id)
 --     ON DELETE CASCADE
 -- );
+
+-- CREATE TABLE gardens (
+--   id int NOT NULL AUTO_INCREMENT,
+--   userId VARCHAR(255) NOT NULL,
+--   name VARCHAR(255),
+--   description VARCHAR(255),
+--   backGround VARCHAR(255),
+--   width int NOT NULL,
+--   height int NOT NULL,
+--   PRIMARY KEY (id)
+-- )

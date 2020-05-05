@@ -48,7 +48,7 @@ export default {
         this.newGarden.width = 1000000
       }
       let ratio = this.newGarden.height / this.newGarden.width;
-      if(ratio > 1.2){
+      if(ratio > 1){
         return {
           plotWidth: ((this.newGarden.width / this.newGarden.height) * 80) + "vw",
           plotHeight: "80vw"
