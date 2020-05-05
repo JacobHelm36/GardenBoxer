@@ -1,12 +1,15 @@
 <template>
-  <div @click="bedForm($event)" class="beds" id="beds">
+  <div  :style="{'top':top + 'px', 'left': left+'px','max-width':WInterval + 'px', 'max-height':HInterval + 'px'}" @click="bedForm($event)" class="beds" id="beds">
     <div class>
-      <img  class="img-fluid" :src="bedData.img" />
+      <img
+      @mousedown="clickIt($event)"
+      @mouseup="drop($event)"
+      @mousemove="dragIt($event)" draggable="false" class="img-fluid" :src="bedData.img" />
     </div>
-    <div v-show="info" class="popup">
+    <div :style="{'top':(bedData.bedY + 1) * HInterval, 'left': (bedData.bedX + 1) * WInterval}" v-show="info" class="popup">
       <p>{{bedData.name}}</p>
     </div>
-    <div class="edit-bed-form" v-if="bedEditForm">
+    <div class="edit-bed-form" :style="{'top':100 + 'px', 'left': 100 + 'px'}" v-if="bedEditForm">
       <div class="form">
         <input type='text' class="form-control-sm" v-model="editedBed.name" placeholder="Enter a plant"></input>
         <input type='text' class="form-control-sm" v-model="editedBed.description" placeholder="Enter a description"></input>
@@ -26,11 +29,17 @@
 
 <script>
 export default {
-  props: ["bedData", "clicker"],
+  props: ["bedData", "clicker","gardenDim"],
+  mounted(){
+    this.HInterval = document.getElementById("garden").offsetHeight / this.gardenDim.height;
+    this.WInterval = document.getElementById("garden").offsetWidth / this.gardenDim.width;
+    this.left = this.bedData.bedX * this.WInterval;
+    this.top = this.bedData.bedY * this.HInterval;
+  },
   methods: {
     bedForm(e){
       if (e.toElement.id == "beds") {
-      this.bedEditForm = !this.bedEditForm;
+        this.bedEditForm = !this.bedEditForm;
       }
     },
     updateBed() {
@@ -38,6 +47,30 @@ export default {
     },
     cancelEditBed() {
       this.bedEditForm = false;
+    },
+    clickIt(e) {
+      this.drag = true;
+      this.offset.x = e.clientX - this.left
+      this.offset.y = e.clientY - this.top
+    },
+    drop(e) {
+      this.bedData.bedY = Math.floor(this.top / this.HInterval);
+      this.bedData.bedX = Math.floor(this.left / this.WInterval);
+      this.top = (this.bedData.bedY * this.HInterval);
+      this.left = (this.bedData.bedX * this.WInterval);
+      if(this.top > this.gardenDim.height){
+        this.top = this.gardenDim.height;
+      }
+      if(this.left > this.gardenDim.width){
+
+      }
+      this.drag = false;
+    },
+    dragIt(e) {
+      if (this.drag) {
+        this.top = e.clientY - this.offset.y;
+        this.left = e.clientX - this.offset.x;
+      }
     }
   },
   data() {
@@ -57,7 +90,14 @@ export default {
       info: false,
       HInterval:0,
       WInterval:0,
-      bedEditForm: false
+      bedEditForm: false,
+      drag: false,
+      top: 0,
+      left: 0,
+      offset: {
+        x: 0,
+        y: 0
+      }
     };
   },
   computed: {
@@ -67,6 +107,18 @@ export default {
     },
     Interval() {
       return { Hinterval: this.HIterval, Winterval: this.WInterval };
+    },
+    YInterval() {
+      return 100 / this.gardenDim.height;
+    },
+    XInterval() {
+      return 100 / this.gardenDim.width;
+    },
+    offsetCorner(){
+      debugger;
+      let x = document.getElementById("garden")
+      let y = document.getElementById("garden").pageY;
+      return {top:y, left:x};
     }
   }
 };
@@ -76,5 +128,14 @@ export default {
 <style scoped>
 .flex {
   display: flex;
+}
+.popup {
+  position:absolute;
+}
+.edit-bed-form{
+  position:absolute;
+}
+img{
+  max-width:100%;
 }
 </style>

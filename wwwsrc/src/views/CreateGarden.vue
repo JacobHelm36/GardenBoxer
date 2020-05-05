@@ -25,9 +25,6 @@ export default {
   },
   methods:{
     click(e){
-      console.log(e);
-      console.log(e.offsetY);
-      console.log(e.offsetX);
       return e.offsetX;
     },
     asdf(){

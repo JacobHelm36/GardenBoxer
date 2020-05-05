@@ -25,9 +25,14 @@
       :key="bed.id"
       :clicker="true"
       class="beds"
-      v-bind:style="{'top':(bed.bedY * Interval.HInterval) + 'px', 'left':(bed.bedX * Interval.WInterval)+ 'px', 'min-width': Interval.WInterval + 'px', 'min-height': Interval.HInterval + 'px','max-width': Interval.WInterval + 'px', 'max-height': Interval.HInterval + 'px'}"
+      @mousedown="clickIt($event)"
+      @mouseup="drop()"
+      @mousemove="dragIt($event)"
+      @click="clickIt()"
       :bedData="bed"
+      :gardenDim="gardenDim"
     />
+    <!-- v-bind:style="{'top':(bed.bedY * Interval.HInterval) + 'px', 'left':(bed.bedX * Interval.WInterval)+ 'px', 'min-width': Interval.WInterval + 'px', 'min-height': Interval.HInterval + 'px','max-width': Interval.WInterval + 'px', 'max-height': Interval.HInterval + 'px'}" -->
   </div>
 </template>
 
@@ -60,6 +65,23 @@ export default {
       this.WInterval =
         document.getElementById("garden").offsetWidth / this.gardenData.width;
       console.log(this.$route.params.id + "vs" + this.gardenData.id);
+    },
+    clickIt(e) {
+      this.drag = true;
+      this.offset.x = e.offsetX;
+      this.offset.y = e.offsetY;
+      console.log("click");
+    },
+    drop(e) {
+      this.drag = false;
+      console.log(this.drag);
+      console.log(this.top);
+    },
+    dragIt(e) {
+      if (this.drag) {
+        this.top = e.clientY - this.offset.y;
+        this.left = e.clientX - this.offset.x;
+      }
     }
   },
   computed: {
@@ -99,6 +121,9 @@ export default {
     },
     Interval() {
       return { WInterval: this.WInterval, HInterval: this.HInterval };
+    },
+    gardenDim() {
+      return { width: this.gardenData.width, height: this.gardenData.height };
     }
   },
   components: {
@@ -118,7 +143,14 @@ export default {
       },
       WInterval: 0,
       HInterval: 0,
-      interval: null
+      interval: null,
+      drag: false,
+      top: 0,
+      left: 0,
+      offset: {
+        x: 0,
+        y: 0
+      }
     };
   }
 };

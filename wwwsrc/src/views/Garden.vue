@@ -18,6 +18,7 @@ import AddBed from "../components/addBed";
 import Garden from "../components/garden";
 import SideBar from "../components/sideBar";
 export default {
+  props: ["gardenDim"],
   async mounted() {
     if (await this.$auth.isAuthenticated) {
       this.$store.dispatch("setActiveGarden", this.$route.params.id);
