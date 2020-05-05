@@ -1,10 +1,9 @@
 <template>
-  <div v-bind:style="{}" class="side-wrapper">
+  <div v-bind:style="{'height':windowHeight}" class="side-wrapper">
     <button @click="toggleIt" class="btn btn-primary side-toggle">TOGGLE</button>
     <div class="side-bar d-flex flex-column align-items-start" v-bind:style="{'left': left + '%'}">
       <button @click="toggleIt" class="btn btn-secondary align-self-end">Toogle</button>
-
-      <button class="btn btn-warning">content</button>
+      <button @click="info()" class="btn btn-warning">content</button>
       <p>stuff</p>
     </div>
   </div>
@@ -40,6 +39,9 @@ export default {
       clearInterval(this.toggleInterval);
       this.toggleInterval = 0;
       this.toggle = !this.toggle;
+    },
+    info() {
+      console.log(document.getElementById("app").scrollHeight);
     }
   },
   data() {
@@ -49,7 +51,11 @@ export default {
       toggleInterval: null
     };
   },
-  computed: {}
+  computed: {
+    windowHeight() {
+      return document.getElementById("garden-view").offsetHeight + "px";
+    }
+  }
 };
 </script>
 
@@ -58,9 +64,8 @@ export default {
   overflow: hidden;
   position: absolute;
   left: 0px;
-  height: 100vh;
   min-width: 25%;
-  z-index: 1;
+  height: 100%;
 }
 .side-bar {
   top: 0px;
@@ -68,5 +73,6 @@ export default {
   position: absolute;
   min-width: 100%;
   background-color: blue;
+  z-index: 1;
 }
 </style>
