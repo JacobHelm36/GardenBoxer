@@ -9,15 +9,14 @@
       <input type='text' class="form-control-sm" v-model="newBed.datePlanted" placeholder="Enter the date planted"></input>
       <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
     </div>
-    <!-- <div>
-      <date-picker v-model="picker" />
-    </div> -->
+      <date-picker v-model="date" lang="en" type="date" format="YYYY-MM-dd"></date-picker>
       <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
   </div>
 </template>
 
 
 <script>
+import DatePicker from "vue2-datepicker"
 export default {
   props:["coords"],
   methods: {
@@ -39,11 +38,11 @@ export default {
         bedY: this.coords.bedY,
         gardenId: parseInt(this.$route.params.id)
       },
-      picker: new Date(),
+      date: '',
     }
   },
   computed:{},
-  // components: {Datepicker}
+  components: {DatePicker}
 }
 </script>
 

@@ -34,6 +34,7 @@
     />
     <!-- v-bind:style="{'top':(bed.bedY * Interval.HInterval) + 'px', 'left':(bed.bedX * Interval.WInterval)+ 'px', 'min-width': Interval.WInterval + 'px', 'min-height': Interval.HInterval + 'px','max-width': Interval.WInterval + 'px', 'max-height': Interval.HInterval + 'px'}" -->
   </div>
+  
 </template>
 
 <script>
