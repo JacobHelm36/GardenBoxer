@@ -39,16 +39,17 @@ namespace GardenBoxer.Services
       original.BedX = newdBed.Height != 0 ? newdBed.Height : original.Height;
       original.BedY = newdBed.BedY != 0 ? newdBed.BedY : original.BedY;
       original.DatePlanted = newdBed.DatePlanted != null ? newdBed.DatePlanted : original.DatePlanted;
+      original.Img = newdBed.Img != null ? newdBed.Img : original.Img;
       return _repo.Edit(original);
     }
 
     public string Delete(int id, string userId)
     {
-      if(_repo.Delete(id, userId))
+      if (_repo.Delete(id, userId))
       {
         return "Deleted";
       }
-        throw new Exception("That Bed doesn't exist");
+      throw new Exception("That Bed doesn't exist");
     }
   }
 }

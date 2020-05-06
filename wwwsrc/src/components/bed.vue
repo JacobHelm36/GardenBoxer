@@ -6,8 +6,9 @@
       @mouseup="drop($event)"
       @mousemove="dragIt($event)" draggable="false" class="img-fluid" :src="bedData.img" />
     </div>
-    <div :style="{'top':(bedData.bedY + 1) * HInterval, 'left': (bedData.bedX + 1) * WInterval}" v-show="info" class="popup">
+    <div :style="{'top':(bedData.bedY + 1) * HInterval, 'left': (bedData.bedX + 1) * WInterval}" v-if="info" class="popup">
       <p>{{bedData.name}}</p>
+      <button @click="bedEditForm = !bedEditForm" class="btn btn-primary">Edit</button>
     </div>
     <div class="edit-bed-form" :style="{'top':100 + 'px', 'left': 100 + 'px'}" v-if="bedEditForm">
       <div class="form">
@@ -52,8 +53,15 @@ export default {
       this.drag = true;
       this.offset.x = e.clientX - this.left
       this.offset.y = e.clientY - this.top
+      this.initX = e.clientX;
+      this.initY = e.clientY;
     },
     drop(e) {
+      if(e.clientY - this.initY < 1 && e.clientY - this.initY > -1 && e.clientX - this.initX < 1 && e.clientX - this.initX > -1){
+        this.info = !this.info;
+        this.drag = false;
+        return;
+      }
       this.bedData.bedY = Math.floor((this.top + e.offsetY) / this.HInterval);
       this.bedData.bedX = Math.floor((this.left + e.offsetX) / this.WInterval);
       if(this.bedData.bedY >= this.gardenDim.height){
@@ -71,7 +79,7 @@ export default {
       this.top = (this.bedData.bedY * this.HInterval);
       this.left = (this.bedData.bedX * this.WInterval);
       this.drag = false;
-      this.$store.dispatch("editBed", this.bedData);
+      this.$store.dispatch("editBed", {id: this.bedData.id, bedX:this.bedData.bedX, bedY:this.bedData.bedY});
     },
     dragIt(e) {
       if (this.drag) {
@@ -104,7 +112,9 @@ export default {
       offset: {
         x: 0,
         y: 0
-      }
+      },
+      initX:0,
+      initY:0
     };
   },
   computed: {
