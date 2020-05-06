@@ -6,7 +6,7 @@ import router from "../router";
 Vue.use(Vuex);
 
 let baseUrl = location.host.includes("localhost")
-  ? "https://localhost:5001/"
+  ? "http://localhost:5000/"
   : "/";
 
 let api = Axios.create({
@@ -91,7 +91,7 @@ export default new Vuex.Store({
       commit("addBed", res.data)
     },
     async editBed({ commit }, editedBed) {
-      let res = await api.put(`beds/${editedBed.Id}`, editedBed);
+      let res = await api.put(`beds/${editedBed.id}`, editedBed);
       commit("setEditBed", res.data)
     },
     async deleteBed({ commit }, bedData) {

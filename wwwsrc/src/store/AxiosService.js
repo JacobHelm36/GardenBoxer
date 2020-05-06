@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 let baseUrl = location.host.includes("localhost")
-  ? "https://localhost:5001/"
+  ? "http://localhost:5000/"
   : "/";
 
 export const api = Axios.create({
@@ -10,10 +10,10 @@ export const api = Axios.create({
   withCredentials: true
 });
 
-export const setBearer = function(bearer) {
+export const setBearer = function (bearer) {
   api.defaults.headers.authorization = bearer;
 };
 
-export const resetBearer = function() {
+export const resetBearer = function () {
   api.defaults.headers.authorization = "";
 };
