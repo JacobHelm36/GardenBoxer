@@ -6,10 +6,9 @@
       <input type='number' class="form-control-sm" v-model="newBed.width" placeholder="Enter a width"></input>
       <input type='number' class="form-control-sm" v-model="newBed.height" placeholder="Enter a height"></input>
       <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image"></input>
-      <input type='text' class="form-control-sm" v-model="newBed.datePlanted" placeholder="Enter the date planted"></input>
+      <date-picker v-model="newBed.datePlanted" class="calendar-icon" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
       <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
     </div>
-      <date-picker v-model="date" lang="en" type="date" format="YYYY-MM-dd"></date-picker>
       <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
   </div>
 </template>
@@ -37,8 +36,7 @@ export default {
         bedX: this.coords.bedX,
         bedY: this.coords.bedY,
         gardenId: parseInt(this.$route.params.id)
-      },
-      date: '',
+      }
     }
   },
   computed:{},
@@ -53,5 +51,10 @@ export default {
   border: 1px solid #ddd;
   padding: 0em 1em 1em;
   margin-bottom: 2em;
+}
+.calendar-icon {
+  background-image: url(https://img.favpng.com/21/24/23/computer-icons-google-calendar-icon-design-time-png-favpng-HpYLV7p1Cbkr1MbJ6wXWFWd8M.jpg);
+  background-position: 50%;
+  background-repeat: no-repeat;
 }
 </style>
