@@ -90,3 +90,7 @@
 --   height int NOT NULL,
 --   PRIMARY KEY (id)
 -- )
+
+USE gardenboxer;
+-- DROP TABLE IF EXISTS beds;
+DELETE FROM beds WHERE id = 13
