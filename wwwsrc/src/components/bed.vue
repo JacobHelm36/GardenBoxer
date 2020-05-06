@@ -54,8 +54,8 @@ export default {
       this.offset.y = e.clientY - this.top
     },
     drop(e) {
-      this.bedData.bedY = Math.floor(this.top / this.HInterval);
-      this.bedData.bedX = Math.floor(this.left / this.WInterval);
+      this.bedData.bedY = Math.floor(this.top + e.offsetY / this.HInterval);
+      this.bedData.bedX = Math.floor(this.left + e.offsetX / this.WInterval);
       this.top = (this.bedData.bedY * this.HInterval);
       this.left = (this.bedData.bedX * this.WInterval);
       if(this.top > this.gardenDim.height){
