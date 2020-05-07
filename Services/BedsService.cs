@@ -28,18 +28,18 @@ namespace GardenBoxer.Services
       return _repo.GetById(BedId, UserId);
     }
 
-    public Bed Edit(Bed newdBed, string userId)
+    public Bed Edit(Bed newBed, string userId)
     {
-      Bed original = GetById(newdBed.Id, userId);
+      Bed original = GetById(newBed.Id, userId);
       original.UserId = userId;
-      original.Name = newdBed.Name != null ? newdBed.Name : original.Name;
-      original.DateFertilized = newdBed.DateFertilized != null ? newdBed.DateFertilized : original.DateFertilized;
-      original.Width = newdBed.Width != 0 ? newdBed.Width : original.Width;
-      original.Height = newdBed.BedX != 0 ? newdBed.BedX : original.BedX;
-      original.BedX = newdBed.Height != 0 ? newdBed.Height : original.Height;
-      original.BedY = newdBed.BedY != 0 ? newdBed.BedY : original.BedY;
-      original.DatePlanted = newdBed.DatePlanted != null ? newdBed.DatePlanted : original.DatePlanted;
-      original.Img = newdBed.Img != null ? newdBed.Img : original.Img;
+      original.Name = newBed.Name != null ? newBed.Name : original.Name;
+      original.DateFertilized = newBed.DateFertilized != null ? newBed.DateFertilized : original.DateFertilized;
+      original.Width = newBed.Width != 0 ? newBed.Width : original.Width;
+      original.Height = newBed.BedX != 0 ? newBed.BedX : original.BedX;
+      original.BedX = newBed.Height != 0 ? newBed.Height : original.Height;
+      original.BedY = newBed.BedY != 0 ? newBed.BedY : original.BedY;
+      original.DatePlanted = newBed.DatePlanted != null ? newBed.DatePlanted : original.DatePlanted;
+      original.Img = newBed.Img != null ? newBed.Img : original.Img;
       return _repo.Edit(original);
     }
 

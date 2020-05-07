@@ -1,5 +1,5 @@
 <template>
-  <div  :style="{'top':top + 'px', 'left': left+'px','max-width': Interval.Winterval + 'px', 'max-height':Interval.Hinterval + 'px'}" @click="bedForm($event)" class="beds" id="beds">
+  <div :style="{'top':top + 'px', 'left': left+'px','max-width': Interval.Winterval + 'px', 'max-height':Interval.Hinterval + 'px'}" @click="bedForm($event)" class="beds" id="beds">
     <div class>
       <img
       @mousedown="clickIt($event)"

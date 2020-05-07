@@ -4,7 +4,7 @@ namespace GardenBoxer.Models
   {
     public int Id { get; set; }
     public string UserId { get; set; }
-    public int bedId {get;set;}
-    public int groupId{get;set;}
+    public int bedId { get; set; }
+    public int groupId { get; set; }
   }
 }

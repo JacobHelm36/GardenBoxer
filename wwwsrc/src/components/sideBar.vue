@@ -1,17 +1,25 @@
 <template>
-  <div v-bind:style="{'height':windowHeight}" class="side-wrapper">
+  <div v-bind:style="{}" class="side-wrapper">
     <button @click="toggleIt" class="btn btn-primary side-toggle">TOGGLE</button>
     <div class="side-bar d-flex flex-column align-items-start" v-bind:style="{'left': left + '%'}">
       <button @click="toggleIt" class="btn btn-secondary align-self-end">Toogle</button>
       <button @click="info()" class="btn btn-warning">content</button>
       <p>stuff</p>
+      <bed v-for="bed in beds" :key="bed.id" :bedData="bed" />
     </div>
   </div>
 </template>
 
 <script>
+import Bed from "../components/bedCard";
 export default {
   name: "Sidebar",
+  mounted() {
+    setTimeout(
+      (this.offsetHeight = document.getElementById("garden-view").offsetHeight),
+      1000
+    );
+  },
   methods: {
     toggleIt() {
       if (!this.toggleInterval) {
@@ -52,9 +60,12 @@ export default {
     };
   },
   computed: {
-    windowHeight() {
-      return document.getElementById("garden-view").offsetHeight + "px";
+    beds() {
+      return this.$store.state.beds;
     }
+  },
+  components: {
+    Bed
   }
 };
 </script>
@@ -69,7 +80,7 @@ export default {
 }
 .side-bar {
   top: 0px;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   min-width: 100%;
   background-color: blue;

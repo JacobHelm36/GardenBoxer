@@ -55,7 +55,8 @@ namespace GardenBoxer.Repositories
             width = @Width,
             height = @Height,
             datePlanted = @DatePlanted,
-            dateFertilized = @DateFertilized
+            dateFertilized = @DateFertilized,
+            img = @Img
         WHERE (id = @Id AND userId = @UserId);
         ";
       _db.Execute(sql, EditedBed);
