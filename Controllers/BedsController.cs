@@ -29,7 +29,8 @@ namespace GardenBoxer.Controllers
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         editedBed.UserId = userId;
-        return Ok(_bs.Edit(editedBed, userId));
+        editedBed.Id = id;
+        return Ok(_bs.Edit(editedBed));
       }
       catch (Exception e)
       {

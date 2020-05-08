@@ -1,16 +1,16 @@
 <template class="container">
-  <div class="bed-forms row">
-    <div class="form col-12">
-      <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant"></input>
-      <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description"></input>
-      <input type='number' class="form-control-sm" v-model="newBed.width" placeholder="Enter a width"></input>
-      <input type='number' class="form-control-sm" v-model="newBed.height" placeholder="Enter a height"></input>
-      <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image"></input>
-      <date-picker v-bind:style="{'max-width': '50px' }" v-model="newBed.datePlanted" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
-      <input type='text' class="form-control-sm" v-model="newBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
+  <form class="bed-form row">
+    <div class="col-12">
+      <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant">
+      <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description">
+      <input type='number' class="form-control-sm" v-model.number="newBed.width" placeholder="Enter a width">
+      <input type='number' class="form-control-sm" v-model.number="newBed.height" placeholder="Enter a height">
+      <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image">
+      <date-picker class="form-control-sm" v-bind:style="{'max-width': '50px' }" v-model="newBed.datePlanted" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
+      <date-picker class="form-control-sm" v-bind:style="{'max-width': '50px' }" v-model="newBed.dateFertilized" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date fertilized"></date-picker>
     </div>
       <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
-  </div>
+  </form>
 </template>
 
 
@@ -20,6 +20,8 @@ export default {
   props:["coords"],
   methods: {
     createBed(){
+      debugger
+      console.log(this.newBed)
       this.$store.dispatch("createBed", this.newBed)
     }
   },

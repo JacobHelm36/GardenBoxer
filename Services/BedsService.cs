@@ -28,10 +28,9 @@ namespace GardenBoxer.Services
       return _repo.GetById(BedId, UserId);
     }
 
-    public Bed Edit(Bed newBed, string userId)
+    public Bed Edit(Bed newBed)
     {
-      Bed original = GetById(newBed.Id, userId);
-      original.UserId = userId;
+      Bed original = GetById(newBed.Id, newBed.UserId);
       original.Name = newBed.Name != null ? newBed.Name : original.Name;
       original.DateFertilized = newBed.DateFertilized != null ? newBed.DateFertilized : original.DateFertilized;
       original.Width = newBed.Width != 0 ? newBed.Width : original.Width;

@@ -115,6 +115,7 @@ export default {
       return [this.formCoords.top, this.formCoords.left, bottom, right];
     },
     bedCoordinates() {
+      console.log(this.bedCoords)
       return this.bedCoords;
     },
     beds() {

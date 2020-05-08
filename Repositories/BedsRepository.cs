@@ -65,8 +65,25 @@ namespace GardenBoxer.Repositories
     internal bool Delete(int Id, string UserId)
     {
       string sql = "DELETE FROM beds WHERE (id = @Id AND userId = @UserId) LIMIT 1";
-      int removed = _db.Execute(sql, new { Id });
+      int removed = _db.Execute(sql, new { Id, UserId });
       return removed == 1;
+    }
+    internal IEnumerable<Bed> EditBedsInGroup(Bed bed, int GroupId)
+    {
+      string sql = @"
+        UPDATE beds
+        SET
+            name = @Name,
+            bedX = @BedX,
+            bedY = @BedY,
+            width = @Width,
+            height = @Height,
+            datePlanted = @DatePlanted,
+            dateFertilized = @DateFertilized,
+            img = @Img
+        WHERE (userId = @UserId AND FROM bedgroups WHERE (groupId = @GroupId AND userId = @UserId));";
+        _db.Execute(sql, bed, new{GroupId});
+      return bed;
     }
   }
 }
