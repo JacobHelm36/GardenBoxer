@@ -1,4 +1,4 @@
--- USE keepr13;
+USE gardenboxer;
 
 -- CREATE TABLE vaults (
 --     id int NOT NULL AUTO_INCREMENT,
@@ -91,6 +91,38 @@
 --   PRIMARY KEY (id)
 -- )
 
-USE gardenboxer;
--- DROP TABLE IF EXISTS beds;
-DELETE FROM beds WHERE id = 13
+CREATE TABLE bedtemplates (
+  id int NOT NULL AUTO_INCREMENT,
+  userId VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
+  width INT,
+  height INT,
+  img VARCHAR(255)
+)
+
+CREATE TABLE groups (
+  id int NOT NULL AUTO_INCREMENT,
+  userId VARCHAR(255) NOT NULL,
+  name VARCHAR(255)
+)
+
+CREATE TABLE bedgroups (
+  id int NOT NULL AUTO_INCREMENT,
+  userId VARCHAR(255) NOT NULL,
+  bedId int NOT NULL,
+  groupId int NOT NULL,
+  gardenId int NOT NULL,
+
+  UNIQUE(bedId, groupId),
+  UNIQUE(bedId, gardenId)
+)
+
+-- USE THIS LINE FOR GET KEEPS BY VAULTID
+-- g.id as groupId
+SELECT 
+b.*,
+FROM bedgroups bg
+INNER JOIN beds b ON b.id = bg.bedId 
+WHERE (bg.userId = @userId AND bg.bedId = @id)
+INNER JOIN groups g ON g.id = bg.groupId
+WHERE (bg.groupId = @id AND bg.userId = @userId)

@@ -47,7 +47,7 @@ export default new Vuex.Store({
       let index = state.beds.indexOf({ id: editedBed.id });
       Vue.set(state.beds, index, editedBed);
     },
-    removeBed(state, bedId) {
+    deleteBed(state, bedId) {
       state.beds = state.beds.filter(b => b.id != bedId)
     }
   },
@@ -96,7 +96,7 @@ export default new Vuex.Store({
     },
     async deleteBed({ commit }, bedData) {
       let res = await api.delete(`beds/${bedData.id}`)
-      commit("removeBed", bedData.id)
+      commit("deleteBed", bedData.id)
     }
   }
 });

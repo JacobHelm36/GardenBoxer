@@ -24,7 +24,7 @@ namespace GardenBoxer.Repositories
     internal BedTemplate Create(BedTemplate BedTemplateData)
     {
       string sql = @"
-            INSERT INTO beds
+            INSERT INTO bedtemplates
             (name, userId, width, height, gardenId, img)
             VALUES
             (@Name, @UserId, @Width, @Height, @GardenId, @Img);
@@ -33,29 +33,31 @@ namespace GardenBoxer.Repositories
       BedTemplateData.Id = _db.ExecuteScalar<int>(sql, BedTemplateData);
       return BedTemplateData;
     }
-    internal IEnumerable<BedTemplate> GetBedTemplatesByGardenId(int GardenId, string UserId)
+    // internal IEnumerable<BedTemplate> GetBedTemplatesByGardenId(int GardenId, string UserId)
+    // {
+    //   string sql = "SELECT * FROM bedtemplates WHERE (userId = @UserId AND gardenId = @GardenId)";
+    //   return _db.Query<BedTemplate>(sql, new { UserId, GardenId });
+    // }
+    internal IEnumerable<BedTemplate> GetAll(string UserId)
     {
-      string sql = "SELECT * FROM beds WHERE (userId = @UserId AND gardenId = @GardenId)";
-      return _db.Query<BedTemplate>(sql, new { UserId, GardenId });
+      string sql = "SELECT * FROM bedtemplatetemplates WHERE userId = @UserId";
+      return _db.Query<BedTemplate>(sql, new{UserId});
     }
 
     internal BedTemplate GetById(int Id, string UserId)
     {
-      string sql = "SELECT * FROM beds WHERE (id = @Id AND userId = @UserId)";
+      string sql = "SELECT * FROM bedtemplates WHERE (id = @Id AND userId = @UserId)";
       return _db.QueryFirstOrDefault<BedTemplate>(sql, new { Id, UserId });
     }
     internal BedTemplate Edit(BedTemplate EditedBedTemplate)
     {
       string sql = @"
-        UPDATE beds
+        UPDATE bedtemplates
         SET
             name = @Name,
-            bedX = @BedTemplateX,
-            bedY = @BedTemplateY,
             width = @Width,
             height = @Height,
-            datePlanted = @DatePlanted,
-            dateFertilized = @DateFertilized
+            img = @Img,
         WHERE (id = @Id AND userId = @UserId);
         ";
       _db.Execute(sql, EditedBedTemplate);
@@ -63,7 +65,7 @@ namespace GardenBoxer.Repositories
     }
     internal bool Delete(int Id, string UserId)
     {
-      string sql = "DELETE FROM beds WHERE (id = @Id AND userId = @UserId) LIMIT 1";
+      string sql = "DELETE FROM bedtemplates WHERE (id = @Id AND userId = @UserId) LIMIT 1";
       int removed = _db.Execute(sql, new { Id });
       return removed == 1;
     }

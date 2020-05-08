@@ -9,19 +9,20 @@
     <div :style="{'top':(bedData.bedY + 1) * HInterval, 'left': (bedData.bedX + 1) * WInterval}" v-if="info" class="popup">
       <p>{{bedData.name}}</p>
       <button @click="bedEditForm = !bedEditForm" class="btn btn-primary">Edit</button>
+      <button @click="deleteBed()" class="btn btn-danger">Delete</button>
     </div>
     <div class="edit-bed-form" :style="{'top':100 + 'px', 'left': 100 + 'px'}" v-if="bedEditForm">
       <div class="form">
-        <input type='text' class="form-control-sm" v-model="editedBed.name" placeholder="Enter a plant"></input>
-        <input type='text' class="form-control-sm" v-model="editedBed.description" placeholder="Enter a description"></input>
-        <input type='number' class="form-control-sm" v-model="editedBed.width" placeholder="Enter a width"></input>
-        <input type='number' class="form-control-sm" v-model="editedBed.height" placeholder="Enter a height"></input>
-        <input type='text' class="form-control-sm" v-model="editedBed.img" placeholder="Enter an image"></input>
-        <input type='text' class="form-control-sm" :placeholder="bedData.datePlanted"></input>
-        <input type='text' class="form-control-sm" v-model="editedBed.dateFertilized" placeholder="Enter the date last fertilized"></input>
+        <input type='text' class="form-control-sm" v-model="editedBed.name" placeholder="Enter a plant">
+        <input type='text' class="form-control-sm" v-model="editedBed.description" placeholder="Enter a description">
+        <input type='number' class="form-control-sm" v-model="editedBed.width" placeholder="Enter a width">
+        <input type='number' class="form-control-sm" v-model="editedBed.height" placeholder="Enter a height">
+        <input type='text' class="form-control-sm" v-model="editedBed.img" placeholder="Enter an image">
+        <input type='text' class="form-control-sm" :placeholder="bedData.datePlanted">
+        <input type='text' class="form-control-sm" v-model="editedBed.dateFertilized" placeholder="Enter the date last fertilized">
         <div class="flex">
           <button type="button" class="btn btn-primary" @click="updateBed()">Save Changes</button>
-          <button type="button" class="btn btn-danger" @click="cancelEditBed()">Cancel</button>
+          <button type="button" class="btn btn-danger" @click="bedEditForm = !bedEditForm">Cancel</button>
         </div>
       </div>
     </div>
@@ -44,10 +45,12 @@ export default {
       }
     },
     updateBed() {
+      debugger
+      console.log(this.editedBed)
       this.$store.dispatch("editBed", this.editedBed);
     },
-    cancelEditBed() {
-      this.bedEditForm = false;
+    deleteBed() {
+      this.$store.dispatch("deleteBed", this.bedData);
     },
     clickIt(e) {
       this.drag = true;
@@ -100,7 +103,8 @@ export default {
         dateFertilized: this.bedData.dateFertilized,
         bedX: this.bedData.bedX,
         bedY: this.bedData.bedY,
-        gardenId: this.bedData.gardenId
+        gardenId: this.bedData.gardenId,
+        id: this.bedData.id
         },
       info: false,
       HInterval:0,

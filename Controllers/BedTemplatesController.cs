@@ -21,15 +21,30 @@ namespace GardenBoxer.Controllers
       _bts = bts;
     }
 
+    [HttpGet]
+    [Authorize]
+    public ActionResult<IEnumerable<BedTemplate>> GetAll(){
+      try
+      {
+      string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+      return Ok(_bts.GetAll(userId));
+      }
+      catch(Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
     [HttpPut("{id}")]
     [Authorize]
     public ActionResult<BedTemplate> Edit(int id, [FromBody] BedTemplate editedBedTemplate)
     {
-      try
+    try
       {
+        editedBedTemplate.Id = id;
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         editedBedTemplate.UserId = userId;
-        return Ok(_bts.Edit(editedBedTemplate, userId));
+        return Ok(_bts.Edit(editedBedTemplate));
       }
       catch (Exception e)
       {
@@ -66,7 +81,7 @@ namespace GardenBoxer.Controllers
       {
         return BadRequest(e.Message);
       }
+    
     }
-
   }
 }

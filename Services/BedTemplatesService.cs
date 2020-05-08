@@ -28,15 +28,18 @@ namespace GardenBoxer.Services
       return _repo.GetById(BedTemplateId, UserId);
     }
 
-    public BedTemplate Edit(BedTemplate newBedTemplate, string userId)
+    public BedTemplate Edit(BedTemplate newBedTemplate)
     {
-      BedTemplate original = GetById(newBedTemplate.Id, userId);
-      original.UserId = userId;
+      BedTemplate original = GetById(newBedTemplate.Id, newBedTemplate.UserId);
       original.Name = newBedTemplate.Name != null ? newBedTemplate.Name : original.Name;
       original.Width = newBedTemplate.Width != 0 ? newBedTemplate.Width : original.Width;
       original.Height = newBedTemplate.Height != 0 ? newBedTemplate.Height : original.Height;
       original.Img = newBedTemplate.Img != null ? newBedTemplate.Img : original.Img;
       return _repo.Edit(original);
+    }
+    public IEnumerable<BedTemplate> GetAll(string UserId)
+    {
+      return _repo.GetAll(UserId);
     }
 
     public string Delete(int id, string userId)
