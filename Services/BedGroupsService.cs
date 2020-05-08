@@ -4,51 +4,46 @@ using System.Data;
 using GardenBoxer.Models;
 using GardenBoxer.Repositories;
 
-// namespace GardenBoxer.Services
-// {
-//   public class BedGroupService
-//   {
-    // private readonly BedGroupRepository _repo;
-    // public BedGroupService(BedGroupRepository repo)
-    // {
-    //   _repo = repo;
-    // }
+namespace GardenBoxer.Services
+{
+  public class BedGroupsService
+  {
+    private readonly BedGroupRepository _repo;
+    public BedGroupsService(BedGroupRepository repo)
+    {
+      _repo = repo;
+    }
+    public BedGroup Create(BedGroup newBedGroup)
+    {
 
-  //   public BedTemplate Create(BedTemplate newBedTemplate)
-  //   {
-  //     return _repo.Create(newBedTemplate);
-  //   }
-
-    // public IEnumerable<BedTemplate> GetBedGroupByGardenId(int GardenId, string userId)
-    // {
-    //   return _repo.GetBedGroupByGardenId(GardenId, userId);
-    // }
-    // public BedTemplate GetById(int BedTemplateId, string UserId)
-    // {
-    //   return _repo.GetById(BedTemplateId, UserId);
-    // }
-
-  //   public BedTemplate Edit(BedTemplate newBedTemplate)
-  //   {
-  //     BedTemplate original = GetById(newBedTemplate.Id, newBedTemplate.UserId);
-  //     original.Name = newBedTemplate.Name != null ? newBedTemplate.Name : original.Name;
-  //     original.Width = newBedTemplate.Width != 0 ? newBedTemplate.Width : original.Width;
-  //     original.Height = newBedTemplate.Height != 0 ? newBedTemplate.Height : original.Height;
-  //     original.Img = newBedTemplate.Img != null ? newBedTemplate.Img : original.Img;
-  //     return _repo.Edit(original);
-  //   }
-  //   public IEnumerable<BedTemplate> GetAll(string UserId)
-  //   {
-  //     return _repo.GetAll(UserId);
-  //   }
-
-  //   public string Delete(int id, string userId)
-  //   {
-  //     if (_repo.Delete(id, userId))
-  //     {
-  //       return "Deleted";
-  //     }
-  //     throw new Exception("That BedTemplate doesn't exist");
-  //   }
-  // }
-// }
+      return _repo.Create(newBedGroup);
+    }
+    public IEnumerable<BedGroupViewModel> GetBedsByGroupId(int GroupId, string UserId)
+    {
+      return _repo.GetBedsByGroupId(GroupId, UserId);
+    }
+    public BedGroup GetById(int BedGroupId, string UserId)
+    {
+      return _repo.GetById(BedGroupId, UserId);
+    }
+    public BedGroup Edit(BedGroup newBedGroup)
+    {
+      BedGroup original = GetById(newBedGroup.Id, newBedGroup.UserId);
+      original.bedId = newBedGroup.bedId != 0 ? newBedGroup.bedId : original.bedId;
+      original.groupId = newBedGroup.groupId != 0 ? newBedGroup.groupId : original.groupId;
+      return _repo.Edit(original);
+    }
+    public IEnumerable<BedGroup> GetAll(string UserId)
+    {
+      return _repo.GetAll(UserId);
+    }
+    public string Delete(int id, string userId)
+    {
+      if (_repo.Delete(id, userId))
+      {
+        return "Deleted";
+      }
+      throw new Exception("That BedGroup doesn't exist");
+    }
+  }
+}

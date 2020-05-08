@@ -8,30 +8,45 @@ using GardenBoxer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+// NOTE for managing individual groups
 
-// NOTE for managing bed group relationships
 namespace GardenBoxer.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class BedGroupsController : ControllerBase
+  public class GroupsController : ControllerBase
   {
+    private readonly GroupsService _gs;
     private readonly BedGroupsService _bgs;
-    private readonly BedsService _bs;
-    public BedGroupsController(BedGroupsService bgs, BedsService bs)
+    public GroupsController(GroupsService gs, BedGroupsService bgs)
     {
+      _gs = gs;
       _bgs = bgs;
-      _bs = bs;
     }
 
     [HttpGet]
     [Authorize]
-    public ActionResult<IEnumerable<BedGroup>> GetAll()
+    public ActionResult<IEnumerable<Group>> GetAll()
     {
       try
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_bgs.Edit(userId));
+        return Ok(_gs.GetAll(userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{groupId}/beds")]
+    [Authorize]
+    public ActionResult<IEnumerable<BedGroupViewModel>> GetBedsByGroupId(int groupId)
+    {
+      try
+      {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_bgs.GetBedsByGroupId(groupId, userId));
       }
       catch (Exception e)
       {
@@ -41,14 +56,14 @@ namespace GardenBoxer.Controllers
 
     [HttpPut("{id}")]
     [Authorize]
-    public ActionResult<BedGroup> Edit(int id, [FromBody] BedGroup editedBedGroup)
+    public ActionResult<Group> Edit(int id, [FromBody] Group editedGroup)
     {
       try
       {
+        editedGroup.Id = id;
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        editedBedGroup.UserId = userId;
-        editedBedGroup.Id = id;
-        return Ok(_bgs.Edit(editedBedGroup));
+        editedGroup.UserId = userId;
+        return Ok(_gs.Edit(editedGroup));
       }
       catch (Exception e)
       {
@@ -58,37 +73,32 @@ namespace GardenBoxer.Controllers
 
     [HttpPost]
     [Authorize]
-    public ActionResult<BedGroup> Post([FromBody] BedGroup newBedGroup)
+    public ActionResult<Group> Post([FromBody] Group newGroup)
     {
       try
       {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        newBedGroup.UserId = userId;
-        Bed bed = _bs.GetById(newBedGroup.BedId, userId);
-        newBedGroup.GardenId = bed.GardenId;
-
-        return Ok(_bgs.Create(newBedGroup));
+        newGroup.UserId = userId;
+        return Ok(_gs.Create(newGroup));
       }
       catch (Exception e)
       {
         return BadRequest(e.Message);
       }
     }
-
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<BedGroup> Delete(int id)
+    public ActionResult<Group> Delete(int id)
     {
       try
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_bgs.Delete(id, userId));
+        return Ok(_gs.Delete(id, userId));
       }
       catch (Exception e)
       {
         return BadRequest(e.Message);
       }
     }
-
   }
 }

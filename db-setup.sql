@@ -75,9 +75,9 @@ USE gardenboxer;
 --     gardenId INT NOT NULL,
 --     UNIQUE(bedX, bedY, gardenId),
 
---     FOREIGN KEY (gardenId)
---     REFERENCES gardens(id)
---     ON DELETE CASCADE
+    -- FOREIGN KEY (gardenId)
+    -- REFERENCES gardens(id)
+    -- ON DELETE CASCADE
 -- );
 
 -- CREATE TABLE gardens (
@@ -113,16 +113,32 @@ CREATE TABLE bedgroups (
   groupId int NOT NULL,
   gardenId int NOT NULL,
 
+  FOREIGN KEY (gardenId)
+    REFERENCES gardens(id)
+    ON DELETE CASCADE,
+
+    FOREIGN KEY (bedId)
+    REFERENCES beds(id)
+    ON DELETE CASCADE,
+
+    FOREIGN KEY (groupId)
+    REFERENCES groups(id)
+    ON DELETE CASCADE,
+
   UNIQUE(bedId, groupId),
   UNIQUE(bedId, gardenId)
 )
 
 -- USE THIS LINE FOR GET KEEPS BY VAULTID
 -- g.id as groupId
-SELECT 
-b.*,
-FROM bedgroups bg
-INNER JOIN beds b ON b.id = bg.bedId 
-WHERE (bg.userId = @userId AND bg.bedId = @id)
-INNER JOIN groups g ON g.id = bg.groupId
-WHERE (bg.groupId = @id AND bg.userId = @userId)
+
+
+-- SELECT 
+-- b.*,
+-- FROM bedgroups bg
+-- INNER JOIN beds b ON b.id = bg.bedId 
+-- WHERE (bg.userId = @userId AND bg.bedId = @id)
+
+
+-- INNER JOIN groups g ON g.id = bg.groupId
+-- WHERE (bg.groupId = @id AND bg.userId = @userId)

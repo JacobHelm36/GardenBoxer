@@ -70,6 +70,7 @@ namespace GardenBoxer.Repositories
     }
     internal IEnumerable<Bed> EditBedsInGroup(Bed bed, int GroupId)
     {
+      bed.GroupId = GroupId;
       string sql = @"
         UPDATE beds
         SET
@@ -81,8 +82,8 @@ namespace GardenBoxer.Repositories
             datePlanted = @DatePlanted,
             dateFertilized = @DateFertilized,
             img = @Img
-        WHERE (userId = @UserId AND FROM bedgroups WHERE (groupId = @GroupId AND userId = @UserId));";
-        _db.Execute(sql, bed, new{GroupId});
+        WHERE (userId = @UserId AND bedId FROM bedgroups WHERE (userId = @UserId AND groupId = @groupId) = id);";
+      _db.Execute(sql, new { GroupId, bed });
       return bed;
     }
   }
