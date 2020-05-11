@@ -50,5 +50,13 @@ namespace GardenBoxer.Services
       }
       throw new Exception("Some properties are null");
     }
+    public string Delete(int id, string userId)
+    {
+      if(_repo.Delete(id, userId))
+      {
+      return "Deleted";
+      }
+        throw new Exception("That Garden doesn't exist");
+    }
   }
 }
