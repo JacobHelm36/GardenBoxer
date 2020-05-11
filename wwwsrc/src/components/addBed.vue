@@ -6,8 +6,8 @@
       <input type='number' class="form-control-sm" v-model.number="newBed.width" placeholder="Enter a width">
       <input type='number' class="form-control-sm" v-model.number="newBed.height" placeholder="Enter a height">
       <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image">
-      <date-picker class="form-control-sm" v-bind:style="{'max-width': '50px' }" v-model="newBed.datePlanted" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
-      <date-picker class="form-control-sm" v-bind:style="{'max-width': '50px' }" v-model="newBed.dateFertilized" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date fertilized"></date-picker>
+      <date-picker class="form-control-sm" v-bind:style="{'max-width': '0px' }" v-model="newBed.datePlanted" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
+      <date-picker class="form-control-sm" v-bind:style="{'max-width': '0px' }" v-model="newBed.dateFertilized" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date fertilized"></date-picker>
     </div>
       <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
   </form>
@@ -20,9 +20,8 @@ export default {
   props:["coords"],
   methods: {
     createBed(){
-      debugger
       console.log(this.newBed)
-      this.$store.dispatch("createBed", this.newBed)
+      // this.$store.dispatch("createBed", this.newBed)
     }
   },
   data(){
