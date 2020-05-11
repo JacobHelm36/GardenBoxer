@@ -15,7 +15,6 @@ namespace GardenBoxer.Services
     }
     public BedGroup Create(BedGroup newBedGroup)
     {
-
       return _repo.Create(newBedGroup);
     }
     public IEnumerable<BedGroupViewModel> GetBedsByGroupId(int GroupId, string UserId)
@@ -29,13 +28,10 @@ namespace GardenBoxer.Services
     public BedGroup Edit(BedGroup newBedGroup)
     {
       BedGroup original = GetById(newBedGroup.Id, newBedGroup.UserId);
-      original.bedId = newBedGroup.bedId != 0 ? newBedGroup.bedId : original.bedId;
-      original.groupId = newBedGroup.groupId != 0 ? newBedGroup.groupId : original.groupId;
+      original.BedId = newBedGroup.BedId != 0 ? newBedGroup.BedId : original.BedId;
+      original.GroupId = newBedGroup.GroupId != 0 ? newBedGroup.GroupId : original.GroupId;
+      original.GardenId = newBedGroup.GardenId != 0 ? newBedGroup.GardenId : original.GardenId;
       return _repo.Edit(original);
-    }
-    public IEnumerable<BedGroup> GetAll(string UserId)
-    {
-      return _repo.GetAll(UserId);
     }
     public string Delete(int id, string userId)
     {

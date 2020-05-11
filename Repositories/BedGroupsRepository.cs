@@ -48,11 +48,6 @@ namespace GardenBoxer.Repositories
     //   string sql = "SELECT * FROM bedgroups WHERE (userId = @UserId AND gardenId = @GardenId)";
     //   return _db.Query<BedGroup>(sql, new { UserId, GardenId });
     // }
-    internal IEnumerable<BedGroup> GetAll(string UserId)
-    {
-      string sql = "SELECT * FROM bedgrouptemplates WHERE userId = @UserId";
-      return _db.Query<BedGroup>(sql, new { UserId });
-    }
 
     internal BedGroup GetById(int Id, string UserId)
     {

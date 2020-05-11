@@ -24,21 +24,6 @@ namespace GardenBoxer.Controllers
       _bs = bs;
     }
 
-    [HttpGet]
-    [Authorize]
-    public ActionResult<IEnumerable<BedGroup>> GetAll()
-    {
-      try
-      {
-        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_bgs.Edit(userId));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
-
     [HttpPut("{id}")]
     [Authorize]
     public ActionResult<BedGroup> Edit(int id, [FromBody] BedGroup editedBedGroup)
@@ -66,7 +51,6 @@ namespace GardenBoxer.Controllers
         newBedGroup.UserId = userId;
         Bed bed = _bs.GetById(newBedGroup.BedId, userId);
         newBedGroup.GardenId = bed.GardenId;
-
         return Ok(_bgs.Create(newBedGroup));
       }
       catch (Exception e)
@@ -89,6 +73,5 @@ namespace GardenBoxer.Controllers
         return BadRequest(e.Message);
       }
     }
-
   }
 }
