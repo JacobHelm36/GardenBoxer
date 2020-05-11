@@ -91,43 +91,46 @@ USE gardenboxer;
 --   PRIMARY KEY (id)
 -- )
 
-CREATE TABLE bedtemplates (
-  id int NOT NULL AUTO_INCREMENT,
-  userId VARCHAR(255) NOT NULL,
-  name VARCHAR(255),
-  width INT,
-  height INT,
-  img VARCHAR(255)
-)
+-- CREATE TABLE bedtemplates (
+--   id int NOT NULL AUTO_INCREMENT,
+--   userId VARCHAR(255) NOT NULL,
+--   name VARCHAR(255),
+--   width INT,
+--   height INT,
+--   img VARCHAR(255).
+--   PRIMARY KEY (id)
+-- )
 
-CREATE TABLE groups (
-  id int NOT NULL AUTO_INCREMENT,
-  userId VARCHAR(255) NOT NULL,
-  name VARCHAR(255)
-)
+-- CREATE TABLE groups (
+--   id int NOT NULL AUTO_INCREMENT,
+--   userId VARCHAR(255) NOT NULL,
+--   name VARCHAR(255),
+--   PRIMARY KEY (id)
+-- )
 
-CREATE TABLE bedgroups (
-  id int NOT NULL AUTO_INCREMENT,
-  userId VARCHAR(255) NOT NULL,
-  bedId int NOT NULL,
-  groupId int NOT NULL,
-  gardenId int NOT NULL,
+-- CREATE TABLE bedgroups (
+--   id int NOT NULL AUTO_INCREMENT,
+--   userId VARCHAR(255) NOT NULL,
+--   bedId int NOT NULL,
+--   groupId int NOT NULL,
+--   gardenId int NOT NULL,
+--   PRIMARY KEY (id),
 
-  FOREIGN KEY (gardenId)
-    REFERENCES gardens(id)
-    ON DELETE CASCADE,
+--   FOREIGN KEY (gardenId)
+--     REFERENCES gardens(id)
+--     ON DELETE CASCADE,
 
-    FOREIGN KEY (bedId)
-    REFERENCES beds(id)
-    ON DELETE CASCADE,
+--     FOREIGN KEY (bedId)
+--     REFERENCES beds(id)
+--     ON DELETE CASCADE,
 
-    FOREIGN KEY (groupId)
-    REFERENCES groups(id)
-    ON DELETE CASCADE,
+--     FOREIGN KEY (groupId)
+--     REFERENCES groups(id)
+--     ON DELETE CASCADE,
 
-  UNIQUE(bedId, groupId),
-  UNIQUE(bedId, gardenId)
-)
+--   UNIQUE(bedId, groupId),
+--   UNIQUE(bedId, gardenId)
+-- )
 
 -- USE THIS LINE FOR GET KEEPS BY VAULTID
 -- g.id as groupId
