@@ -68,7 +68,7 @@ namespace GardenBoxer.Repositories
       int removed = _db.Execute(sql, new { Id, UserId });
       return removed == 1;
     }
-    internal Bed EditBedsInGroup(Bed bed, int GroupId)
+    internal BedGroupViewModel EditBedsInGroup(BedGroupViewModel bed, int GroupId)
     {
       string sql = @"
         UPDATE beds
