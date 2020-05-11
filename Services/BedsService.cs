@@ -32,7 +32,6 @@ namespace GardenBoxer.Services
     {
       Bed original = GetById(newBed.Id, newBed.UserId);
       original.Name = newBed.Name != null ? newBed.Name : original.Name;
-      original.Description = newBed.Description != null ? newBed.Description : original.Description;
       original.DateFertilized = newBed.DateFertilized != null ? newBed.DateFertilized : original.DateFertilized;
       original.Width = newBed.Width != 0 ? newBed.Width : original.Width;
       original.Height = newBed.BedX != 0 ? newBed.BedX : original.BedX;

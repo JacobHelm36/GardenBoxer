@@ -50,7 +50,6 @@ namespace GardenBoxer.Repositories
         UPDATE beds
         SET
             name = @Name,
-            description = @Description,
             bedX = @BedX,
             bedY = @BedY,
             width = @Width,

@@ -68,6 +68,5 @@ namespace GardenBoxer.Controllers
         return BadRequest(e.Message);
       }
     }
-
   }
 }

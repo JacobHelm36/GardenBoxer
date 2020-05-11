@@ -21,7 +21,7 @@ export default {
   methods: {
     createBed(){
       console.log(this.newBed)
-      // this.$store.dispatch("createBed", this.newBed)
+      this.$store.dispatch("createBed", this.newBed)
     }
   },
   data(){

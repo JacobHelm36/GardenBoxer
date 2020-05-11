@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// import Datepicker from "vuejs-datepicker";
 import Navbar from "@/components/navbar";
 import { onAuth } from "@bcwdev/auth0-vue";
 export default {
