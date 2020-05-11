@@ -32,6 +32,7 @@ namespace GardenBoxer.Services
     {
       Bed original = GetById(newBed.Id, newBed.UserId);
       original.Name = newBed.Name != null ? newBed.Name : original.Name;
+      original.Description = newBed.Description != null ? newBed.Description : original.Description;
       original.DateFertilized = newBed.DateFertilized != null ? newBed.DateFertilized : original.DateFertilized;
       original.Width = newBed.Width != 0 ? newBed.Width : original.Width;
       original.Height = newBed.BedX != 0 ? newBed.BedX : original.BedX;
@@ -41,14 +42,13 @@ namespace GardenBoxer.Services
       original.Img = newBed.Img != null ? newBed.Img : original.Img;
       return _repo.Edit(original);
     }
-
-    public string Delete(int id, string userId)
+    public BedGroupViewModel EditBedsByGroupId(BedGroupViewModel newBed)
     {
-      if (_repo.Delete(id, userId))
+      if(newBed.DatePlanted != null && newBed.DateFertilized != null && newBed.Name != null && newBed.Height != 0 && newBed.Width != 0 && newBed.Img != null && newBed.Description != null)
       {
-        return "Deleted";
+        return _repo.EditBedsInGroup(newBed);
       }
-      throw new Exception("That Bed doesn't exist");
+      throw new Exception("Some properties are null");
     }
   }
 }

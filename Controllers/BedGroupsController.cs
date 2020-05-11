@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-// NOTE for managing bed group relationships
+// NOTE for managing bed group relationships and data in bedgroups
 namespace GardenBoxer.Controllers
 {
   [ApiController]

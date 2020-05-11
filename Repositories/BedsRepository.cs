@@ -50,6 +50,7 @@ namespace GardenBoxer.Repositories
         UPDATE beds
         SET
             name = @Name,
+            description = @Description,
             bedX = @BedX,
             bedY = @BedY,
             width = @Width,
@@ -68,23 +69,21 @@ namespace GardenBoxer.Repositories
       int removed = _db.Execute(sql, new { Id, UserId });
       return removed == 1;
     }
-    internal BedGroupViewModel EditBedsInGroup(BedGroupViewModel bed, int GroupId)
+    internal BedGroupViewModel EditBedsInGroup(BedGroupViewModel bed)
     {
       string sql = @"
         UPDATE beds
         SET
             name = @Name,
-            bedX = @BedX,
-            bedY = @BedY,
+            description = @Description,
             width = @Width,
             height = @Height,
             datePlanted = @DatePlanted,
             dateFertilized = @DateFertilized,
             img = @Img
-        WHERE (userId = @UserId AND bedId FROM bedgroups WHERE (userId = @UserId AND groupId = @groupId) = id);";
-      _db.Execute(sql, new { GroupId });
+        WHERE (userId = @UserId AND bedId FROM bedgroups WHERE (userId = @UserId AND groupId = @BedGroupId) = id);";
+      _db.Execute(sql, bed);
       return bed;
-      // return new IEnumerable<Bed>
     }
   }
 }

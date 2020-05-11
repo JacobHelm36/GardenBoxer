@@ -18,10 +18,12 @@ namespace GardenBoxer.Controllers
   {
     private readonly GroupsService _gs;
     private readonly BedGroupsService _bgs;
-    public GroupsController(GroupsService gs, BedGroupsService bgs)
+    private readonly BedsService _bs;
+    public GroupsController(GroupsService gs, BedGroupsService bgs, BedsService bs)
     {
       _gs = gs;
       _bgs = bgs;
+      _bs = bs;
     }
 
     [HttpGet]
@@ -64,6 +66,22 @@ namespace GardenBoxer.Controllers
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         editedGroup.UserId = userId;
         return Ok(_gs.Edit(editedGroup));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpPut("{id}/beds")]
+    [Authorize]
+    public ActionResult<BedGroupViewModel> EditBedsByGroupId(int id, [FromBody] BedGroupViewModel editedBed)
+    {
+      try
+      {
+        editedBed.BedGroupId = id;
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        editedBed.UserId = userId;
+        return Ok(_bs.EditBedsByGroupId(editedBed));
       }
       catch (Exception e)
       {
