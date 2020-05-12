@@ -34,8 +34,8 @@ namespace GardenBoxer.Services
       original.Name = newBed.Name != null ? newBed.Name : original.Name;
       original.DateFertilized = newBed.DateFertilized != null ? newBed.DateFertilized : original.DateFertilized;
       original.Width = newBed.Width != 0 ? newBed.Width : original.Width;
-      original.Height = newBed.BedX != 0 ? newBed.BedX : original.BedX;
-      original.BedX = newBed.Height != 0 ? newBed.Height : original.Height;
+      original.Height = newBed.Height != 0 ? newBed.Height : original.Height;
+      original.BedX = newBed.BedX != 0 ? newBed.BedX : original.BedX;
       original.BedY = newBed.BedY != 0 ? newBed.BedY : original.BedY;
       original.DatePlanted = newBed.DatePlanted != null ? newBed.DatePlanted : original.DatePlanted;
       original.Img = newBed.Img != null ? newBed.Img : original.Img;
@@ -43,7 +43,7 @@ namespace GardenBoxer.Services
     }
     public BedGroupViewModel EditBedsByGroupId(BedGroupViewModel newBed)
     {
-      if(newBed.DatePlanted != null && newBed.DateFertilized != null && newBed.Name != null && newBed.Height != 0 && newBed.Width != 0 && newBed.Img != null && newBed.Description != null)
+      if (newBed.DatePlanted != null && newBed.DateFertilized != null && newBed.Name != null && newBed.Height != 0 && newBed.Width != 0 && newBed.Img != null && newBed.Description != null)
       {
         return _repo.EditBedsInGroup(newBed);
       }
@@ -51,11 +51,11 @@ namespace GardenBoxer.Services
     }
     public string Delete(int id, string userId)
     {
-      if(_repo.Delete(id, userId))
+      if (_repo.Delete(id, userId))
       {
-      return "Deleted";
+        return "Deleted";
       }
-        throw new Exception("That Garden doesn't exist");
+      throw new Exception("That Garden doesn't exist");
     }
   }
 }

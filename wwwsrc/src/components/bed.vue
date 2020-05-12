@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{'top':top + 'px', 'left': left+'px','max-width': Interval.Winterval * this.bedData.width + 'px', 'min-width': Interval.Winterval * this.bedData.width + 'px', 'max-height':Interval.Hinterval * this.bedData.height + 'px', 'min-height':Interval.Hinterval * this.bedData.height + 'px', 'background-image':`url('${bedData.img}')`}"
+    :style="{'top':(Interval.HInterval * (bedData.bedY - 1)) + 'px', 'left': (Interval.WInterval * (bedData.bedX - 1))+'px', 'min-width': Interval.WInterval * this.bedData.width + 'px', 'min-height':Interval.HInterval * this.bedData.height + 'px', 'background-image':`url('${bedData.img}')`, 'opacity':opacity}"
     @click="info1()"
     class="beds"
     id="beds"
@@ -26,13 +26,13 @@
         <input
           type="number"
           class="form-control-sm"
-          v-model="editedBed.width"
+          v-model.number="editedBed.width"
           placeholder="Enter a width"
         />
         <input
           type="number"
           class="form-control-sm"
-          v-model="editedBed.height"
+          v-model.number="editedBed.height"
           placeholder="Enter a height"
         />
         <input
@@ -90,8 +90,6 @@ export default {
       }
     },
     updateBed() {
-      console.log(this.bedData);
-      console.log(this.editedBed);
       this.$store.dispatch("editBed", this.editedBed);
     },
     cancelEditBed() {
@@ -131,8 +129,8 @@ export default {
       if (this.bedData.bedY < 0) {
         this.bedData.bedY = 0;
       }
-      this.top = (this.bedData.bedY - 1) * this.HInterval;
-      this.left = (this.bedData.bedX - 1) * this.WInterval;
+      this.top = (this.bedData.bedY - 1) * this.Interval.HInterval;
+      this.left = (this.bedData.bedX - 1) * this.Interval.WInterval;
       this.drag = false;
       this.$store.dispatch("editBed", {
         id: this.bedData.id,
@@ -183,10 +181,19 @@ export default {
       return this.bedData;
     },
     Interval() {
-      return { Hinterval: this.HInterval, Winterval: this.WInterval };
+      return this.$store.state.activeGardenDimensions;
     },
     garden() {
       return this.$store.state.activeGarden;
+    },
+    active() {
+      return this.$store.state.activeHover[this.bedData.id];
+    },
+    opacity() {
+      if (this.active) {
+        return "50%";
+      }
+      return "100%";
     }
   },
   components: { DatePicker }

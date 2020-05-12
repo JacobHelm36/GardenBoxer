@@ -61,6 +61,7 @@ export default {
       this.WInterval =
         document.getElementById("garden").offsetWidth / this.gardenData.width;
       console.log(this.$route.params.id + "vs" + this.gardenData.id);
+      this.$store.dispatch("updateGardenDimensions", this.Interval);
     }
   },
   computed: {
@@ -150,7 +151,7 @@ export default {
 }
 .beds {
   position: absolute;
-  border: 1px black;
+  border: 5px black;
   background-color: rgb(131, 82, 53);
 }
 </style>

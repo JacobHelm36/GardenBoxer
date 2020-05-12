@@ -19,7 +19,10 @@ export default new Vuex.Store({
   state: {
     gardens: [],
     beds: [],
-    activeGarden: {}
+    activeGarden: {},
+    activeGardenDimensions: {},
+    activeHover: {},
+    templateBeds: []
   },
   mutations: {
     // Gardens
@@ -36,6 +39,9 @@ export default new Vuex.Store({
     removeGarden(state, gardenId) {
       state.gardens = state.gardens.filter(g => g.id != gardenId)
     },
+    setGardenDimensions(state, gardenDim) {
+      state.activeGardenDimensions = gardenDim;
+    },
     // Beds
     setBeds(state, beds) {
       state.beds = beds;
@@ -44,11 +50,26 @@ export default new Vuex.Store({
       state.beds.push(newBed)
     },
     setEditBed(state, editedBed) {
-      let index = state.beds.indexOf({ id: editedBed.id });
+      let index = state.beds.map(b => b.id).indexOf(editedBed.id);
       Vue.set(state.beds, index, editedBed);
     },
     deleteBed(state, bedId) {
       state.beds = state.beds.filter(b => b.id != bedId)
+    },
+    addActiveBed(state, bedId) {
+      Vue.set(state.activeHover, bedId, true);
+    },
+    removeActiveBed(state, bedId) {
+      Vue.set(state.activeHover, bedId, false);
+    },
+    addSavedBed(state, bed) {
+      state.templateBeds.push(bed);
+    },
+    removeSavedBed(state, bedId) {
+      state.templateBeds.filter(b => b.id != bedId);
+    },
+    setSavedBeds(state, beds) {
+      state.templateBeds = beds;
     }
   },
   actions: {
@@ -80,6 +101,9 @@ export default new Vuex.Store({
       await api.delete(`gardens/${gardenData.id}`);
       commit("removeGarden", gardenData.id);
     },
+    updateGardenDimensions({ commit }, gardenDim) {
+      commit("setGardenDimensions", gardenDim);
+    },
 
     // Beds
     async getBedsByGardenId({ commit }, gardenId) {
@@ -92,14 +116,32 @@ export default new Vuex.Store({
       commit("addBed", res.data)
     },
     async editBed({ commit }, editedBed) {
-      console.log("this is the original edited bed", editedBed)
+      console.log("this is the original edited bed", editedBed);
       let res = await api.put(`beds/${editedBed.id}`, editedBed);
-      commit("setEditBed", res.data)
-      console.log("new edited bed", res.data)
+      commit("setEditBed", res.data);
+      console.log("new edited bed", res.data);
     },
     async deleteBed({ commit }, bedId) {
-      let res = await api.delete(`beds/${bedId}`)
+      let res = await api.delete(`beds/${bedId}`);
       commit("deleteBed", bedId)
+    },
+    addHover({ commit }, bedId) {
+      commit("addActiveBed", bedId);
+    },
+    removeHover({ commit }, bedId) {
+      commit("removeActiveBed", bedId);
+    },
+    async saveBed({ commit }, bed) {
+      let res = await api.post(`bedtemplates`, bed);
+      commit("addSavedBed", res.data);
+    },
+    async removeSavedBed({ commit }, bedId) {
+      await api.delete(`bedtemplates/${bedId}`);
+      commit("removeSavedBed", bedId);
+    },
+    async getBedTemplates({ commit }) {
+      let res = await api.get(`bedtemplates`);
+      commit("setSavedBeds", res.data);
     }
   }
 });

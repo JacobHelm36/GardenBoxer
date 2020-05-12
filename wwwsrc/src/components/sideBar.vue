@@ -1,11 +1,18 @@
 <template>
-  <div v-bind:style="{}" class="side-wrapper">
+  <div v-bind:style="{height:this.offsetHeight + 'px'}" class="side-wrapper">
     <button @click="toggleIt" class="btn btn-primary side-toggle">TOGGLE</button>
-    <div class="side-bar d-flex flex-column align-items-start" v-bind:style="{'left': left + '%'}">
+    <div class="side-bar d-flex flex-column" v-bind:style="{'left': left + '%'}">
       <button @click="toggleIt" class="btn btn-secondary align-self-end">Toogle</button>
-      <button @click="info()" class="btn btn-warning">content</button>
-      <p>stuff</p>
-      <bed v-for="bed in beds" :key="bed.id" :bedData="bed" />
+      <div class="d-flex flex-row justify-content-around mt-2 mb-2">
+        <button @click="active = 'group'" class="btn btn-warning">groups</button>
+        <button @click="active = 'bed'" class="btn btn-warning">beds</button>
+        <button @click="active = 'save'" class="btn btn-warning">saves</button>
+      </div>
+      <div v-if="active == 'bed'" class="row beds-spot">
+        <bed v-for="bed in beds" :key="bed.id" :bedData="bed" />
+      </div>
+      <div v-if="active == 'group'" class="row groups-spot"></div>
+      <div v-if="active == 'save'" class="row saves-spot"></div>
     </div>
   </div>
 </template>
@@ -15,10 +22,7 @@ import Bed from "../components/bedCard";
 export default {
   name: "Sidebar",
   mounted() {
-    setTimeout(
-      (this.offsetHeight = document.getElementById("garden-view").offsetHeight),
-      1000
-    );
+    setTimeout(this.pollHeight, 1000);
   },
   methods: {
     toggleIt() {
@@ -48,15 +52,16 @@ export default {
       this.toggleInterval = 0;
       this.toggle = !this.toggle;
     },
-    info() {
-      console.log(document.getElementById("app").scrollHeight);
+    pollHeight() {
+      this.offsetHeight = document.getElementById("garden-view").offsetHeight;
     }
   },
   data() {
     return {
       left: -100,
       toggle: true,
-      toggleInterval: null
+      toggleInterval: null,
+      active: "bed"
     };
   },
   computed: {
@@ -85,6 +90,10 @@ export default {
   min-width: 100%;
   background-color: blue;
   z-index: 1;
-  max-width:100%;
+  max-width: 100%;
+}
+.beds-spot {
+  max-width: 100%;
+  margin-left: 0px;
 }
 </style>

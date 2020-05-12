@@ -58,8 +58,8 @@ export default {
         img: "",
         datePlanted: "",
         dateFertilized: "",
-        bedX: this.coords.bedX + 1,
-        bedY: this.coords.bedY + 1,
+        bedX: this.coords.bedX,
+        bedY: this.coords.bedY,
         gardenId: parseInt(this.$route.params.id)
       }
     };
