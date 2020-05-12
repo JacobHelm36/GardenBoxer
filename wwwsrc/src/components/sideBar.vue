@@ -85,5 +85,6 @@ export default {
   min-width: 100%;
   background-color: blue;
   z-index: 1;
+  max-width:100%;
 }
 </style>

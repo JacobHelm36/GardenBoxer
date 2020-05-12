@@ -21,8 +21,8 @@ export default {
   props: ["gardenDim"],
   async mounted() {
     if (await this.$auth.isAuthenticated) {
-      this.$store.dispatch("setActiveGarden", this.$route.params.id);
-      this.$store.dispatch("getBedsByGardenId", this.$route.params.id);
+      await this.$store.dispatch("setActiveGarden", this.$route.params.id);
+      await this.$store.dispatch("getBedsByGardenId", this.$route.params.id);
     }
   },
   computed: {

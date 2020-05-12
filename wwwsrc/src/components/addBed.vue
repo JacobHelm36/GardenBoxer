@@ -1,29 +1,55 @@
 <template class="container">
   <form class="bed-form row">
     <div class="col-12">
-      <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant">
-      <input type='number' class="form-control-sm" v-model.number="newBed.width" placeholder="Enter a width">
-      <input type='number' class="form-control-sm" v-model.number="newBed.height" placeholder="Enter a height">
-      <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image">
-      <date-picker class="form-control-sm" v-bind:style="{'max-width': '0px' }" v-model="newBed.datePlanted" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
-      <date-picker class="form-control-sm" v-bind:style="{'max-width': '0px' }" v-model="newBed.dateFertilized" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date fertilized"></date-picker>
+      <input type="text" class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant" />
+      <input
+        type="number"
+        class="form-control-sm"
+        v-model.number="newBed.width"
+        placeholder="Enter a width"
+      />
+      <input
+        type="number"
+        class="form-control-sm"
+        v-model.number="newBed.height"
+        placeholder="Enter a height"
+      />
+      <input type="text" class="form-control-sm" v-model="newBed.img" placeholder="Enter an image" />
+      <date-picker
+        class="form-control-sm"
+        v-bind:style="{'max-width': '0px' }"
+        v-model="newBed.datePlanted"
+        lang="en"
+        type="date"
+        format="YYYY-MM-dd"
+        placeholder="Enter date planted"
+      ></date-picker>
+      <date-picker
+        class="form-control-sm"
+        v-bind:style="{'max-width': '0px' }"
+        v-model="newBed.dateFertilized"
+        lang="en"
+        type="date"
+        format="YYYY-MM-dd"
+        placeholder="Enter date fertilized"
+      ></date-picker>
     </div>
-      <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
+    <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
   </form>
 </template>
 
 
 <script>
-import DatePicker from "vue2-datepicker"
+import DatePicker from "vue2-datepicker";
 export default {
-  props:["coords"],
+  props: ["coords"],
   methods: {
-    createBed(){
-      console.log(this.newBed)
-      this.$store.dispatch("createBed", this.newBed)
+    createBed() {
+      console.log(this.newBed);
+      this.$store.dispatch("createBed", this.newBed);
     }
   },
-  data(){
+  data() {
     return {
       newBed: {
         name: "",
@@ -32,15 +58,15 @@ export default {
         img: "",
         datePlanted: "",
         dateFertilized: "",
-        bedX: this.coords.bedX,
-        bedY: this.coords.bedY,
+        bedX: this.coords.bedX + 1,
+        bedY: this.coords.bedY + 1,
         gardenId: parseInt(this.$route.params.id)
       }
-    }
+    };
   },
-  computed:{},
-  components: {DatePicker}
-}
+  computed: {},
+  components: { DatePicker }
+};
 </script>
 
 

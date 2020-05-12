@@ -40,7 +40,7 @@ namespace GardenBoxer.Repositories
     // }
     internal IEnumerable<Group> GetAll(string UserId)
     {
-      string sql = "SELECT * FROM grouptemplates WHERE userId = @UserId";
+      string sql = "SELECT * FROM groups WHERE userId = @UserId";
       return _db.Query<Group>(sql, new { UserId });
     }
 

@@ -26,11 +26,9 @@
       :clicker="true"
       class="beds"
       :bedData="bed"
-      :gardenDim="gardenDim"
     />
     <!-- v-bind:style="{'top':(bed.bedY * Interval.HInterval) + 'px', 'left':(bed.bedX * Interval.WInterval)+ 'px', 'min-width': Interval.WInterval + 'px', 'min-height': Interval.HInterval + 'px','max-width': Interval.WInterval + 'px', 'max-height': Interval.HInterval + 'px'}" -->
   </div>
-  
 </template>
 
 <script>
@@ -46,8 +44,9 @@ export default {
   methods: {
     click(e) {
       if (e.toElement.id == "garden" && this.clickable) {
-        this.bedCoords.bedY = Math.floor(e.offsetY / this.Interval.HInterval);
-        this.bedCoords.bedX = Math.floor(e.offsetX / this.Interval.WInterval);
+        this.bedCoords.bedY = Math.ceil(e.offsetY / this.Interval.HInterval);
+        this.bedCoords.bedX = Math.ceil(e.offsetX / this.Interval.WInterval);
+        console.log(this.bedCoords.bedY);
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = !this.form;
@@ -81,8 +80,8 @@ export default {
       };
     },
     gridCoords() {
-      let x = this.bedCoords.bedX * this.Interval.WInterval;
-      let y = this.bedCoords.bedY * this.Interval.HInterval;
+      let x = (this.bedCoords.bedX - 1) * this.Interval.WInterval;
+      let y = (this.bedCoords.bedY - 1) * this.Interval.HInterval;
       return {
         x,
         y
@@ -94,7 +93,7 @@ export default {
       return [this.formCoords.top, this.formCoords.left, bottom, right];
     },
     bedCoordinates() {
-      console.log(this.bedCoords)
+      console.log(this.bedCoords);
       return this.bedCoords;
     },
     beds() {

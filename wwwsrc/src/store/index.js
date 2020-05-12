@@ -85,18 +85,21 @@ export default new Vuex.Store({
     async getBedsByGardenId({ commit }, gardenId) {
       let res = await api.get(`gardens/${gardenId}/beds`);
       commit("setBeds", res.data);
+      console.log("yo beds", res.data)
     },
     async createBed({ commit }, newBed) {
       let res = await api.post("beds", newBed)
       commit("addBed", res.data)
     },
     async editBed({ commit }, editedBed) {
+      console.log("this is the original edited bed", editedBed)
       let res = await api.put(`beds/${editedBed.id}`, editedBed);
       commit("setEditBed", res.data)
+      console.log("new edited bed", res.data)
     },
-    async deleteBed({ commit }, bedData) {
-      let res = await api.delete(`beds/${bedData.id}`)
-      commit("deleteBed", bedData.id)
+    async deleteBed({ commit }, bedId) {
+      let res = await api.delete(`beds/${bedId}`)
+      commit("deleteBed", bedId)
     }
   }
 });
