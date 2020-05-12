@@ -25,10 +25,6 @@
       :key="bed.id"
       :clicker="true"
       class="beds"
-      @mousedown="clickIt($event)"
-      @mouseup="drop()"
-      @mousemove="dragIt($event)"
-      @click="clickIt()"
       :bedData="bed"
       :gardenDim="gardenDim"
     />
@@ -66,23 +62,6 @@ export default {
       this.WInterval =
         document.getElementById("garden").offsetWidth / this.gardenData.width;
       console.log(this.$route.params.id + "vs" + this.gardenData.id);
-    },
-    clickIt(e) {
-      this.drag = true;
-      this.offset.x = e.offsetX;
-      this.offset.y = e.offsetY;
-      console.log("click");
-    },
-    drop(e) {
-      this.drag = false;
-      console.log(this.drag);
-      console.log(this.top);
-    },
-    dragIt(e) {
-      if (this.drag) {
-        this.top = e.clientY - this.offset.y;
-        this.left = e.clientX - this.offset.x;
-      }
     }
   },
   computed: {

@@ -3644,31 +3644,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\calvi\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "/Users/jacobhelm/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\source\\codeworks\\GardenBoxer\\keepr.csproj",
+      "projectUniqueName": "/Users/jacobhelm/source/personal/gardenboxer/keepr.csproj",
       "projectName": "keepr",
-      "projectPath": "C:\\source\\codeworks\\GardenBoxer\\keepr.csproj",
-      "packagesPath": "C:\\Users\\calvi\\.nuget\\packages\\",
-      "outputPath": "C:\\source\\codeworks\\GardenBoxer\\obj\\",
+      "projectPath": "/Users/jacobhelm/source/personal/gardenboxer/keepr.csproj",
+      "packagesPath": "/Users/jacobhelm/.nuget/packages/",
+      "outputPath": "/Users/jacobhelm/source/personal/gardenboxer/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\calvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "/Users/jacobhelm/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3716,7 +3709,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.200/RuntimeIdentifierGraph.json"
       }
     }
   }

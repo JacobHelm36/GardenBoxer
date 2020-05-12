@@ -93,3 +93,5 @@ USE gardenboxer;
 -- DROP TABLE IF EXISTS groups;
 -- DROP TABLE IF EXISTS bedtemplates;
 -- DROP TABLE IF EXISTS bedgroups;
+
+SELECT * FROM beds WHERE id = 2

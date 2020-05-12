@@ -1,3 +1,5 @@
+using System;
+
 namespace GardenBoxer.Models
 {
   public class Bed
@@ -10,8 +12,8 @@ namespace GardenBoxer.Models
     public int Height { get; set; }
     public int BedX { get; set; }
     public int BedY { get; set; }
-    public string DatePlanted { get; set; }
-    public string DateFertilized { get; set; }
+    public DateTime DatePlanted { get; set; }
+    public DateTime DateFertilized { get; set; }
     public string Img { get; set; }
     public int GardenId { get; set; }
   }
