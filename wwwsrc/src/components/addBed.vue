@@ -2,7 +2,6 @@
   <form class="bed-form row">
     <div class="col-12">
       <input type='text' class="form-control-sm" v-model="newBed.name" placeholder="Enter a plant">
-      <input type='text' class="form-control-sm" v-model="newBed.description" placeholder="Enter a description">
       <input type='number' class="form-control-sm" v-model.number="newBed.width" placeholder="Enter a width">
       <input type='number' class="form-control-sm" v-model.number="newBed.height" placeholder="Enter a height">
       <input type='text' class="form-control-sm" v-model="newBed.img" placeholder="Enter an image">
@@ -28,7 +27,6 @@ export default {
     return {
       newBed: {
         name: "",
-        description: "",
         width: 1,
         height: 1,
         img: "",

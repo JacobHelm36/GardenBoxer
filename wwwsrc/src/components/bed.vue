@@ -1,10 +1,13 @@
 <template>
-  <div :style="{'top':top + 'px', 'left': left+'px','max-width': Interval.Winterval + 'px', 'max-height':Interval.Hinterval + 'px'}" @click="bedForm($event)" class="beds" id="beds">
-    <div class>
-      <img
+  <div :style="{'top':top + 'px', 'left': left+'px','max-width': Interval.Winterval + 'px', 'min-width': Interval.Winterval + 'px', 'max-height':Interval.Hinterval + 'px', 'min-height':Interval.Hinterval + 'px'}" @click="info()" class="beds" id="beds" draggable="true"
       @mousedown="clickIt($event)"
       @mouseup="drop($event)"
-      @mousemove="dragIt($event)" draggable="false" class="img-fluid" :src="bedData.img" />
+      @drag="dragIt($event)" 
+      @dragend="drop($event)">
+    <div class>
+      <img
+      draggable="false" class="img-fluid" :src="bedData.img" />
+      
     </div>
     <div :style="{'top':(bedData.bedY + 1) * HInterval, 'left': (bedData.bedX + 1) * WInterval}" v-if="info" class="popup">
       <p>{{bedData.name}}</p>
@@ -13,12 +16,11 @@
     <div class="edit-bed-form" :style="{'top':100 + 'px', 'left': 100 + 'px'}" v-if="bedEditForm">
       <div class="form">
         <input type='text' class="form-control-sm" v-model="editedBed.name" placeholder="Enter a plant">
-        <input type='text' class="form-control-sm" v-model="editedBed.description" placeholder="Enter a description">
         <input type='number' class="form-control-sm" v-model="editedBed.width" placeholder="Enter a width">
         <input type='number' class="form-control-sm" v-model="editedBed.height" placeholder="Enter a height">
         <input type='text' class="form-control-sm" v-model="editedBed.img" placeholder="Enter an image">
-        <input type='text' class="form-control-sm" :placeholder="bedData.datePlanted">
-        <input type='text' class="form-control-sm" v-model="editedBed.dateFertilized" placeholder="Enter the date last fertilized">
+        <date-picker class="form-control-sm" v-bind:style="{'max-width': '0px' }" v-model="editedBed.datePlanted" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date planted"></date-picker>
+        <date-picker class="form-control-sm" v-bind:style="{'max-width': '0px' }" v-model="editedBed.dateFertilized" lang="en" type="date" format="YYYY-MM-dd" placeholder="Enter date fertilized"></date-picker>
         <div class="flex">
           <button type="button" class="btn btn-primary" @click="updateBed()">Save Changes</button>
           <button type="button" class="btn btn-danger" @click="cancelEditBed()">Cancel</button>
@@ -29,6 +31,7 @@
 </template>
 
 <script>
+import DatePicker from "vue2-datepicker"
 export default {
   props: ["bedData", "clicker","gardenDim"],
   mounted(){
@@ -39,11 +42,14 @@ export default {
   },
   methods: {
     bedForm(e){
-      if (e.toElement.id == "beds") {
-        this.bedEditForm = !this.bedEditForm;
-      }
+      this.bedEditForm = !this.bedEditForm;
+    },
+    info(){
+      this.info = !this.info
     },
     updateBed() {
+      console.log(this.bedData)
+      console.log(this.editedBed)
       this.$store.dispatch("editBed", this.editedBed);
     },
     cancelEditBed() {
@@ -92,15 +98,15 @@ export default {
     return {
       editedBed: {
         name: this.bedData.name,
-        description: this.bedData.description,
         width: this.bedData.width,
         height: this.bedData.height,
         img: this.bedData.image,
-        datePlanted: this.bedData.datePlanted,
+        datePlanted: this.bedData.datePlanted || this.$state.beds == this.bedData.id,
         dateFertilized: this.bedData.dateFertilized,
         bedX: this.bedData.bedX,
         bedY: this.bedData.bedY,
-        gardenId: this.bedData.gardenId
+        gardenId: this.bedData.gardenId,
+        id: this.bedData.id
         },
       info: false,
       HInterval:0,
@@ -123,9 +129,10 @@ export default {
       return this.bedData;
     },
     Interval() {
-      return { Hinterval: this.HIterval, Winterval: this.WInterval };
+      return { Hinterval: this.HInterval, Winterval: this.WInterval };
     }
-  }
+  },
+  components: {DatePicker}
 };
 </script>
 
@@ -142,5 +149,11 @@ export default {
 }
 img{
   max-width:100%;
+}
+.beds{
+  background-color:brown;
+}
+.beds:active{
+  cursor:help;
 }
 </style>

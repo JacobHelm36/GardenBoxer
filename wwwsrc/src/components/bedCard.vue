@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <img :src="bedData.img" alt />
+      <img :src="bedData.img" class="img-fluid" alt />
       <h2>{{bedData.name}}</h2>
       <p>{{bedData.description}}</p>
     </div>
@@ -14,6 +14,6 @@ export default {
 </script>
 <style scoped>
 img {
-  max-width: 100%;
+  left:0px;
 }
 </style>
