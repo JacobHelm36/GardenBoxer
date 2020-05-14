@@ -38,7 +38,7 @@ USE gardenboxer;
 --   name VARCHAR(255),
 --   width INT,
 --   height INT,
---   img VARCHAR(255).
+--   img VARCHAR(255),
 --   PRIMARY KEY (id)
 -- )
 
