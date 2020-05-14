@@ -8,7 +8,6 @@ $warning: orange;
 $info: aqua;
 
 $blue: blue;
-$indigo: indigo;
 $purple: purple;
 $pink: pink;
 $red: red;
@@ -19,11 +18,16 @@ $teal: teal;
 $cyan: cyan;
 $white: white;
 $gray: gray;
-$gray-dark: darkslategray;
+$moss: #45682B;
+$russianGreen: #6F8C5C;
+$indigo: #1D4447;
+$russet: #7A5213;
+$brown:#A67D1B;
+$gold: #CBA447;
+
 
 $colors: (
   "blue": $blue,
-  "indigo": $indigo,
   "purple": $purple,
   "pink": $pink,
   "red": $red,
@@ -34,5 +38,10 @@ $colors: (
   "cyan": $cyan,
   "white": $white,
   "gray": $gray,
-  "gray-dark": $gray-dark
+  "moss": $moss,
+  "russianGreen": $russianGreen,
+  "indigo": $indigo,
+  "russet": $russet,
+  "brown": $brown,
+  "gold": $gold
 ) !default;

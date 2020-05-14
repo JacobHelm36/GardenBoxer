@@ -25,9 +25,9 @@ namespace GardenBoxer.Repositories
     {
       string sql = @"
             INSERT INTO groups
-            (name, userId, width, height, gardenId, img)
+            (name, userId)
             VALUES
-            (@Name, @UserId, @Width, @Height, @GardenId, @Img);
+            (@Name, @UserId);
             SELECT LAST_INSERT_ID();
             ";
       GroupData.Id = _db.ExecuteScalar<int>(sql, GroupData);
@@ -54,10 +54,7 @@ namespace GardenBoxer.Repositories
       string sql = @"
         UPDATE groups
         SET
-            name = @Name,
-            width = @Width,
-            height = @Height,
-            img = @Img,
+            name = @Name
         WHERE (id = @Id AND userId = @UserId);
         ";
       _db.Execute(sql, EditedGroup);

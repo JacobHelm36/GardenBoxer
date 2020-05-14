@@ -9,22 +9,22 @@
         <button @click="active = 'save'" class="btn btn-warning btn-sm">saves</button>
       </div>
       <div v-if="active == 'bed'" class="row beds-spot">
-        <bed v-for="bed in beds" :key="bed.id" :bedData="bed" />
+        <bed v-for="bed in beds" :template="false" :key="bed.id" :bedData="bed" />
       </div>
       <div v-if="active == 'group'" class="row groups-spot">
-        <button @click="form = !form" class="btn btn-primary btn-sm">+</button>
-        <div v-if="form">
+        <div class="col-12">
+          <button @click="form = !form" class="btn btn-primary btn-sm">+</button>
+        </div>
+        <div v-if="form" class="col-12 d-flex justify-content-center">
           <input class="form-control-sm" type="text" v-model="groupName" />
           <button @click="createGroup()" class="btn btn-primary btn-sm">Submit</button>
         </div>
-        <div>
-          <div v-for="group in groups" :key="group.id">
-            <p>{{group.name}}</p>
-          </div>
+        <div class="col-6 col-md-4" v-for="group in groups" :key="group.id">
+          <p>{{group.name}}</p>
         </div>
       </div>
       <div v-if="active == 'save'" class="row saves-spot">
-        <bed v-for="template in templates" :bedData="template" :key="template.id" />
+        <bed v-for="template in templates" :bedData="template" :template="true" :key="template.id" />
       </div>
     </div>
   </div>
@@ -71,6 +71,7 @@ export default {
     async createGroup() {
       await this.$store.dispatch("createGroup", this.groupName);
       this.form = false;
+      this.groupName = "";
     }
   },
   data() {

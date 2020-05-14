@@ -36,9 +36,14 @@ import AddBed from "../components/addBed";
 import Bed from "../components/bed";
 export default {
   props: ["gardenData", "clickable", "percent", "showBeds"],
-  mounted() {
+  async mounted() {
     if (this.showBeds) {
       this.interval = setInterval(this.pollDim, 1000);
+      let rect = await document
+        .getElementById("garden")
+        .getBoundingClientRect();
+      let offset = { x: rect.left, y: rect.top };
+      this.$store.dispatch("setOffset", offset);
     }
   },
   methods: {

@@ -100,8 +100,11 @@ export default {
     },
     clickIt(e) {
       this.drag = true;
-      this.offset.x = e.clientX - this.left;
-      this.offset.y = e.clientY - this.top;
+      this.left = (this.bedData.bedX - 1) * this.Interval.WInterval;
+      this.top = (this.bedData.bedY - 1) * this.Interval.HInterval;
+      this.offset.x = e.clientX - e.offsetX - this.left;
+      this.offset.y = e.clientY - e.offsetY - this.top;
+      this.$store.dispatch("setOffset", this.offset);
       this.initX = e.clientX;
       this.initY = e.clientY;
     },
@@ -115,21 +118,29 @@ export default {
         this.drag = false;
         return;
       }
-      debugger;
-      this.bedData.bedY = Math.ceil(e.clientY / this.HInterval);
-      this.bedData.bedX = Math.ceil(e.clientX / this.WInterval);
-      if (this.bedData.bedY > this.garden.height) {
-        this.bedData.bedY = this.garden.height;
+      this.tempY = Math.ceil(this.top / this.HInterval);
+      this.tempX = Math.ceil(this.left / this.WInterval);
+      if (this.tempY > this.garden.height) {
+        this.tempY = this.garden.height;
       }
-      if (this.bedData.bedY > this.garden.width) {
-        this.bedData.bedY = this.garden.height;
+      if (this.tempX > this.garden.width) {
+        this.tempX = this.garden.width;
       }
-      if (this.bedData.bedX < 1) {
-        this.bedData.bedX = 1;
+      if (this.tempX < 1) {
+        this.tempX = 1;
       }
-      if (this.bedData.bedY < 1) {
-        this.bedData.bedY = 1;
+      if (this.tempY < 1) {
+        this.tempY = 1;
       }
+      if (
+        this.$store.state.beds.filter(
+          b => b.bedY == this.tempY && b.bedX == this.tempX
+        )[0]
+      ) {
+        return;
+      }
+      this.bedData.bedX = this.tempX;
+      this.bedData.bedY = this.tempY;
       this.top = this.bedData.bedY * this.Interval.HInterval;
       this.left = this.bedData.bedX * this.Interval.WInterval;
       this.drag = false;
@@ -140,7 +151,7 @@ export default {
       });
     },
     dragIt(e) {
-      if (this.drag) {
+      if (this.drag && e.clientX) {
         this.top = e.clientY - this.offset.y;
         this.left = e.clientX - this.offset.x;
       }
@@ -173,7 +184,9 @@ export default {
         y: 0
       },
       initX: 0,
-      initY: 0
+      initY: 0,
+      tempX: 0,
+      tempY: 0
     };
   },
   computed: {
