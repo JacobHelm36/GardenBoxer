@@ -47,10 +47,10 @@ export default {
       if (e.toElement.id == "garden" && this.clickable) {
         this.bedCoords.bedY = Math.ceil(e.offsetY / this.Interval.HInterval);
         this.bedCoords.bedX = Math.ceil(e.offsetX / this.Interval.WInterval);
-        console.log(this.bedCoords.bedY);
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = !this.form;
+        console.log(this.gardenDim.width/this.Interval.WInterval)
       }
     },
     // NOTE gets the height interval and width interval
@@ -82,6 +82,9 @@ export default {
         plotHeight: ratio * this.percent + "%",
         plotWidth: this.percent + "%"
       };
+    },
+    intervalPixals() {
+      return this.gardenData.width / this.WInterval
     },
     gridCoords() {
       let x = (this.bedCoords.bedX - 1) * this.Interval.WInterval;
