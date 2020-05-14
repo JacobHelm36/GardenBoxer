@@ -8,8 +8,8 @@ namespace GardenBoxer.Services
 {
   public class BedGroupsService
   {
-    private readonly BedGroupRepository _repo;
-    public BedGroupsService(BedGroupRepository repo)
+    private readonly BedGroupsRepository _repo;
+    public BedGroupsService(BedGroupsRepository repo)
     {
       _repo = repo;
     }

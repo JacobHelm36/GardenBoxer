@@ -6,11 +6,11 @@ using Dapper;
 
 namespace GardenBoxer.Repositories
 {
-  public class BedGroupRepository
+  public class BedGroupsRepository
   {
     private readonly IDbConnection _db;
 
-    public BedGroupRepository(IDbConnection db)
+    public BedGroupsRepository(IDbConnection db)
     {
       _db = db;
     }
