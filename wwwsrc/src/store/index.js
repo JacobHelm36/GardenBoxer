@@ -22,7 +22,8 @@ export default new Vuex.Store({
     activeGarden: {},
     activeGardenDimensions: {},
     activeHover: {},
-    templateBeds: []
+    templateBeds: [],
+    groups: []
   },
   mutations: {
     // Gardens
@@ -70,6 +71,15 @@ export default new Vuex.Store({
     },
     setSavedBeds(state, beds) {
       state.templateBeds = beds;
+    },
+    addGroup(state, group) {
+      state.groups.push(group);
+    },
+    removeGroup(state, groupId) {
+      state.groups.filter(g => g.id != groupId);
+    },
+    setGroups(state, groups) {
+      state.groups = groups;
     }
   },
   actions: {
@@ -142,6 +152,18 @@ export default new Vuex.Store({
     async getBedTemplates({ commit }) {
       let res = await api.get(`bedtemplates`);
       commit("setSavedBeds", res.data);
+    },
+    async createGroup({ commit }, groupName) {
+      let res = await api.post(`groups`, { name: groupName });
+      commit("addGroup", res.data);
+    },
+    async deleteGroup({ commit }, groupId) {
+      await api.delete(`groups/${groupId}`);
+      commit("removeGroup", groupId);
+    },
+    async getGroups({ commit }) {
+      let res = await api.get("groups");
+      commit("setGroups", res.data);
     }
   }
 });

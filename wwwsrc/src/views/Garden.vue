@@ -23,6 +23,7 @@ export default {
       await this.$store.dispatch("setActiveGarden", this.$route.params.id);
       await this.$store.dispatch("getBedsByGardenId", this.$route.params.id);
       await this.$store.dispatch("getBedTemplates");
+      await this.$store.dispatch("getGroups");
     }
   },
   computed: {

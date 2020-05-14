@@ -45,14 +45,14 @@ namespace Keepr
       {
         options.AddPolicy("CorsDevPolicy", builder =>
               {
-            builder
-                      .WithOrigins(new string[]{
+                builder
+                          .WithOrigins(new string[]{
                             "http://localhost:8080"
-                  })
-                      .AllowAnyMethod()
-                      .AllowAnyHeader()
-                      .AllowCredentials();
-          });
+                      })
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+              });
       });
 
       services.AddControllers();
@@ -65,6 +65,12 @@ namespace Keepr
       services.AddTransient<GardensRepository>();
       services.AddTransient<BedsService>();
       services.AddTransient<BedsRepository>();
+      services.AddTransient<BedTemplatesService>();
+      services.AddTransient<BedTemplatesRepository>();
+      services.AddTransient<BedGroupsService>();
+      services.AddTransient<BedGroupsRepository>();
+      services.AddTransient<GroupsService>();
+      services.AddTransient<GroupsRepository>();
     }
 
     private IDbConnection CreateDbConnection()

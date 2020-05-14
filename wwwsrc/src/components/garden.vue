@@ -50,7 +50,6 @@ export default {
         this.formCoords.top = e.offsetY;
         this.formCoords.left = e.offsetX;
         this.form = !this.form;
-        console.log(this.gardenDim.width/this.Interval.WInterval)
       }
     },
     // NOTE gets the height interval and width interval
@@ -82,9 +81,6 @@ export default {
         plotHeight: ratio * this.percent + "%",
         plotWidth: this.percent + "%"
       };
-    },
-    intervalPixals() {
-      return this.gardenData.width / this.WInterval
     },
     gridCoords() {
       let x = (this.bedCoords.bedX - 1) * this.Interval.WInterval;
@@ -158,6 +154,5 @@ export default {
 .beds {
   position: absolute;
   border: 5px black;
-  background-color: rgb(131, 82, 53);
 }
 </style>

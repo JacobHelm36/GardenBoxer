@@ -116,8 +116,8 @@ export default {
         return;
       }
       debugger;
-      this.bedData.bedY = Math.ceil((this.top + e.clientY) / this.HInterval);
-      this.bedData.bedX = Math.ceil((this.left + e.clientX) / this.WInterval);
+      this.bedData.bedY = Math.ceil(e.clientY / this.HInterval);
+      this.bedData.bedX = Math.ceil(e.clientX / this.WInterval);
       if (this.bedData.bedY > this.garden.height) {
         this.bedData.bedY = this.garden.height;
       }
