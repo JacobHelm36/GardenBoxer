@@ -40,8 +40,8 @@ namespace GardenBoxer.Repositories
     // }
     internal IEnumerable<BedTemplate> GetAll(string UserId)
     {
-      string sql = "SELECT * FROM bedtemplatetemplates WHERE userId = @UserId";
-      return _db.Query<BedTemplate>(sql, new{UserId});
+      string sql = "SELECT * FROM bedtemplates WHERE userId = @UserId";
+      return _db.Query<BedTemplate>(sql, new { UserId });
     }
 
     internal BedTemplate GetById(int Id, string UserId)
