@@ -8,7 +8,7 @@
     <add-bed
       class="add-bed"
       id="bed-form"
-      v-bind:style="{'top':(gridCoords.y *1) + 'px', 'left':gridCoords.x + 'px'}"
+      v-bind:style="{'top':gridCoords.y + 'px', 'left':(gridCoords.x + WInterval) + 'px'}"
       v-show="clickable"
       v-if="form"
       :coords="bedCoordinates"

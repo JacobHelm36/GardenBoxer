@@ -11,7 +11,9 @@
       <div v-if="active == 'bed'" class="row beds-spot">
         <bed v-for="bed in beds" :key="bed.id" :bedData="bed" />
       </div>
-      <div v-if="active == 'group'" class="row groups-spot"></div>
+      <div v-if="active == 'group'" class="row groups-spot">
+        <button class="btn btn-primary btn-sm">+</button>
+      </div>
       <div v-if="active == 'save'" class="row saves-spot"></div>
     </div>
   </div>

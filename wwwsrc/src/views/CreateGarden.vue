@@ -1,37 +1,57 @@
 <template>
   <div class="dashboard container">
-    
     <div class="row d-flex justify-content-center">
       <div class="form-input col-12">
         <label>Height:</label>
-        <input type="number" class="form-control-sm" max="100" v-model="newGarden.height" placeholder="Enter a height"></input>
+        <input
+          type="number"
+          class="form-control-sm"
+          max="100"
+          v-model="newGarden.height"
+          placeholder="Enter a height"
+        />
         <label>Width:</label>
-        <input type="number" class="form-control-sm" max="100" v-model="newGarden.width" placeholder="Enter a width"></input>
-        <input type="text" class="form-control-sm" max="100" v-model="newGarden.name" placeholder="Name"></input>
-        <input type="text" class="form-control-sm" max="100" v-model="newGarden.description" placeholder="Description"></input>
+        <input
+          type="number"
+          class="form-control-sm"
+          max="100"
+          v-model="newGarden.width"
+          placeholder="Enter a width"
+        />
+        <input
+          type="text"
+          class="form-control-sm"
+          max="100"
+          v-model="newGarden.name"
+          placeholder="Name"
+        />
+        <input
+          type="text"
+          class="form-control-sm"
+          max="100"
+          v-model="newGarden.description"
+          placeholder="Description"
+        />
         <button @click="createGarden()" class="btn btn-primary">Submit</button>
       </div>
-      <div @click.prevent="click($event)" class="col-12 box p-0 mt-5 mb-5" v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight}" >
-      </div>
-      <button @click="asdf()">asdf</button>
+      <div
+        @click.prevent="click($event)"
+        class="col-12 box p-0 mt-5 mb-5"
+        v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth, 'min-height': plotDimensions.plotHeight, 'max-height': plotDimensions.plotHeight}"
+      ></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name:"create",
-  mounted() {
-  },
-  methods:{
-    click(e){
+  name: "create",
+  mounted() {},
+  methods: {
+    click(e) {
       return e.offsetX;
     },
-    asdf(){
-      console.log(this.$router);
-      this.$router.push(`dashboard`)
-    },
-    async createGarden(){
+    async createGarden() {
       this.newGarden.width = Number(this.newGarden.width);
       this.newGarden.height = Number(this.newGarden.height);
       await this.$store.dispatch("createGarden", this.newGarden);
@@ -39,35 +59,34 @@ export default {
     }
   },
   computed: {
-    plotDimensions(){
-      if(this.newGarden.height > 1000000){
-        this.newGarden.height = 1000000
+    plotDimensions() {
+      if (this.newGarden.height > 1000000) {
+        this.newGarden.height = 1000000;
       }
-      if(this.newGarden.width > 1000000){
-        this.newGarden.width = 1000000
+      if (this.newGarden.width > 1000000) {
+        this.newGarden.width = 1000000;
       }
       let ratio = this.newGarden.height / this.newGarden.width;
-      if(ratio > 1){
+      if (ratio > 1) {
         return {
-          plotWidth: ((this.newGarden.width / this.newGarden.height) * 80) + "vw",
+          plotWidth: (this.newGarden.width / this.newGarden.height) * 80 + "vw",
           plotHeight: "80vw"
-        }
+        };
       }
       return {
-        plotHeight: (ratio * 80) + "vw",
+        plotHeight: ratio * 80 + "vw",
         plotWidth: "80vw"
-      }
+      };
     }
   },
-  components: {
-  },
+  components: {},
   data() {
     return {
-      newGarden:{
+      newGarden: {
         width: null,
         height: null,
         name: null,
-        description:null
+        description: null
       }
     };
   }
@@ -75,11 +94,10 @@ export default {
 </script>
 
 <style>
-.box{
-  min-width:80vw;
-  max-width:80vw;
+.box {
+  min-width: 80vw;
+  max-width: 80vw;
   background-color: rgb(42, 165, 73);
   border: 1px solid black;
 }
-
 </style>

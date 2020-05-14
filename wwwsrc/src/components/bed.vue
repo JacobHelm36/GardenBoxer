@@ -115,22 +115,23 @@ export default {
         this.drag = false;
         return;
       }
-      this.bedData.bedY = Math.ceil((this.top + e.offsetY) / this.HInterval);
-      this.bedData.bedX = Math.ceil((this.left + e.offsetX) / this.WInterval);
+      debugger;
+      this.bedData.bedY = Math.ceil((this.top + e.clientY) / this.HInterval);
+      this.bedData.bedX = Math.ceil((this.left + e.clientX) / this.WInterval);
       if (this.bedData.bedY > this.garden.height) {
         this.bedData.bedY = this.garden.height;
       }
       if (this.bedData.bedY > this.garden.width) {
         this.bedData.bedY = this.garden.height;
       }
-      if (this.bedData.bedX < 0) {
-        this.bedData.bedX = 0;
+      if (this.bedData.bedX < 1) {
+        this.bedData.bedX = 1;
       }
-      if (this.bedData.bedY < 0) {
-        this.bedData.bedY = 0;
+      if (this.bedData.bedY < 1) {
+        this.bedData.bedY = 1;
       }
-      this.top = (this.bedData.bedY - 1) * this.Interval.HInterval;
-      this.left = (this.bedData.bedX - 1) * this.Interval.WInterval;
+      this.top = this.bedData.bedY * this.Interval.HInterval;
+      this.left = this.bedData.bedX * this.Interval.WInterval;
       this.drag = false;
       this.$store.dispatch("editBed", {
         id: this.bedData.id,
@@ -223,5 +224,4 @@ img {
 .beds:active {
   cursor: help;
 }
-
 </style>
