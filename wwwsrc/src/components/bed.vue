@@ -223,4 +223,5 @@ img {
 .beds:active {
   cursor: help;
 }
+
 </style>

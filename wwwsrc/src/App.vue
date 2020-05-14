@@ -23,4 +23,13 @@ export default {
 <style lang="scss">
 @import "./assets/_variables.scss";
 @import "./assets/_overrides.scss";
+div.mx-datepicker-content {
+  background-color: aqua;
+}
+span button.mx-btn {
+  background-color: lightgreen
+}
+table.mx-table.mx-table-date {
+  cursor: pointer;
+}
 </style>

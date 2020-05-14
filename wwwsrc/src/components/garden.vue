@@ -8,7 +8,7 @@
     <add-bed
       class="add-bed"
       id="bed-form"
-      v-bind:style="{'top':formCoords.top + 'px', 'left': formCoords.left + 'px'}"
+      v-bind:style="{'top':(gridCoords.y *1) + 'px', 'left':gridCoords.x + 'px'}"
       v-show="clickable"
       v-if="form"
       :coords="bedCoordinates"
@@ -42,6 +42,7 @@ export default {
     }
   },
   methods: {
+    // NOTE gets the beds & form coordinates for x & y
     click(e) {
       if (e.toElement.id == "garden" && this.clickable) {
         this.bedCoords.bedY = Math.ceil(e.offsetY / this.Interval.HInterval);
@@ -52,6 +53,7 @@ export default {
         this.form = !this.form;
       }
     },
+    // NOTE gets the height interval and width interval
     pollDim() {
       if (this.$route.params.id != this.gardenData.id) {
         clearInterval(this.interval);
@@ -65,6 +67,7 @@ export default {
     }
   },
   computed: {
+    //NOTE gets the plots dimensions on the screen
     plotDimensions() {
       let ratio = this.gardenData.height / this.gardenData.width;
       if (ratio > 1) {
