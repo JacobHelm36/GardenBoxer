@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{'top':(Interval.HInterval * (bedData.bedY - 1)) + 'px', 'left': (Interval.WInterval * (bedData.bedX - 1))+'px', 'min-width': Interval.WInterval * this.bedData.width + 'px', 'min-height':Interval.HInterval * this.bedData.height + 'px', 'background-image':`url('${bedData.img}')`, 'opacity':opacity}"
+    :style="{'top':fTop + 'px', 'left': fLeft+'px', 'min-width': Interval.WInterval * this.bedData.width + 'px', 'min-height':Interval.HInterval * this.bedData.height + 'px', 'background-image':`url('${bedData.img}')`, 'opacity':opacity}"
     @click="info1()"
     class="beds"
     id="beds"
@@ -10,7 +10,11 @@
     @drag="dragIt($event)"
     @dragend="drop($event)"
   >
-    <div :style="{'top':HInterval + 'px', 'left':WInterval + 'px'}" v-if="info" class="popup">
+    <div
+      :style="{'top':Interval.HInterval + 'px', 'left':Interval.WInterval + 'px'}"
+      v-if="info"
+      class="popup"
+    >
       <p>{{bedData.name}}</p>
       <button @click="bedEditForm = !bedEditForm" class="btn btn-primary">Edit</button>
       <button @click="deleteBed(bedData.id)" class="btn btn-primary">Delete</button>
@@ -72,14 +76,7 @@
 import DatePicker from "vue2-datepicker";
 export default {
   props: ["bedData", "clicker"],
-  mounted() {
-    this.HInterval =
-      document.getElementById("garden").offsetHeight / this.garden.height;
-    this.WInterval =
-      document.getElementById("garden").offsetWidth / this.garden.width;
-    this.left = (this.bedData.bedX - 1) * this.WInterval;
-    this.top = (this.bedData.bedY - 1) * this.HInterval;
-  },
+  mounted() {},
   methods: {
     bedForm() {
       this.bedEditForm = !this.bedEditForm;
@@ -118,8 +115,8 @@ export default {
         this.drag = false;
         return;
       }
-      this.tempY = Math.ceil(this.top / this.HInterval);
-      this.tempX = Math.ceil(this.left / this.WInterval);
+      this.tempY = Math.ceil(this.top / this.Interval.HInterval);
+      this.tempX = Math.ceil(this.left / this.Interval.WInterval);
       if (this.tempY > this.garden.height) {
         this.tempY = this.garden.height;
       }
@@ -173,16 +170,10 @@ export default {
         id: this.bedData.id
       },
       info: false,
-      HInterval: 0,
-      WInterval: 0,
       bedEditForm: false,
       drag: false,
       top: 0,
       left: 0,
-      offset: {
-        x: 0,
-        y: 0
-      },
       initX: 0,
       initY: 0,
       tempX: 0,
@@ -208,6 +199,15 @@ export default {
         return "50%";
       }
       return "100%";
+    },
+    offset() {
+      return this.$store.state.offset;
+    },
+    fLeft() {
+      return (this.bedData.bedX - 1) * this.Interval.WInterval;
+    },
+    fTop() {
+      return (this.bedData.bedY - 1) * this.Interval.HInterval;
     }
   },
   components: { DatePicker }
@@ -226,6 +226,7 @@ export default {
 }
 .edit-bed-form {
   position: absolute;
+  z-index: 1;
 }
 img {
   max-width: 100%;
