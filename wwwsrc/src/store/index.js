@@ -23,7 +23,8 @@ export default new Vuex.Store({
     activeGardenDimensions: {},
     activeHover: {},
     templateBeds: [],
-    groups: []
+    groups: [],
+    offset: {}
   },
   mutations: {
     // Gardens
@@ -80,6 +81,9 @@ export default new Vuex.Store({
     },
     setGroups(state, groups) {
       state.groups = groups;
+    },
+    setOffset(state, offset) {
+      state.offset = offset;
     }
   },
   actions: {
@@ -164,6 +168,9 @@ export default new Vuex.Store({
     async getGroups({ commit }) {
       let res = await api.get("groups");
       commit("setGroups", res.data);
+    },
+    setOffset({ commit }, offset) {
+      commit("setOffset", offset)
     }
   }
 });
