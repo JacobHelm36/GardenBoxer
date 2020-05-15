@@ -5,7 +5,7 @@ $secondary: #e90e66;
 $danger: #dd0000;
 $success: lime;
 $warning: orange;
-$info: aqua;
+$info: rgb(252, 192, 174);
 
 $blue: blue;
 $purple: purple;
@@ -34,6 +34,7 @@ $colors: (
   "orange": $orange,
   "yellow": $yellow,
   "green": $green,
+  "info": $info,
   "teal": $teal,
   "cyan": $cyan,
   "white": $white,

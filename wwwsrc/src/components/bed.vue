@@ -16,10 +16,10 @@
       class="popup"
     >
       <p>{{bedData.name}}</p>
-      <button @click="bedEditForm = !bedEditForm" class="btn btn-primary">Edit</button>
-      <button @click="deleteBed(bedData.id)" class="btn btn-primary">Delete</button>
+      <button @click="bedEditForm = !bedEditForm" class="btn btn-edit">Edit</button>
+      <button @click="deleteBed(bedData.id)" class="btn btn-danger">Delete</button>
     </div>
-    <div class="edit-bed-form" :style="{'top':100 + 'px', 'left': 100 + 'px'}" v-if="bedEditForm">
+    <div class="edit-bed-form" :style="{'top':HInterval + 'px', 'left': 126.77 + WInterval + 'px'}" v-if="bedEditForm">
       <div class="form">
         <input
           type="text"
@@ -64,7 +64,7 @@
           placeholder="Change date fertilized"
         ></date-picker>
         <div class="flex">
-          <button type="button" class="btn btn-primary" @click="updateBed()">Save Changes</button>
+          <button type="button" class="btn btn-success" @click="updateBed()">Save Changes</button>
           <button type="button" class="btn btn-danger" @click="cancelEditBed()">Cancel</button>
         </div>
       </div>
@@ -221,7 +221,8 @@ export default {
 }
 .popup {
   position: absolute;
-  background-color: green;
+  background-color: rgb(139, 224, 82);
+  text-align: center;
   z-index: 1;
 }
 .edit-bed-form {

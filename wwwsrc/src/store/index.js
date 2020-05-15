@@ -112,8 +112,8 @@ export default new Vuex.Store({
       commit("setNewGardens", res.data);
     },
     async deleteGarden({ commit }, gardenData) {
-      await api.delete(`gardens/${gardenData.id}`);
-      commit("removeGarden", gardenData.id);
+      await api.delete(`gardens/${gardenData}`);
+      commit("removeGarden", gardenData);
     },
     updateGardenDimensions({ commit }, gardenDim) {
       commit("setGardenDimensions", gardenDim);
