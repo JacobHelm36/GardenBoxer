@@ -1,6 +1,6 @@
 <template>
   <div class="col-6 col-md-4 bed-card mb-1 mt-1" @click="setActive()">
-    <img
+    <!-- <img
       draggable="true"
       @dragend="drop($event)"
       @dragstart="drag = true"
@@ -8,15 +8,23 @@
       :src="bedData.img"
       class="img-fluid"
       alt
-    />
+    />-->
+    <div
+      class="bed-model"
+      :style="{'width': plotDimensions.plotWidth, 'padding-bottom':plotDimensions.plotHeight, 'background-image':`url('${bedData.img}')`}"
+      @dragend="drop($event)"
+      @dragstart="drag = true"
+      @drag="dragIt($event)"
+      :draggable="template"
+    ></div>
     <h4>{{bedData.name}}</h4>
     <p>{{bedData.description}}</p>
     <button v-if="!template" @click="save()" class="btn btn-sm btn-primary">Save</button>
-    <div
+    <!-- <div
       v-if="drag"
       :style="{'background-image':`url('${bedData.img}')`, 'min-height': (Interval.HInterval * bedData.height) + 'px', 'min-width': (Interval.WInterval * bedData.width) + 'px', 'top': this.top + 'px', 'left':this.left + 'px'}"
       class="dummy"
-    ></div>
+    ></div>-->
   </div>
 </template>
 <script>
@@ -38,12 +46,13 @@ export default {
     },
     dragIt(e) {
       if (e.clientX) {
-        debugger;
+        // debugger;
         this.top = e.clientY - this.offset.y;
         this.left = e.clientX - this.offset.x;
       }
     },
     drop(e) {
+      // debugger;
       let tempY = Math.ceil(this.top / this.Interval.HInterval);
       let tempX = Math.ceil(this.left / this.Interval.WInterval);
       if (tempY > this.garden.height) {
@@ -65,13 +74,16 @@ export default {
       ) {
         return;
       }
-      this.bedData.bedX = tempX;
-      this.bedData.bedY = tempY;
-      this.top = this.bedData.bedY * this.Interval.HInterval;
-      this.left = this.bedData.bedX * this.Interval.WInterval;
+      let date = new Date();
+      this.newBed.bedX = parseInt(tempX);
+      this.newBed.bedY = parseInt(tempY);
+      this.newBed.gardenId = parseInt(this.$route.params.id);
+      this.newBed.datePlanted = date.toJSON();
+      this.newBed.dateFertilized = date.toJSON();
+      this.top = this.newBed.bedY * this.Interval.HInterval;
+      this.left = this.newBed.bedX * this.Interval.WInterval;
       this.drag = false;
-      console.log(this.bedData);
-      this.$store.dispatch("createBed", this.bedData);
+      this.$store.dispatch("createBed", this.newBed);
     }
   },
   computed: {
@@ -79,24 +91,37 @@ export default {
       return this.$store.state.activeHover[this.bedData.id];
     },
     Interval() {
-      let garden = this.$store.state.activeGarden;
-      let dims = this.$store.state.activeGardenDimensions;
-      let HInterval = dims.height / garden.height;
-      let WInterval = dims.width / garden.width;
-      return { HInterval, WInterval };
+      return this.$store.state.activeGardenDimensions;
     },
     offset() {
       return this.$store.state.offset;
     },
     garden() {
       return this.$store.state.activeGarden;
+    },
+    plotDimensions() {
+      let ratio = this.bedData.height / this.bedData.width;
+      console.log(this.bedData.height + " AND " + this.bedData.width);
+      if (ratio > 1) {
+        return {
+          plotWidth:
+            (this.bedData.width / this.bedData.height) * this.percent + "%",
+          plotHeight: this.percent + "%"
+        };
+      }
+      return {
+        plotHeight: ratio * this.percent + "%",
+        plotWidth: this.percent + "%"
+      };
     }
   },
   data() {
     return {
       drag: false,
       top: 0,
-      left: 0
+      left: 0,
+      percent: 100,
+      newBed: this.bedData
     };
   }
 };
@@ -112,5 +137,10 @@ img {
   background-size: 100%;
   position: absolute;
   z-index: 2;
+}
+.bed-model {
+  background-size: 100%;
+  background-color: brown;
+  z-index: 1;
 }
 </style>
