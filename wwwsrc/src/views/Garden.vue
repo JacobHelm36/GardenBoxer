@@ -7,10 +7,6 @@
           <garden :showBeds="true" :percent="100" :clickable="true" :gardenData="gardenInfo" />
           <h2>{{gardenInfo.name}}</h2>
           <h2>{{gardenInfo.description}}</h2>
-          <select name="gardenOptions" id="gardenOptions">
-            <option value=""></option>
-            <option value=""></option>
-          </select>
         </div>
       </div>
     </div>

@@ -10,6 +10,12 @@
       <div class="col-6 d-flex justify-content-start align-items-center">
         <p class="mb-0">We're not a company and we don't have a mission, but you know, why not.</p>
       </div>
+      <div class="col-12 text-center">
+        <img src="https://www.rd.com/wp-content/uploads/2014/10/15-hampton-the-worlds-15-most-unforgettable-royal-gardens-211608664-PlusONE-760x506.jpg" alt="a picture">
+        <h4 class="text-center mt-2">
+          Just think, with this app this could be you.
+        </h4>
+      </div>
     </div>
   </div>
 </template>
@@ -29,3 +35,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+div img {
+  margin-top: 20px;
+  height: 550px;
+  width: 700px;
+}
+</style>
