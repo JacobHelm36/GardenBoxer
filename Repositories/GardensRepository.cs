@@ -25,9 +25,9 @@ namespace GardenBoxer.Repositories
     {
       string sql = @"
             INSERT INTO gardens
-            (name, userId, width, height, description)
+            (name, userId, width, height, description, background)
             VALUES
-            (@Name, @UserId, @Width, @Height, @Description);
+            (@Name, @UserId, @Width, @Height, @Description, @BackGround);
             SELECT LAST_INSERT_ID();
             ";
       GardenData.Id = _db.ExecuteScalar<int>(sql, GardenData);
@@ -41,7 +41,8 @@ namespace GardenBoxer.Repositories
             name = @Name,
             description = @Description,
             width = @Width,
-            height = @Height
+            height = @Height,
+            background = @BackGround
         WHERE (id = @Id AND userId = @UserId);
         ";
       _db.Execute(sql, EditedGarden);

@@ -2,7 +2,7 @@
   <div
     class="box cont"
     id="garden"
-    v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth,'padding-bottom':plotDimensions.plotHeight}"
+    v-bind:style="{ 'min-width': plotDimensions.plotWidth, 'max-width': plotDimensions.plotWidth,'padding-bottom':plotDimensions.plotHeight, backgroundColor : this.gardenData.backGround}"
     @click.prevent="click($event)"
   >
     <add-bed
@@ -37,6 +37,7 @@ import Bed from "../components/bed";
 export default {
   props: ["gardenData", "clickable", "percent", "showBeds"],
   async mounted() {
+    console.log(this.gardenData)
     if (this.showBeds) {
       this.interval = setInterval(this.pollDim, 1000);
       let rect = await document
@@ -146,7 +147,7 @@ export default {
 
 <style>
 .box {
-  background-color: rgb(42, 165, 73);
+  /* background-color: rgb(42, 165, 73); */
   border: 1px solid black;
 }
 .add-bed {

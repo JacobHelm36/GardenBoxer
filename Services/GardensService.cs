@@ -35,6 +35,7 @@ namespace GardenBoxer.Services
       original.Description = newGarden.Description != null ? newGarden.Description : original.Description;
       original.Width = newGarden.Width != 0 ? newGarden.Width : original.Width;
       original.Height = newGarden.Height != 0 ? newGarden.Height : original.Height;
+      original.BackGround = newGarden.BackGround != null ? newGarden.BackGround : original.BackGround;
       return _repo.Edit(original);
     }
     public string Delete(int id, string userId)

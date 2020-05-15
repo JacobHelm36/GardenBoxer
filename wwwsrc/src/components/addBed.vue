@@ -34,7 +34,7 @@
         placeholder="Enter date fertilized"
       ></date-picker>
     </div>
-    <button type="button" class="btn btn-primary" @click="createBed()">Submit</button>
+    <button type="button" class="btn btn-success ml-3" @click="createBed()">Submit</button>
   </form>
 </template>
 

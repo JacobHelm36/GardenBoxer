@@ -32,17 +32,18 @@
           v-model="newGarden.description"
           placeholder="Description"
         />
-        <button @click="createGarden()" class="btn btn-primary">Submit</button>
-        <select name="colors" id="colors" v-model="this.newGarden.background">
-          <option value="rgb(239, 248, 182)">light yellow</option>
-          <option value="rgb(223, 241, 59)">green</option>
-          <option value="rgb(166, 226, 25)"></option>
-          <option value="rgb(77, 209, 16)"></option>
-          <option value="rgb(2, 139, 32)"></option>
-          <option value="rgb(64, 120, 194)"></option>
-          <option value="rgb(95, 85, 190)"></option>
-          <option value="rgb(187, 3, 3)"></option>
+        <button @click="createGarden()" class="btn btn-success">Submit</button>
+        <select name="colors" id="colors" v-model="newGarden.background">
+          <option value="rgb(239, 248, 182)">faded yellow</option>
+          <option value="rgb(223, 241, 59)">pea green</option>
+          <option value="rgb(166, 226, 25)">lettuce leaf</option>
+          <option value="rgb(77, 209, 16)">true green</option>
+          <option value="rgb(2, 139, 32)">algae dream</option>
+          <option value="rgb(64, 120, 194)">silky night</option>
+          <option value="rgb(95, 85, 190)">soothing purple</option>
+          <option value="rgb(187, 3, 3)">red</option>
         </select>
+        
       </div>
       <div
         @click.prevent="click($event)"
@@ -62,11 +63,10 @@ export default {
       return e.offsetX;
     },
     async createGarden() {
-      console.log(this.newGarden);
       this.newGarden.width = Number(this.newGarden.width);
       this.newGarden.height = Number(this.newGarden.height);
-      // await this.$store.dispatch("createGarden", this.newGarden);
-      // this.$router.push(`garden/${this.$store.state.activeGarden.id}`);
+      await this.$store.dispatch("createGarden", this.newGarden);
+      this.$router.push(`garden/${this.$store.state.activeGarden.id}`);
     }
   },
   computed: {
@@ -105,22 +105,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .box {
   min-width: 80vw;
   max-width: 80vw;
   /* background-color: null; */
   border: 1px solid rgb(0, 0, 0);
-}
-.color {
-  background-color: rgb(239, 248, 182);
-  background-color: rgb(223, 241, 59);
-  background-color: rgb(166, 226, 25);
-  background-color: rgb(77, 209, 16);
-  background-color: rgb(2, 139, 32);
-  background-color: rgb(64, 120, 194);
-  background-color: rgb(95, 85, 190);
-  background-color: rgb(187, 3, 3);
 }
 
 input[type="color"] {
