@@ -4,7 +4,7 @@
       <h1>Your Gardens</h1>
     </div>
     <div class="row">
-      <garden v-for="garden in gardens" :key="garden.id" :gardenData="garden" />
+        <garden v-for="garden in gardens" :key="garden.id" :gardenData="garden" />
     </div>
   </div>
 </template>

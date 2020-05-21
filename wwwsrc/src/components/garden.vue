@@ -10,6 +10,7 @@
       id="bed-form"
       v-bind:style="{'top':gridCoords.y + 'px', 'left':(gridCoords.x + WInterval) + 'px'}"
       v-show="clickable"
+      @formToFalse="form = false"
       v-if="form"
       :coords="bedCoordinates"
     />
@@ -37,7 +38,6 @@ import Bed from "../components/bed";
 export default {
   props: ["gardenData", "clickable", "percent", "showBeds"],
   async mounted() {
-    console.log(this.gardenData);
     if (this.showBeds) {
       this.interval = setInterval(this.pollDim, 1000);
       let rect = await document
@@ -67,7 +67,6 @@ export default {
         document.getElementById("garden").offsetHeight / this.gardenData.height;
       this.WInterval =
         document.getElementById("garden").offsetWidth / this.gardenData.width;
-      console.log(this.$route.params.id + "vs" + this.gardenData.id);
       this.$store.dispatch("updateGardenDimensions", this.Interval);
     }
   },
@@ -113,9 +112,6 @@ export default {
     },
     gardenDim() {
       return { width: this.gardenData.width, height: this.gardenData.height };
-    },
-    offset() {
-      return this.$store.state.offset;
     }
   },
   components: {
@@ -138,7 +134,11 @@ export default {
       interval: null,
       drag: false,
       top: 0,
-      left: 0
+      left: 0,
+      offset: {
+        x: 0,
+        y: 0
+      }
     };
   }
 };
