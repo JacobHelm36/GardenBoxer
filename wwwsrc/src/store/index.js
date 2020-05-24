@@ -171,6 +171,12 @@ export default new Vuex.Store({
     },
     setOffset({ commit }, offset) {
       commit("setOffset", offset)
+    },
+    async addBedToGroup(data) {
+      await api.post(`bedtemplates`, data);
+    },
+    async removeBedFromGroup(bedGroupId) {
+      await api.delete(`bedgroups/${bedGroupId}`)
     }
   }
 });

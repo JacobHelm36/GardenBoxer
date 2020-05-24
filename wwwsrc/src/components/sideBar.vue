@@ -21,10 +21,61 @@
         </div>
         <div class="col-6 col-md-4" v-for="group in groups" :key="group.id">
           <p>{{group.name}}</p>
+          <button @click="groupEdit = !groupEdit" class="btn btn-primary btn-sm">Edit</button>
         </div>
       </div>
       <div v-if="active == 'save'" class="row saves-spot">
         <bed v-for="template in templates" :bedData="template" :template="true" :key="template.id" />
+      </div>
+      <div v-if="active == 'group' && groupEdit">
+        <div class="form">
+          <input
+            type="text"
+            class="form-control-sm"
+            v-model="editedBed.name"
+            placeholder="Enter a plant"
+          />
+          <input
+            type="number"
+            class="form-control-sm"
+            v-model.number="editedBed.width"
+            placeholder="Enter a width"
+          />
+          <input
+            type="number"
+            class="form-control-sm"
+            v-model.number="editedBed.height"
+            placeholder="Enter a height"
+          />
+          <input
+            type="text"
+            class="form-control-sm"
+            v-model="editedBed.img"
+            placeholder="Enter an image"
+          />
+          <date-picker
+            class="form-control-sm"
+            v-bind:style="{'max-width': '0px' }"
+            v-model="editedBed.datePlanted"
+            lang="en"
+            type="date"
+            format="YYYY-MM-dd"
+            placeholder="Change date planted"
+          ></date-picker>
+          <date-picker
+            class="form-control-sm"
+            v-bind:style="{'max-width': '0px' }"
+            v-model="editedBed.dateFertilized"
+            lang="en"
+            type="date"
+            format="YYYY-MM-dd"
+            placeholder="Change date fertilized"
+          ></date-picker>
+          <div class="flex">
+            <button type="button" class="btn btn-success" @click="updateBeds()">Save Changes</button>
+            <button type="button" class="btn btn-danger" @click="groupEdit = !groupEdit">Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -32,6 +83,7 @@
 
 <script>
 import Bed from "../components/bedCard";
+import DatePicker from "vue2-datepicker";
 export default {
   name: "Sidebar",
   mounted() {
@@ -72,6 +124,9 @@ export default {
       await this.$store.dispatch("createGroup", this.groupName);
       this.form = false;
       this.groupName = "";
+    },
+    updateBeds() {
+      this.$store.dispatch("", this.editedBed);
     }
   },
   data() {
@@ -81,7 +136,9 @@ export default {
       toggleInterval: null,
       active: "bed",
       form: false,
-      groupName: ""
+      groupName: "",
+      groupEdit: false,
+      editedBed: {}
     };
   },
   computed: {
@@ -96,7 +153,8 @@ export default {
     }
   },
   components: {
-    Bed
+    Bed,
+    DatePicker
   }
 };
 </script>
@@ -130,5 +188,11 @@ export default {
 .saves-spot {
   max-width: 100%;
   margin-left: 0px;
+}
+.form {
+  z-index: 1;
+}
+.mx-datepicker-main {
+  z-index: 1;
 }
 </style>
