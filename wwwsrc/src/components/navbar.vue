@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-russGreen" id="nav">
     <router-link class="navbar-brand" :to="{ name: 'home' }">Garden Boxer</router-link>
     <button
       class="navbar-toggler"
@@ -64,4 +64,24 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.bg-russGreen {
+  background-color: rgb(223, 248, 206);
+  }
+#nav {
+  border-bottom: 2px solid rgb(86, 163, 86);
+  font-size: 25px;
+}
+ul:any-link {
+  text-decoration: none;
+}
+ul:visited {
+  text-decoration: none;
+}
+ul:hover {
+  text-decoration: underline
+}
+ul:active {
+  text-decoration: underline
+}
+</style>

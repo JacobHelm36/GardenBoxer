@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard container">
     <div class="col-12 text-center">
-      <h1>Your Gardens</h1>
+      <h1><i class="fas fa-seedling"></i>Your Gardens<i class="fas fa-seedling"></i></h1>
     </div>
     <div class="row">
         <garden v-for="garden in gardens" :key="garden.id" :gardenData="garden" />

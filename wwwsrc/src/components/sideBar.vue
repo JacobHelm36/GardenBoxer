@@ -172,10 +172,12 @@ export default {
   height: 100%;
   position: absolute;
   min-width: 100%;
-  background-color: blue;
+  background-color: rgb(192, 248, 245);
   z-index: 1;
   max-width: 100%;
   overflow: hidden;
+  border-top: 2px solid rgb(185, 140, 73);
+  border-right: 2px solid rgb(185, 140, 73);
 }
 .beds-spot {
   max-width: 100%;
