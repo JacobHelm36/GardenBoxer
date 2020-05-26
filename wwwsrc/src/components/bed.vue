@@ -11,7 +11,7 @@
     @dragend="drop($event)"
   >
     <div
-      :style="{'top':Interval.HInterval + 'px', 'left':Interval.WInterval + 'px'}"
+      :style="{'top': 'px', 'left':Interval.WInterval + 'px'}"
       v-if="info"
       class="popup"
     >
@@ -19,7 +19,7 @@
       <button @click="bedEditForm = !bedEditForm" class="btn btn-edit">Edit</button>
       <button @click="deleteBed(bedData.id)" class="btn btn-danger">Delete</button>
     </div>
-    <div class="edit-bed-form" :style="{'top':HInterval + 'px', 'left': 126.77 + WInterval + 'px'}" v-if="bedEditForm">
+    <div class="edit-bed-form" :style="{'top': 'px', 'left': 126.77 + Interval.WInterval + 'px'}" v-if="bedEditForm">
       <div class="form">
         <input
           type="text"
@@ -224,6 +224,9 @@ export default {
   background-color: rgb(139, 224, 82);
   text-align: center;
   z-index: 1;
+  font-size: 95%;
+  width:126.77px;
+  height:76px;
 }
 .edit-bed-form {
   position: absolute;
@@ -231,6 +234,7 @@ export default {
 }
 img {
   max-width: 100%;
+  /* no repeat */
 }
 .beds {
   background-color: brown;

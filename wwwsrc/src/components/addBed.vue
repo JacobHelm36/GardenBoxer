@@ -45,7 +45,7 @@ export default {
   props: ["coords"],
   methods: {
     createBed() {
-      console.log(this.newBed);
+      this.$emit("formToFalse")
       this.$store.dispatch("createBed", this.newBed);
     }
   },
