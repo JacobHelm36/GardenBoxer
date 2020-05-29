@@ -43,7 +43,7 @@ export default {
       }
       if (value == 'destroy') {
         console.log("needs a sweet alert")
-        this.$store.dispatch("deleteGarden", this.gardenData.id)
+        // this.$store.dispatch("deleteGarden", this.gardenData.id)
       }
     },
   }

@@ -53,8 +53,6 @@ export default {
     async login() {
       await this.$auth.loginWithPopup();
       this.$store.dispatch("setBearer", this.$auth.bearer);
-      console.log("this.$auth.user: ");
-      console.log(this.$auth.user);
     },
     async logout() {
       this.$store.dispatch("resetBearer");
@@ -78,10 +76,7 @@ ul:any-link {
 ul:visited {
   text-decoration: none;
 }
-ul:hover {
-  text-decoration: underline
-}
-ul:active {
+ul li:hover {
   text-decoration: underline
 }
 </style>

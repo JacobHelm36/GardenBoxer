@@ -16,7 +16,8 @@
       class="popup"
     >
       <p>{{bedData.name}}</p>
-      <button @click="bedEditForm = !bedEditForm" class="btn btn-edit">Edit</button>
+      <button @click="bedViewForm = !bedViewForm" id="viewBedBtn" class="btn btn-primary">View Bed</button>
+      <button @click="bedEditForm = !bedEditForm" id="editBedBtn" class="btn btn-edit">Edit</button>
       <button @click="deleteBed(bedData.id)" class="btn btn-danger">Delete</button>
     </div>
     <div class="edit-bed-form" :style="{'top': 'px', 'left': 126.77 + Interval.WInterval + 'px'}" v-if="bedEditForm">
@@ -69,6 +70,18 @@
         </div>
       </div>
     </div>
+    <div class="view-bed-form" :style="{'top': 'px', 'left': 126.77 + Interval.WInterval + 'px'}" v-if="bedViewForm">
+      <div class="form">
+        <p>{{bedData.name}}</p>
+        <p>Width: {{bedData.width}}</p>
+        <p>Height: {{bedData.height}}</p>
+        <p>Planted: {{bedData.datePlanted}}</p>
+        <p>Fertilized{{bedData.dateFertilized}}</p>
+        <div class="d-flex">
+          <button type="button" class="btn btn-danger" @click="bedViewForm = !bedViewForm">Got It!</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -78,16 +91,14 @@ export default {
   props: ["bedData", "clicker"],
   mounted() {},
   methods: {
-    bedForm() {
-      this.bedEditForm = !this.bedEditForm;
-    },
     info1() {
-      if (this.bedEditForm == false) {
+      if (this.bedEditForm == false && this.bedViewForm == false) {
         this.info = !this.info;
-      }
+      } 
     },
     updateBed() {
       this.$store.dispatch("editBed", this.editedBed);
+      this.bedEditForm = !this.bedEditForm;
     },
     cancelEditBed() {
       this.bedEditForm = false;
@@ -171,6 +182,7 @@ export default {
       },
       info: false,
       bedEditForm: false,
+      bedViewForm: false,
       drag: false,
       top: 0,
       left: 0,
@@ -182,7 +194,6 @@ export default {
   },
   computed: {
     bedInfo() {
-      console.log(this.bedData);
       return this.bedData;
     },
     Interval() {
@@ -219,6 +230,7 @@ export default {
 .flex {
   display: flex;
 }
+
 .popup {
   position: absolute;
   background-color: rgb(139, 224, 82);
@@ -227,18 +239,26 @@ export default {
   font-size: 95%;
   width:126.77px;
   height:76px;
+  border:1px rgb(44, 30, 30) solid;
 }
 .edit-bed-form {
   position: absolute;
   z-index: 1;
+}
+.view-bed-form {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
 }
 img {
   max-width: 100%;
   /* no repeat */
 }
 .beds {
-  background-color: brown;
+  background-color: rgb(88, 59, 59);
   background-size: 100%;
+  border: 3px rgb(44, 30, 30) solid;
 }
 .beds:active {
   cursor: help;

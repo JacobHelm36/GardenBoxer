@@ -34,14 +34,15 @@
         />
         <button @click="createGarden()" class="btn btn-success">Submit</button>
         <select name="colors" id="colors" v-model="newGarden.background">
-          <option value="rgb(239, 248, 182)">faded yellow</option>
-          <option value="rgb(223, 241, 59)">pea green</option>
-          <option value="rgb(166, 226, 25)">lettuce leaf</option>
-          <option value="rgb(77, 209, 16)">true green</option>
-          <option value="rgb(2, 139, 32)">algae dream</option>
-          <option value="rgb(64, 120, 194)">silky night</option>
-          <option value="rgb(95, 85, 190)">soothing purple</option>
-          <option value="rgb(187, 3, 3)">red</option>
+          <option disabled value="">Colors</option>
+          <option value="rgb(239, 248, 182)" class="faded-yellow">faded yellow</option>
+          <option value="rgb(223, 241, 59)" class="text-danger">pea green</option>
+          <option value="rgb(166, 226, 25)" class="lettuce-leaf">lettuce leaf</option>
+          <option value="rgb(77, 209, 16)" class="true-green">true green</option>
+          <option value="rgb(2, 139, 32)" class="algae-dream">algae dream</option>
+          <option value="rgb(64, 120, 194)" class="silky-night">silky night</option>
+          <option value="rgb(95, 85, 190)" class="soothing-purple">soothing purple</option>
+          <option value="rgb(187, 3, 3)" class="redbg">red</option>
         </select>
         
       </div>
@@ -115,5 +116,38 @@ export default {
 
 input[type="color"] {
   width: 25px;
+}
+
+.faded-yellow {
+  height: 10px;
+  width: 10px;
+  background-color: "rgb(239, 248, 182)";
+}
+.pea-green {
+  background-color: "rgb(223, 241, 59)";
+}
+
+.lettuce-leaf {
+  background-color: "rgb(166, 226, 25)";
+}
+
+.true-green {
+  background-color: "rgb(77, 209, 16)";
+}
+
+.algae-dream{
+  background-color: "rgb(2, 139, 32)";
+}
+
+.silky-night {
+  background-color: "rgb(64, 120, 194)";
+}
+
+.soothing-purple {
+  background-color: "rgb(95, 85, 190)";
+}
+
+.redbg {
+  background-color: "rgb(187, 3, 3)";
 }
 </style>

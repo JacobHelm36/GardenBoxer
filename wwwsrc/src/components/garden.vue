@@ -151,6 +151,7 @@ export default {
 }
 .add-bed {
   position: absolute;
+  z-index: 1;
 }
 .outline {
   position: absolute;
@@ -158,6 +159,6 @@ export default {
 }
 .beds {
   position: absolute;
-  border: 5px black;
+  border: 5px rgb(53, 83, 44);
 }
 </style>

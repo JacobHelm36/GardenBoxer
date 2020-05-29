@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:style="{height:this.offsetHeight + 'px'}" class="side-wrapper">
+  <div class="side-wrapper">
     <button @click="toggleIt" class="btn btn-primary side-toggle">TOGGLE</button>
     <div class="side-bar d-flex flex-column" v-bind:style="{'left': left + '%'}">
       <button @click="toggleIt" class="btn btn-secondary align-self-end">Toogle</button>
@@ -87,7 +87,7 @@ import DatePicker from "vue2-datepicker";
 export default {
   name: "Sidebar",
   mounted() {
-    setTimeout(this.pollHeight, 1000);
+    // setTimeout(this.pollHeight, 1000);
   },
   methods: {
     toggleIt() {
@@ -116,9 +116,6 @@ export default {
       clearInterval(this.toggleInterval);
       this.toggleInterval = 0;
       this.toggle = !this.toggle;
-    },
-    pollHeight() {
-      this.offsetHeight = document.getElementById("garden-view").offsetHeight;
     },
     async createGroup() {
       await this.$store.dispatch("createGroup", this.groupName);
